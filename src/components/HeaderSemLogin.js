@@ -2,15 +2,17 @@ import { View } from "react-native";
 import ImagemComponent from "../components/ImagemComponent";
 import BotaoRotaComponent from "../components/BotaoRotaComponent";
 import { useNavigation } from "@react-navigation/native";
-import { styles } from "../style/styleHeader";
+import { stylesHeader } from "../styles/styleHeader";
 
 export default function Header() {
   const navigation = useNavigation();
 
   return (
-    <View style={styles.header}>
+    <View style={stylesHeader.header}>
       {/* logo da empresa */}
-      <ImagemComponent RotaImagem={require("../assets/imagens/Preview.jpeg")} />
+      <ImagemComponent
+        RotaImagem={require("../assets/images/LogoPrincipal.png")}
+      />
       {/* botões da navegação das paginas */}
 
       {/* botão de login */}

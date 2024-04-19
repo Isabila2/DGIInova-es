@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 
-export const styles = StyleSheet.create({
+export const stylesHeader = StyleSheet.create({
   header: {
     height: 100,
     backgroundColor: "#DFDFDF",
