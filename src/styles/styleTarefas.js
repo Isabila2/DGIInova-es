@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 
-export const stylesHome = StyleSheet.create({
+export const styleTarefa = StyleSheet.create({
   inicio: {
     justifyContent: "center",
     alignItems: "center",
@@ -28,36 +28,5 @@ export const stylesHome = StyleSheet.create({
     fontSize: 15,
     textAlign: "center",
     fontWeight: "300",
-  },
-  meio: {
-    marginTop: 250,
-  },
-  titulo: {
-    marginTop: 55,
-    marginLeft: 20,
-    width: 130,
-    height: 18,
-  },
-  box: {
-    width: "90%",
-    height: 300,
-    backgroundColor: "#ffcbff",
-    borderRadius: 5,
-    margin: 15,
-  },
-  cardtxt: {
-    marginLeft: 20,
-    marginTop: 8,
-  },
-  txt: {
-    fontSize: 13,
-    marginTop: 2,
-  },
-  footerlogo: {
-    width: 200,
-    height: 80,
-    alignItems: "center",
-    justifyContent: "center",
-    marginLeft: 70,
   },
 });

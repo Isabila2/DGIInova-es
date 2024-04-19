@@ -6,7 +6,7 @@ import ImagemComponent from "../components/ImagemComponent";
 import TxtComponent from "../components/TxtComponent";
 import { styleUserHome } from "../styles/stylesUserHome";
 
-export default function Tarefas() {
+export default function HomeUsuario() {
   const navigation = useNavigation();
   return (
     <View style={{ flex: 1, backgroundColor: "white" }}>
@@ -14,13 +14,16 @@ export default function Tarefas() {
         {/* Parte do Boas-Vindas */}
         <View style={styleUserHome.inicio}>
           <TxtComponent
-            texto="Minhas Tarefas"
+            texto="Seja Bem-Vindo!"
             styleTxt={styleUserHome.txtboasv}
           />
-
+          <ImagemComponent
+            RotaImagem={require("../assets/images/LogoPrincipal.png")}
+            style={styleUserHome.img}
+          />
           <BotaoComponent
-            BtnTxt="Home só"
-            OnPress={() => navigation.navigate("Home")}
+            BtnTxt="Visualizar tarefas"
+            OnPress={() => navigation.navigate("Tarefas")}
             style={styleUserHome.btn}
             styleTxtBtn={styleUserHome.txtbtn}
           />

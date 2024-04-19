@@ -6,7 +6,7 @@ export default function BotaoRotaComponent({ RotaTxt, onPress, style }) {
 
   return (
     <TouchableOpacity onPress={onPress} style={style}>
-      <Text> {RotaTxt} </Text>
+      <Text style={styleTxtBtn}> {RotaTxt} </Text>
     </TouchableOpacity>
   );
 }

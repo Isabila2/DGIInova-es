@@ -2,25 +2,18 @@ import { View } from "react-native";
 import { ScrollView } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import BotaoComponent from "../components/BotaoComponent";
-import ImagemComponent from "../components/ImagemComponent";
-import TxtComponent from "../components/TxtComponent";
 import { styleUserHome } from "../styles/stylesUserHome";
 
-export default function Tarefas() {
+export default function HomeUsuario() {
   const navigation = useNavigation();
   return (
     <View style={{ flex: 1, backgroundColor: "white" }}>
       <ScrollView>
         {/* Parte do Boas-Vindas */}
         <View style={styleUserHome.inicio}>
-          <TxtComponent
-            texto="Minhas Tarefas"
-            styleTxt={styleUserHome.txtboasv}
-          />
-
           <BotaoComponent
-            BtnTxt="Home só"
-            OnPress={() => navigation.navigate("Home")}
+            BtnTxt="Visualizar tarefas"
+            OnPress={() => navigation.navigate("Tarefas")}
             style={styleUserHome.btn}
             styleTxtBtn={styleUserHome.txtbtn}
           />

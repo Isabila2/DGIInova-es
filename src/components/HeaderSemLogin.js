@@ -3,6 +3,7 @@ import ImagemComponent from "../components/ImagemComponent";
 import BotaoRotaComponent from "../components/BotaoRotaComponent";
 import { useNavigation } from "@react-navigation/native";
 import { stylesHeader } from "../styles/styleHeader";
+import { stylesHeader } from "../styles/styleHeader";
 
 export default function Header() {
   const navigation = useNavigation();
@@ -12,6 +13,7 @@ export default function Header() {
       {/* logo da empresa */}
       <ImagemComponent
         RotaImagem={require("../assets/images/LogoPrincipal.png")}
+        style={stylesHeader.img}
       />
       {/* botões da navegação das paginas */}
 
