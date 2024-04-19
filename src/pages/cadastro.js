@@ -13,7 +13,12 @@ export default function Cadastro() {
 
       <InputComponent placeholder="CPF" value="" />
 
-      <BotaoRotaComponent />
+      <BotaoRotaComponent
+        BtnTxt="Já possui uma Conta?"
+        OnPress={() => navigation.navigate("Login")}
+        style={stylesHome.btn}
+        styleTxtBtn={stylesHome.txtbtn}
+      />
     </View>
   );
 }

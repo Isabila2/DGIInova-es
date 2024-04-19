@@ -1,5 +1,9 @@
-import { TextInput } from "react-native";
+import { TextInput, View } from "react-native";
 
-export default function InputComponent() {
-  return <TextInput placeholder="Digite seu email" secureTextEntry={false} />;
+export default function InputComponent({ placeholder }) {
+  return (
+    <View>
+      <TextInput placeholder={placeholder} />
+    </View>
+  );
 }

@@ -6,8 +6,8 @@ export const stylesHome = StyleSheet.create({
     alignItems: "center",
   },
   img: {
-    width: 365,
-    height: 50,
+    width: 340,
+    height: 45,
     justifyContent: "center",
     alignItems: "center",
     marginTop: 250,
