@@ -2,7 +2,6 @@ import { View } from "react-native";
 import { ScrollView } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import BotaoComponent from "../components/BotaoComponent";
-import ImagemComponent from "../components/ImagemComponent";
 import TxtComponent from "../components/TxtComponent";
 import { styleUserHome } from "../styles/stylesUserHome";
 

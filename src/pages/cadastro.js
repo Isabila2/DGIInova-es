@@ -5,13 +5,13 @@ import BotaoRotaComponent from "../components/BotaoRotaComponent";
 export default function Cadastro() {
   return (
     <View>
-      <InputComponent txtplace="E-mail" value="" />
+      <InputComponent placeholder={"Digite seu Usuario"} value="" />
 
-      <InputComponent placeholder="Criar senha" value="" />
+      <InputComponent placeholder={"Digite seu Email"} value="" />
 
-      <InputComponent placeholder="Confirmar senha" value="" />
+      <InputComponent placeholder={"Digite sua Senha"} value="" />
 
-      <InputComponent placeholder="CPF" value="" />
+      <InputComponent placeholder={"Confirme sua Senha"} value="" />
 
       <BotaoRotaComponent
         BtnTxt="Já possui uma Conta?"

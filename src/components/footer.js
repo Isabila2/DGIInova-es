@@ -4,7 +4,7 @@ import { useNavigation } from "@react-navigation/native";
 import BotaoComponent from "../components/BotaoComponent";
 import { styleUserHome } from "../styles/stylesUserHome";
 
-export default function HomeUsuario() {
+export default function Footer() {
   const navigation = useNavigation();
   return (
     <View style={{ flex: 1, backgroundColor: "white" }}>
