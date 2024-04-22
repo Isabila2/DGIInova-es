@@ -21,7 +21,7 @@ export const stylesLoginCadastro = StyleSheet.create({
   },
   view_Inputs: {
     flexDirection: "row",
-    width: "70%",
+    width: "90%",
     borderBottomWidth: 1,
     borderBottomColor: "#DBA3DB",
     padding: 10,

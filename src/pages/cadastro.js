@@ -1,23 +1,21 @@
 import { View } from "react-native";
 import InputComponent from "../components/InputComponent";
-import BotaoRotaComponent from "../components/BotaoRotaComponent";
+import BotaoComponent from "../components/BotaoComponent";
+import { useNavigation } from "@react-navigation/native"; // Importe o hook useNavigation
+import { stylesLoginCadastro } from "../styles/styleLogin-Cadastro";
 
 export default function Cadastro() {
+  const navigation = useNavigation(); // Obtenha o objeto de navegação
+
   return (
     <View>
       <InputComponent placeholder={"Digite seu Usuario"} value="" />
-
       <InputComponent placeholder={"Digite seu Email"} value="" />
-
       <InputComponent placeholder={"Digite sua Senha"} value="" />
-
       <InputComponent placeholder={"Confirme sua Senha"} value="" />
-
-      <BotaoRotaComponent
-        BtnTxt="Já possui uma Conta?"
-        OnPress={() => navigation.navigate("Login")}
-        style={stylesHome.btn}
-        styleTxtBtn={stylesHome.txtbtn}
+      <BotaoComponent
+        OnPress={() => navigation.navigate("Login")} // Navegue para a tela de login
+        BtnTxt={"Cadastrar-se"}
       />
     </View>
   );

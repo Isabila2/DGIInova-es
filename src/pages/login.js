@@ -1,15 +1,16 @@
 import { View } from "react-native";
 import React, { useState } from "react";
+import { useNavigation } from "@react-navigation/native"; // Importe o hook useNavigation
 import ImagemComponent from "../components/ImagemComponent";
 import BotaoComponent from "../components/BotaoComponent";
-import { useNavigation } from "@react-navigation/native";
 import InputSenhaComponent from "../components/InputSenhaComponent";
 import InputComponent from "../components/InputComponent";
 import { stylesLoginCadastro } from "../styles/styleLogin-Cadastro";
 
 export default function Login() {
-  const navigation = useNavigation();
+  const navigation = useNavigation(); // Obtenha o objeto de navegação
   const [Usuario, setUsuario] = useState("");
+
   return (
     <View style={stylesLoginCadastro.tela}>
       <ImagemComponent
@@ -38,12 +39,12 @@ export default function Login() {
       </View>
       <BotaoComponent
         BtnTxt={"Fazer Login"}
+        OnPress={() => navigation.navigate("Usuário(Aluno)")}
         style={stylesLoginCadastro.botao}
         styleTxtBtn={stylesLoginCadastro.BotaoTxt}
-        onPress={() => navigation.navigate("HomeUsuario")}
       />
       <BotaoComponent
-        onPress={() => navigation.navigate("Cadastro")}
+        OnPress={() => navigation.navigate("Cadastro")} // Navegue para a tela de cadastro
         BtnTxt={"Cadastrar-se"}
       />
     </View>
