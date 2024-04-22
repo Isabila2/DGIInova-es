@@ -46,12 +46,14 @@ export default function HomePrincipal() {
               />
             </View>
           </View>
-          <ImagemComponent
-            RotaImagem={require("../assets/images/LogoPrincipal.png")}
-            style={stylesHome.footerlogo}
-          />
         </View>
       </ScrollView>
+      <View style={stylesHome.footer}>
+        <ImagemComponent
+          RotaImagem={require("../assets/images/LogoPrincipal.png")}
+          style={stylesHome.footerlogo}
+        />
+      </View>
     </View>
   );
 }

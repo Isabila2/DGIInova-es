@@ -50,4 +50,11 @@ export const stylesLoginCadastro = StyleSheet.create({
     fontSize: 20,
     textAlign: "center",
   },
+  inputs_cadastro: {
+    width: "90%",
+    borderWidth: 1,
+    borderColor: "#DBA3DB",
+    padding: 10,
+    marginBottom: 20,
+  },
 });

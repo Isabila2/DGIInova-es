@@ -58,6 +58,9 @@ export const stylesHome = StyleSheet.create({
     height: 80,
     alignItems: "center",
     justifyContent: "center",
-    marginLeft: 70,
+  },
+  footer: {
+    alignItems: "center",
+    justifyContent: "center",
   },
 });

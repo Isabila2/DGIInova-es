@@ -9,7 +9,6 @@ import { stylesLoginCadastro } from "../styles/styleLogin-Cadastro";
 
 export default function Login() {
   const navigation = useNavigation(); // Obtenha o objeto de navegação
-  const [Usuario, setUsuario] = useState("");
 
   return (
     <View style={stylesLoginCadastro.tela}>
@@ -26,7 +25,6 @@ export default function Login() {
         <InputComponent
           placeholder={"Digite seu Usuario"}
           style={stylesLoginCadastro.inputTxt}
-          onChangeText={setUsuario}
         />
       </View>
       {/* View com Input e Imagem senha */}

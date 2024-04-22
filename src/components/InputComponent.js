@@ -5,12 +5,10 @@ export default function InputComponent({ placeholder, style, onChangeText }) {
     onChangeText(textInput);
   };
   return (
-    <View>
-      <TextInput
-        placeholder={placeholder}
-        style={style}
-        onChangeText={changeTxt}
-      />
-    </View>
+    <TextInput
+      placeholder={placeholder}
+      style={style}
+      onChangeText={changeTxt}
+    />
   );
 }
