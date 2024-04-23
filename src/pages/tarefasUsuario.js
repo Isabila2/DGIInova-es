@@ -1,5 +1,5 @@
-import { View } from "react-native";
-import { ScrollView, FlatList } from "react-native";
+import React from "react";
+import { View, ScrollView, FlatList } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import BotaoComponent from "../components/BotaoComponent";
 import TxtComponent from "../components/TxtComponent";
@@ -30,6 +30,7 @@ export default function Tarefas() {
               <ListItem
                 data={item}
                 handleLeft={() => alert("Tarefa concluida com sucesso!")}
+                handleRight={() => alert("Tarefa foi excluida!")}
               />
             )}
             ItemSeparatorComponent={() => <Separator />}
@@ -46,6 +47,4 @@ export default function Tarefas() {
   );
 }
 
-const Separator = () => (
-  <View style={{ flex: 1, height: 1, backgroundColor: "#DDD" }}></View>
-);
+const Separator = () => <View style={{ height: 1, backgroundColor: "#DDD" }} />;

@@ -12,7 +12,10 @@ import { stylesLoginCadastro } from "../styles/styleLogin-Cadastro";
 
 const schema = yup.object({
   usuario: yup.string().required("Informe seu Usuário"),
-  senha: yup.string().required("Informe sua senha"),
+  senha: yup
+    .string()
+    .min(8, "A senha deve ter pelo menos 8 dígitos")
+    .required("Informe sua senha"),
 });
 
 export default function Login() {
@@ -39,9 +42,6 @@ export default function Login() {
         style={stylesLoginCadastro.img}
       />
       {/* View com Input e imagem Email */}
-      {errors.usuario && (
-        <Text style={stylesLoginCadastro.erro}>{errors.usuario.message}</Text>
-      )}
       <View style={stylesLoginCadastro.view_Inputs}>
         <ImagemComponent
           RotaImagem={require("../assets/images/usuario.png")}
@@ -60,11 +60,10 @@ export default function Login() {
           )}
         />
       </View>
-
-      {/* View com Input e Imagem senha */}
-      {errors.senha && (
-        <Text style={stylesLoginCadastro.erro}>{errors.senha.message}</Text>
+      {errors.usuario && (
+        <Text style={stylesLoginCadastro.erro}>{errors.usuario.message}</Text>
       )}
+      {/* View com Input e Imagem senha */}
       <View style={stylesLoginCadastro.view_Inputs}>
         <ImagemComponent
           RotaImagem={require("../assets/images/Senha.png")}
@@ -83,7 +82,9 @@ export default function Login() {
           )}
         />
       </View>
-
+      {errors.senha && (
+        <Text style={stylesLoginCadastro.erro}>{errors.senha.message}</Text>
+      )}
       <BotaoComponent
         BtnTxt={"Fazer Login"}
         OnPress={handleSubmit(onSubmit)}
