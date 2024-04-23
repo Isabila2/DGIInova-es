@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { TextInput, View, Image, TouchableOpacity } from "react-native";
 
-export default function InputSenhaComponent() {
+export default function InputSenhaComponent({ onChangeText, value }) {
   const [showPassword, setShowPassword] = useState(true);
 
   const togglePasswordVisibility = () => {
@@ -21,6 +21,8 @@ export default function InputSenhaComponent() {
         placeholder="Digite sua senha"
         secureTextEntry={showPassword}
         style={{ fontSize: 20, width: "87%", marginLeft: 10 }}
+        onChangeText={onChangeText}
+        value={value}
       />
       <TouchableOpacity
         onPress={togglePasswordVisibility}
