@@ -44,6 +44,7 @@ export const stylesLoginCadastro = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     marginTop: 20,
+    marginBottom: 10,
   },
   BotaoTxt: {
     color: "white",

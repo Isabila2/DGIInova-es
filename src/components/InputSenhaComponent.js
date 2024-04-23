@@ -20,7 +20,7 @@ export default function InputSenhaComponent() {
       <TextInput
         placeholder="Digite sua senha"
         secureTextEntry={showPassword}
-        style={{ fontSize: 20, width: "100%", marginLeft: 10 }}
+        style={{ fontSize: 20, width: "87%", marginLeft: 10 }}
       />
       <TouchableOpacity
         onPress={togglePasswordVisibility}
