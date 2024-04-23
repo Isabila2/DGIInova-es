@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { TextInput, View, Image, TouchableOpacity } from "react-native";
-import BotaoComponent from "../components/BotaoComponent";
 
 export default function InputSenhaComponent() {
   const [showPassword, setShowPassword] = useState(true);
@@ -15,12 +14,13 @@ export default function InputSenhaComponent() {
         flexDirection: "row",
         justifyContent: "center",
         alignItems: "center",
+        flex: 1,
       }}
     >
       <TextInput
         placeholder="Digite sua senha"
         secureTextEntry={showPassword}
-        style={{ fontSize: 20, width: "80%" }}
+        style={{ fontSize: 20, width: "100%", marginLeft: 10 }}
       />
       <TouchableOpacity
         onPress={togglePasswordVisibility}

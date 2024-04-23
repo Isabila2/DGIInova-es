@@ -31,7 +31,7 @@ export const stylesLoginCadastro = StyleSheet.create({
   },
   inputTxt: {
     fontSize: 20,
-    width: "150%",
+    flex: 1,
     marginLeft: 10,
   },
   botao: {
@@ -56,5 +56,11 @@ export const stylesLoginCadastro = StyleSheet.create({
     borderColor: "#DBA3DB",
     padding: 10,
     marginBottom: 20,
+  },
+  erro: {
+    alignItems: "center",
+    color: "#ff375b",
+    marginBottom: 5,
+    marginTop: 5,
   },
 });

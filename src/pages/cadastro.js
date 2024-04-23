@@ -1,12 +1,39 @@
-import { View } from "react-native";
+import { View, TouchableOpacity, Text } from "react-native";
 import InputComponent from "../components/InputComponent";
-import BotaoComponent from "../components/BotaoComponent";
 import ImagemComponent from "../components/ImagemComponent";
-import { useNavigation } from "@react-navigation/native"; // Importe o hook useNavigation
+import { useNavigation } from "@react-navigation/native";
 import { stylesLoginCadastro } from "../styles/styleLogin-Cadastro";
+import { useForm, Controller } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+
+const schema = yup.object({
+  usuario: yup.string().required("Informe seu Usuário"),
+  email: yup.string().email("Email Inválido").required("Informe seu Email"),
+  senha: yup
+    .string()
+    .min(8, "A senha deve ter pelo menos 8 dígitos")
+    .required("Informe sua senha"),
+  ConfirmSenha: yup
+    .string()
+    .oneOf([yup.ref("senha"), null], "As senhas precisam ser iguais")
+    .required("Confirme sua senha"),
+});
 
 export default function Cadastro() {
-  const navigation = useNavigation(); // Obtenha o objeto de navegação
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(schema),
+  });
+  const navigation = useNavigation();
+
+  function Verificar_Enviar(data) {
+    console.log(data);
+    navigation.navigate("Login");
+  }
 
   return (
     <View style={stylesLoginCadastro.tela}>
@@ -14,31 +41,75 @@ export default function Cadastro() {
         RotaImagem={require("../assets/images/LogoHome.png")}
         style={stylesLoginCadastro.img}
       />
+      {errors.usuario && (
+        <Text style={stylesLoginCadastro.erro}>{errors.usuario?.message}</Text>
+      )}
+      <Controller
+        control={control}
+        name="usuario"
+        render={({ field: { onChange, value } }) => (
+          <InputComponent
+            placeholder={"Digite seu Usuario"}
+            onChangeText={onChange}
+            value={value}
+            style={stylesLoginCadastro.inputs_cadastro}
+          />
+        )}
+      />
+      {errors.email && (
+        <Text style={stylesLoginCadastro.erro}>{errors.email?.message}</Text>
+      )}
+      <Controller
+        control={control}
+        name="email"
+        render={({ field: { onChange, value } }) => (
+          <InputComponent
+            placeholder={"Digite seu Email"}
+            onChangeText={onChange}
+            value={value}
+            style={stylesLoginCadastro.inputs_cadastro}
+          />
+        )}
+      />
+      {errors.senha && (
+        <Text style={stylesLoginCadastro.erro}>{errors.senha?.message}</Text>
+      )}
+      <Controller
+        control={control}
+        name="senha"
+        render={({ field: { onChange, value } }) => (
+          <InputComponent
+            placeholder={"Digite seu senha"}
+            onChangeText={onChange}
+            value={value}
+            style={stylesLoginCadastro.inputs_cadastro}
+          />
+        )}
+      />
+      {errors.ConfirmSenha && (
+        <Text style={stylesLoginCadastro.erro}>
+          {errors.ConfirmSenha?.message}
+        </Text>
+      )}
 
-      <InputComponent
-        placeholder={"Digite seu Usuario"}
-        value=""
-        style={stylesLoginCadastro.inputs_cadastro}
+      <Controller
+        control={control}
+        name="ConfirmSenha"
+        render={({ field: { onChange, value } }) => (
+          <InputComponent
+            placeholder={"Confirme sua senha"}
+            onChangeText={onChange}
+            value={value}
+            style={stylesLoginCadastro.inputs_cadastro}
+          />
+        )}
       />
-      <InputComponent
-        placeholder={"Digite seu Email"}
-        value=""
-        style={stylesLoginCadastro.inputs_cadastro}
-      />
-      <InputComponent
-        placeholder={"Digite sua Senha"}
-        value=""
-        style={stylesLoginCadastro.inputs_cadastro}
-      />
-      <InputComponent
-        placeholder={"Confirme sua Senha"}
-        value=""
-        style={stylesLoginCadastro.inputs_cadastro}
-      />
-      <BotaoComponent
-        OnPress={() => navigation.navigate("Login")} // Navegue para a tela de login
-        BtnTxt={"Cadastrar-se"}
-      />
+      <TouchableOpacity
+        onPress={handleSubmit(Verificar_Enviar)}
+        style={stylesLoginCadastro.botao}
+      >
+        <Text style={stylesLoginCadastro.BotaoTxt}> Cadastrar </Text>
+      </TouchableOpacity>
     </View>
   );
 }
