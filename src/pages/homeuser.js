@@ -6,6 +6,7 @@ import ImagemComponent from "../components/ImagemComponent";
 import TxtComponent from "../components/TxtComponent";
 import { styleUserHome, VIDEO_HEIGHT } from "../styles/stylesUserHome";
 import YoutubeIframe from "react-native-youtube-iframe";
+import React, { useState } from "react";
 
 export default function HomeUsuario() {
   const navigation = useNavigation();

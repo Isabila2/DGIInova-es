@@ -6,6 +6,7 @@ import Cadastro from "./src/pages/cadastro";
 import Tarefas from "./src/pages/tarefasUsuario";
 import HomeUsuario from "./src/pages/homeuser";
 import TarefasPrivadas from "./src/pages/TarefasPrivadas";
+import "react-native-get-random-values";
 
 const Stack = createNativeStackNavigator();
 

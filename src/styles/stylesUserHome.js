@@ -1,5 +1,7 @@
 import { StyleSheet } from "react-native";
 
+export const VIDEO_HEIGHT = 180;
+
 export const styleUserHome = StyleSheet.create({
   txtboasv: {
     fontSize: 20,

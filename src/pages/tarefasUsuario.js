@@ -10,10 +10,10 @@ import { GestureHandlerRootView } from "react-native-gesture-handler";
 export default function Tarefas() {
   const navigation = useNavigation();
   const tarefas = [
-    { id: "1", tarefa: "Teste 1" },
-    { id: "2", tarefa: "Teste 2" },
-    { id: "3", tarefa: "Teste 3" },
-    { id: "4", tarefa: "Teste 4" },
+    { id: "1", tarefa: "Teste 1", descricao: "Descrição teste 1" },
+    { id: "2", tarefa: "Teste 2", descricao: "Descrição teste 2" },
+    { id: "3", tarefa: "Teste 3", descricao: "Descrição teste 3" },
+    { id: "4", tarefa: "Teste 4", descricao: "Descrição teste 4" },
   ];
 
   const handleTarefaConcluida = (id) => {

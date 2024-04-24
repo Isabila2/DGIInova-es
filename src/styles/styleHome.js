@@ -1,15 +1,9 @@
 import { StyleSheet } from "react-native";
 
 export const stylesHome = StyleSheet.create({
-  inicio: {
-    justifyContent: "center",
-    alignItems: "center",
-  },
   img: {
     width: 340,
     height: 45,
-    justifyContent: "center",
-    alignItems: "center",
     marginTop: 250,
   },
   btn: {
@@ -36,20 +30,49 @@ export const stylesHome = StyleSheet.create({
     width: 300,
     height: 300,
   },
+  gif2: {
+    width: 300,
+    height: 300,
+    marginTop: 100,
+  },
   frase: {
-    width: 100,
-    height: 100,
+    width: 280,
+    height: 40,
+    alignItems: "center",
+    justifyContent: "center",
+    marginLeft: 10,
+  },
+  frase2: {
+    width: 280,
+    height: 45,
+    alignItems: "center",
+    justifyContent: "center",
+    marginLeft: 10,
   },
   box: {
     width: "90%",
-    height: 300,
+    height: "100%",
     //backgroundColor: "#ffcbff",
     borderRadius: 5,
     margin: 15,
   },
-  footerlogo: {
+  listas: {
+    marginTop: 50,
+    width: "85%",
+  },
+  caixas: {
     width: 200,
-    height: 80,
+    height: 200,
+    backgroundColor: "#dba3db",
+    borderRadius: 20,
+    margin: 10,
+    padding: 20,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  footerlogo: {
+    width: 120,
+    height: 50,
     alignItems: "center",
     justifyContent: "center",
   },

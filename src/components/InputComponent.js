@@ -1,6 +1,11 @@
 import { TextInput, View } from "react-native";
 
-export default function InputComponent({ placeholder, style, onChangeText }) {
+export default function InputComponent({
+  placeholder,
+  style,
+  onChangeText,
+  value,
+}) {
   const changeTxt = (textInput) => {
     onChangeText(textInput);
   };
@@ -9,6 +14,7 @@ export default function InputComponent({ placeholder, style, onChangeText }) {
       placeholder={placeholder}
       style={style}
       onChangeText={changeTxt}
+      value={value}
     />
   );
 }
