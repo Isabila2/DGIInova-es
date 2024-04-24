@@ -1,59 +1,69 @@
-import { View } from "react-native";
+import { View, Animated } from "react-native";
 import ImagemComponent from "../components/ImagemComponent";
 import { stylesHome } from "../styles/styleHome";
 import { ScrollView } from "react-native";
 import BotaoComponent from "../components/BotaoComponent";
 import { useNavigation } from "@react-navigation/native";
 import TxtComponent from "../components/TxtComponent";
+import React, { useState } from "react";
 
 export default function HomePrincipal() {
   const navigation = useNavigation();
+  const [largura, setLargura] = useState(new Animated.Value(0));
+  const [altura, setAltura] = useState(new Animated.Value(30));
+
+  Animated.sequence([
+    Animated.timing(largura, {
+      toValue: 360,
+      duration: 2000,
+    }),
+    Animated.timing(altura, {
+      toValue: 500,
+      duration: 1000,
+    }),
+  ]).start();
+
   return (
-    <View style={{ flex: 1, backgroundColor: "white" }}>
+    <View
+      style={{
+        flex: 1,
+        backgroundColor: "white",
+      }}
+    >
       <ScrollView>
         {/* Parte do Boas-Vindas */}
-        <View style={[stylesHome.inicio, { flex: 1 }]}>
+        <Animated.View
+          style={[
+            stylesHome.inicio,
+            { flex: 1, width: largura, height: altura },
+          ]}
+        >
           <ImagemComponent
             RotaImagem={require("../assets/images/LogoHome.png")}
             style={stylesHome.img}
           />
           <BotaoComponent
             BtnTxt="Começe agora"
-            OnPress={() => navigation.navigate("Login")}
+            OnPress={() => navigation.navigate("TarefasPrivadas")}
             style={stylesHome.btn}
             styleTxtBtn={stylesHome.txtbtn}
           />
-        </View>
+        </Animated.View>
         {/* Código da parte descritiva */}
         <View style={stylesHome.meio}>
           <View style={stylesHome.box}>
             <ImagemComponent
-              RotaImagem={require("../assets/images/Sobre.png")}
-              style={stylesHome.titulo}
+              RotaImagem={require("../assets/Gifs/Task.gif")}
+              style={stylesHome.gif}
             />
-            <View style={stylesHome.cardtxt}>
-              <TxtComponent
-                styleTxt={stylesHome.txt}
-                texto=" O Task Management é um site voltado para a organização e o gerenciamento de tarefas."
-              />
-              <TxtComponent
-                styleTxt={stylesHome.txt}
-                texto="Usando o site, o usuário tem total acesso ás suas atividades pendentes, além de poder visualizar as passadas."
-              />
-              <TxtComponent
-                styleTxt={stylesHome.txt}
-                texto="Com seu design limpo, moderno e claro, qualquer um pode se tornar organizado de forma simples e rápido."
-              />
-            </View>
+            <ImagemComponent
+              RotaImagem={require("../assets/images/frase1.png")}
+              style={stylesHome.frase}
+            />
           </View>
         </View>
       </ScrollView>
-      <View style={stylesHome.footer}>
-        <ImagemComponent
-          RotaImagem={require("../assets/images/LogoPrincipal.png")}
-          style={stylesHome.footerlogo}
-        />
-      </View>
+      <View style={stylesHome.footer}></View>
     </View>
   );
 }

@@ -52,7 +52,7 @@ export default function Login() {
           name="usuario"
           render={({ field: { onChange, value } }) => (
             <InputComponent
-              placeholder={"Digite seu Usuario"}
+              placeholder={"Digite seu usuário"}
               onChangeText={onChange}
               value={value}
               style={stylesLoginCadastro.inputTxt}

@@ -32,26 +32,20 @@ export const stylesHome = StyleSheet.create({
   meio: {
     marginTop: 250,
   },
-  titulo: {
-    marginTop: 55,
-    marginLeft: 20,
-    width: 130,
-    height: 18,
+  gif: {
+    width: 300,
+    height: 300,
+  },
+  frase: {
+    width: 100,
+    height: 100,
   },
   box: {
     width: "90%",
     height: 300,
-    backgroundColor: "#ffcbff",
+    //backgroundColor: "#ffcbff",
     borderRadius: 5,
     margin: 15,
-  },
-  cardtxt: {
-    marginLeft: 20,
-    marginTop: 8,
-  },
-  txt: {
-    fontSize: 13,
-    marginTop: 2,
   },
   footerlogo: {
     width: 200,

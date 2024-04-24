@@ -18,34 +18,22 @@ export default function ListItem({ data, handleLeft, handleRight }) {
     });
 
     return (
-      <View style={styles.leftAction}>
+      <TouchableOpacity
+        style={styles.leftAction}
+        onPress={() => handleLeft(data.id)}
+      >
         <Animated.Text style={[styles.actionText, { transform: [{ scale }] }]}>
           Concluir
         </Animated.Text>
-      </View>
-    );
-  }
-
-  function RightActions({ progress, dragX, onPress }) {
-    const scale = dragX.interpolate({
-      inputRange: [-100, 0],
-      outputRange: [1, 0],
-      extrapolate: "clamp",
-    });
-
-    return (
-      <TouchableOpacity onPress={onPress} style={styles.rightAction}>
-        <Animated.View
-          style={[{ padding: 20 }, { transform: [{ scale: scale }] }]}
-        >
-          <Icon name="trash" size={40} color="#FFF" />
-        </Animated.View>
       </TouchableOpacity>
     );
   }
 
   return (
-    <Swipeable renderLeftActions={LeftActions} onSwipeableLeftOpen={handleLeft}>
+    <Swipeable
+      renderLeftActions={LeftActions}
+      onSwipeableLeftOpen={() => handleLeft(data.id)}
+    >
       <View style={styles.container}>
         <Text style={styles.text}> {data.tarefa} </Text>
       </View>
