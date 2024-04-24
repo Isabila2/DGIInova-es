@@ -1,50 +1,71 @@
-import React from "react";
-import { View, FlatList } from "react-native";
-import { useNavigation } from "@react-navigation/native";
-import BotaoComponent from "../components/BotaoComponent";
-import TxtComponent from "../components/TxtComponent";
-import { styleUserHome } from "../styles/stylesUserHome";
-import ListItem from "../components/ListItemComponent";
-import { GestureHandlerRootView } from "react-native-gesture-handler";
+import { Alert, FlatList, View } from "react-native";
+import HeaderTarefas from "../components/HeaderTarefasComponent";
+import AdicionarTarefa from "../components/AdicionarTarefaComponent";
+import ContainerTarefaSala from "../components/ContainerTarefaSala";
+import SemTarefa from "../components/SemTarefaComponent";
+import { useState } from "react";
+import { v4 as uuidv4 } from "uuid";
 
-export default function Tarefas() {
-  const navigation = useNavigation();
-  const tarefas = [
-    { id: "1", tarefa: "Teste 1", descricao: "Descrição teste 1" },
-    { id: "2", tarefa: "Teste 2", descricao: "Descrição teste 2" },
-    { id: "3", tarefa: "Teste 3", descricao: "Descrição teste 3" },
-    { id: "4", tarefa: "Teste 4", descricao: "Descrição teste 4" },
-  ];
+export default function TarefasSala() {
+  const [tarefas, setTarefas] = useState([]);
+  const [novaTarefa, setNovaTarefa] = useState("");
 
-  const handleTarefaConcluida = (id) => {
-    alert(`Tarefa ${id} concluída com sucesso!`);
+  const definirCompleto = (id) => {
+    setTarefas((prevTarefas) =>
+      prevTarefas.map((tarefa) =>
+        tarefa.id === id ? { ...tarefa, completo: !tarefa.completo } : tarefa
+      )
+    );
   };
 
+  const addTarefa = () => {
+    if (novaTarefa !== "" && novaTarefa.length >= 5) {
+      const novaTarefaObj = {
+        id: uuidv4(),
+        completo: false,
+        titulo: novaTarefa,
+      };
+      setTarefas((prevTarefas) => [...prevTarefas, novaTarefaObj]);
+      setNovaTarefa("");
+    }
+  };
+
+  const TotalTarefasCriadas = tarefas.length;
+  const TotalTarefasConcluidas = tarefas.filter(
+    ({ completo }) => completo
+  ).length;
+
   return (
-    <GestureHandlerRootView style={{ flex: 1, backgroundColor: "white" }}>
-      {/* Parte do Boas-Vindas */}
-      <View style={styleUserHome.inicio}>
-        <TxtComponent
-          texto="Minhas Tarefas"
-          styleTxt={styleUserHome.txtboasv}
-        />
-        <FlatList
-          data={tarefas}
-          keyExtractor={(item) => item.id}
-          renderItem={({ item }) => (
-            <ListItem data={item} handleLeft={handleTarefaConcluida} />
-          )}
-          ItemSeparatorComponent={() => <Separator />}
-        />
-        <BotaoComponent
-          BtnTxt="Home"
-          OnPress={() => navigation.navigate("Home")}
-          style={styleUserHome.btn}
-          styleTxtBtn={styleUserHome.txtbtn}
+    <View>
+      {/* Somente a Imagem */}
+      <HeaderTarefas />
+      {/* View onde tem o input e o botão para adicionar tarefa */}
+      <View>
+        {/* component com Input, Botão de adicionar e Contadores de Tarefas */}
+        <AdicionarTarefa
+          tarefa={novaTarefa}
+          onChangeText={setNovaTarefa}
+          onPress={addTarefa}
+          QuantidadeTarefasCriadas={TotalTarefasCriadas}
+          QuantidadeTarefasConcluidas={TotalTarefasConcluidas}
         />
       </View>
-    </GestureHandlerRootView>
+      {/* View onde aparece as tarefas */}
+      <View>
+        {/* Essa é a lista de Tarefas */}
+        <FlatList
+          data={tarefas}
+          keyExtractor={(tarefa) => tarefa.id}
+          renderItem={({ item }) => (
+            <ContainerTarefaSala
+              TituloTarefa={item.titulo}
+              completo={item.completo}
+              onPressCompleto={() => definirCompleto(item.id)}
+            />
+          )}
+          ListEmptyComponent={<SemTarefa />}
+        />
+      </View>
+    </View>
   );
 }
-
-const Separator = () => <View style={{ height: 1, backgroundColor: "#DDD" }} />;

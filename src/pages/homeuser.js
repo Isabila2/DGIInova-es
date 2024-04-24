@@ -26,7 +26,7 @@ export default function HomeUsuario() {
           />
           <BotaoComponent
             BtnTxt="Criar uma Sala Privada"
-            OnPress={() => navigation.navigate("Tarefas")}
+            OnPress={() => navigation.navigate("TarefasPrivadas")}
             style={styleUserHome.btn}
             styleTxtBtn={styleUserHome.txtbtn}
           />

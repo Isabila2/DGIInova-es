@@ -2,11 +2,10 @@ import { View } from "react-native";
 import BotaoImagemComponent from "./BotaoImagemComponent";
 import TxtComponent from "./TxtComponent";
 
-export default function ContainerTarefa({
+export default function ContainerTarefaSala({
   TituloTarefa,
   completo,
   onPressCompleto,
-  onPressExcluir,
 }) {
   return (
     <View>
@@ -20,11 +19,6 @@ export default function ContainerTarefa({
         onPress={onPressCompleto}
       />
       <TxtComponent texto={TituloTarefa} />
-      <BotaoImagemComponent
-        name={"trash-can-outline"}
-        size={20}
-        onPress={onPressExcluir}
-      />
     </View>
   );
 }

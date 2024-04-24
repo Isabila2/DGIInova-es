@@ -86,7 +86,7 @@ export default function HomePrincipal() {
           />
           <BotaoComponent
             BtnTxt="Começe agora"
-            OnPress={() => navigation.navigate("TarefasPrivadas")}
+            OnPress={() => navigation.navigate("Login")}
             style={stylesHome.btn}
             styleTxtBtn={stylesHome.txtbtn}
           />

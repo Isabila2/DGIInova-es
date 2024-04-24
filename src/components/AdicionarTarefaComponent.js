@@ -3,7 +3,13 @@ import InputComponent from "./InputComponent";
 import TxtComponent from "./TxtComponent";
 import BotaoImagemComponent from "./BotaoImagemComponent";
 
-export default function AdicionarTarefa({ onChangeText, tarefa, onPress }) {
+export default function AdicionarTarefa({
+  onChangeText,
+  tarefa,
+  onPress,
+  QuantidadeTarefasCriadas,
+  QuantidadeTarefasConcluidas,
+}) {
   return (
     <View>
       <InputComponent
@@ -19,13 +25,13 @@ export default function AdicionarTarefa({ onChangeText, tarefa, onPress }) {
       <View>
         <TxtComponent texto={"Criados"} />
         <View>
-          <TxtComponent texto={"0"} />
+          <TxtComponent texto={QuantidadeTarefasCriadas} />
         </View>
       </View>
       <View>
         <TxtComponent texto={"Concluidos"} />
         <View>
-          <TxtComponent texto={"0"} />
+          <TxtComponent texto={QuantidadeTarefasConcluidas} />
         </View>
       </View>
     </View>
