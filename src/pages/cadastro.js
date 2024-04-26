@@ -6,6 +6,10 @@ import { stylesLoginCadastro } from "../styles/styleLogin-Cadastro";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../services/firebaseConfig";
+import { setDoc, doc } from "firebase/firestore";
+import { db } from "../services/firebaseConfig";
 
 const schema = yup.object({
   usuario: yup.string().required("Informe seu Usuário"),
@@ -30,10 +34,34 @@ export default function Cadastro() {
   });
   const navigation = useNavigation();
 
-  function Verificar_Enviar(data) {
-    console.log(data);
-    navigation.navigate("Login");
-  }
+  const handleCadastro = async (data) => {
+    try {
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        data.email,
+        data.senha
+      );
+      const user = userCredential.user;
+
+      // Salva os dados do usuário no Firestore
+      await setDoc(doc(db, "users", user.uid), {
+        email: data.email,
+        usuario: data.usuario,
+        senha: data.senha,
+      });
+
+      console.log("Usuário cadastrado com sucesso:", user.uid);
+
+      // Navega para a tela de login após o cadastro
+      navigation.navigate("Login", {
+        successMessage: "Cadastro realizado com sucesso!",
+      });
+    } catch (error) {
+      console.error("Erro ao cadastrar:", error.message);
+      // Exibe mensagem de erro para o usuário
+      Alert.alert("Erro ao cadastrar", error.message);
+    }
+  };
 
   return (
     <View style={stylesLoginCadastro.tela}>
@@ -105,7 +133,7 @@ export default function Cadastro() {
         )}
       />
       <TouchableOpacity
-        onPress={handleSubmit(Verificar_Enviar)}
+        onPress={handleSubmit(handleCadastro)}
         style={stylesLoginCadastro.botao}
       >
         <Text style={stylesLoginCadastro.BotaoTxt}> Cadastrar </Text>

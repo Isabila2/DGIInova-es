@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity } from "react-native";
+import { View, Text } from "react-native";
 import React from "react";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -9,17 +9,16 @@ import BotaoComponent from "../components/BotaoComponent";
 import InputSenhaComponent from "../components/InputSenhaComponent";
 import InputComponent from "../components/InputComponent";
 import { stylesLoginCadastro } from "../styles/styleLogin-Cadastro";
+import { signInWithEmailAndPassword } from "firebase/auth"; // Importe a função do arquivo firebaseConfig.js
+import { auth } from "../services/firebaseConfig"; // Importe a referência ao objeto auth do arquivo firebaseConfig.js
 
 const schema = yup.object({
-  usuario: yup.string().required("Informe seu Usuário"),
-  senha: yup
-    .string()
-    .min(8, "A senha deve ter pelo menos 8 dígitos")
-    .required("Informe sua senha"),
+  email: yup.string().required("Informe seu Email"),
+  senha: yup.string().required("Informe sua senha"),
 });
 
 export default function Login() {
-  const navigation = useNavigation(); // Obtenha o objeto de navegação
+  const navigation = useNavigation();
 
   const {
     control,
@@ -30,9 +29,24 @@ export default function Login() {
   });
 
   const onSubmit = (data) => {
-    console.log(data); // Aqui você pode enviar os dados do formulário para o servidor
-    // Exemplo de navegação para a próxima tela após o login bem-sucedido
-    navigation.navigate("Usuário(Aluno)");
+    handleLogin(data);
+    console.log(data);
+  };
+
+  const handleLogin = async (data) => {
+    try {
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        data.email,
+        data.senha
+      );
+      const user = userCredential.user;
+      console.log("Usuário logado com sucesso:", user.uid);
+      // Navegue para a próxima tela após o login
+      navigation.navigate("Usuário(Aluno)");
+    } catch (error) {
+      console.error("Erro ao fazer login:", error.message);
+    }
   };
 
   return (
@@ -42,6 +56,9 @@ export default function Login() {
         style={stylesLoginCadastro.img}
       />
       {/* View com Input e imagem Email */}
+      {errors.usuario && (
+        <Text style={stylesLoginCadastro.erro}>{errors.usuario.message}</Text>
+      )}
       <View style={stylesLoginCadastro.view_Inputs}>
         <ImagemComponent
           RotaImagem={require("../assets/images/usuario.png")}
@@ -49,10 +66,10 @@ export default function Login() {
         />
         <Controller
           control={control}
-          name="usuario"
+          name="email"
           render={({ field: { onChange, value } }) => (
             <InputComponent
-              placeholder={"Digite seu usuário"}
+              placeholder={"Digite seu Email"}
               onChangeText={onChange}
               value={value}
               style={stylesLoginCadastro.inputTxt}
@@ -60,10 +77,11 @@ export default function Login() {
           )}
         />
       </View>
-      {errors.usuario && (
-        <Text style={stylesLoginCadastro.erro}>{errors.usuario.message}</Text>
-      )}
+
       {/* View com Input e Imagem senha */}
+      {errors.senha && (
+        <Text style={stylesLoginCadastro.erro}>{errors.senha.message}</Text>
+      )}
       <View style={stylesLoginCadastro.view_Inputs}>
         <ImagemComponent
           RotaImagem={require("../assets/images/Senha.png")}
@@ -82,9 +100,7 @@ export default function Login() {
           )}
         />
       </View>
-      {errors.senha && (
-        <Text style={stylesLoginCadastro.erro}>{errors.senha.message}</Text>
-      )}
+
       <BotaoComponent
         BtnTxt={"Fazer Login"}
         OnPress={handleSubmit(onSubmit)}

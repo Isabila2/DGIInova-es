@@ -5,7 +5,9 @@ import Login from "./src/pages/login";
 import Cadastro from "./src/pages/cadastro";
 import Tarefas from "./src/pages/tarefasUsuario";
 import HomeUsuario from "./src/pages/homeuser";
+import HomeProfessor from "./src/pages/homeprofessor";
 import TarefasPrivadas from "./src/pages/TarefasPrivadas";
+
 import "react-native-get-random-values";
 
 const Stack = createNativeStackNavigator();
@@ -18,6 +20,7 @@ export default function App() {
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="Cadastro" component={Cadastro} />
         <Stack.Screen name="Usuário(Aluno)" component={HomeUsuario} />
+        <Stack.Screen name="Usuário(Professor)" component={HomeProfessor} />
         <Stack.Screen name="TarefasPrivadas" component={TarefasPrivadas} />
         <Stack.Screen name="Tarefas" component={Tarefas} />
       </Stack.Navigator>
