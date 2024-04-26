@@ -85,8 +85,14 @@ export default function HomePrincipal() {
             style={stylesHome.img}
           />
           <BotaoComponent
-            BtnTxt="Começe agora"
+            BtnTxt="Começe Login*"
             OnPress={() => navigation.navigate("Login")}
+            style={stylesHome.btn}
+            styleTxtBtn={stylesHome.txtbtn}
+          />
+           <BotaoComponent
+            BtnTxt="Começe TarefasPrivadas"
+            OnPress={() => navigation.navigate("TarefasPrivadas")}
             style={stylesHome.btn}
             styleTxtBtn={stylesHome.txtbtn}
           />

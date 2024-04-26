@@ -5,6 +5,7 @@ import ContainerTarefa from "../components/ContainerTarefaComponent";
 import SemTarefa from "../components/SemTarefaComponent";
 import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
+import { styleTarefa } from "../styles/styleTarefas";
 
 export default function TarefasPrivadas() {
   const [tarefas, setTarefas] = useState([]);
@@ -53,7 +54,7 @@ export default function TarefasPrivadas() {
   ).length;
 
   return (
-    <View>
+    <View >
       {/* Somente a Imagem */}
       <HeaderTarefas />
       {/* View onde tem o input e o botão para adicionar tarefa */}
@@ -65,6 +66,9 @@ export default function TarefasPrivadas() {
           onPress={addTarefa}
           QuantidadeTarefasCriadas={TotalTarefasCriadas}
           QuantidadeTarefasConcluidas={TotalTarefasConcluidas}
+          styleAdd={styleTarefa.add}
+          styleImg={styleTarefa.btnimg}
+          styleTxt={styleTarefa.texto}
         />
       </View>
       {/* View onde aparece as tarefas */}

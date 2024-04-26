@@ -1,7 +1,7 @@
 import { TouchableOpacity } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
-export default function BotaoImagemComponent({ name, size, color, onPress }) {
+export default function BotaoImagemComponent({ name, size, color, onPress, styleBtn }) {
   return (
     <TouchableOpacity>
       <MaterialCommunityIcons
@@ -9,6 +9,7 @@ export default function BotaoImagemComponent({ name, size, color, onPress }) {
         size={size}
         color={color}
         onPress={onPress}
+        style={styleBtn}
       />
     </TouchableOpacity>
   );

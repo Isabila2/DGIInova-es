@@ -1,6 +1,7 @@
 import { View } from "react-native";
 import BotaoImagemComponent from "./BotaoImagemComponent";
 import TxtComponent from "./TxtComponent";
+import { styleTarefa } from "../styles/styleTarefas";
 
 export default function ContainerTarefaSala({
   TituloTarefa,
@@ -17,6 +18,7 @@ export default function ContainerTarefaSala({
         }
         size={20}
         onPress={onPressCompleto}
+        styleTarefa={styleTarefa.btn}
       />
       <TxtComponent texto={TituloTarefa} />
     </View>

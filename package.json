@@ -34,7 +34,9 @@
     "react-native-webview": "13.6.4",
     "react-native-youtube-iframe": "^2.3.0",
     "uuid": "^9.0.1",
-    "yup": "^1.4.0"
+    "yup": "^1.4.0",
+    "expo-splash-screen": "~0.26.5",
+    "expo-av": "~13.10.6"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"

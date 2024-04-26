@@ -24,9 +24,29 @@ export const styleTarefa = StyleSheet.create({
     marginTop: 20,
   },
   txtbtn: {
-    color: "white",
+    color: "black",
     fontSize: 15,
     textAlign: "center",
     fontWeight: "300",
   },
+ add: {
+  fontSize: 15,
+  textAlign: "center",
+  fontWeight: "300",
+  borderBottomWidth: 1,
+  borderBottomColor: "#DBA3DB",
+ },
+ btnimg: {
+  justifyContent: "center",
+  alignItems: "center",
+marginLeft: 150,
+marginTop: 5,
+ },
+ texto: {
+  fontSize: 18,
+  textAlign: "center",
+  fontWeight: "300",
+  marginTop: 20,
+  
+ }
 });
