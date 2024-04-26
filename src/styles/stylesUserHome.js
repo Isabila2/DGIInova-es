@@ -30,6 +30,7 @@ export const styleUserHome = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     marginTop: 20,
+    margin: 60,
   },
   txtbtn: {
     color: "white",

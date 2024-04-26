@@ -1,8 +1,8 @@
 import { Alert, FlatList, View } from "react-native";
-import HeaderTarefas from "../components/HeaderTarefasComponent";
 import AdicionarTarefa from "../components/AdicionarTarefaComponent";
 import ContainerTarefaSala from "../components/ContainerTarefaSala";
 import SemTarefa from "../components/SemTarefaComponent";
+import ImagemComponent from "../components/ImagemComponent";
 import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 
@@ -38,10 +38,11 @@ export default function TarefasSala() {
   return (
     <View>
       {/* Somente a Imagem */}
-      <HeaderTarefas />
+  
       {/* View onde tem o input e o botão para adicionar tarefa */}
       <View>
         {/* component com Input, Botão de adicionar e Contadores de Tarefas */}
+      
         <AdicionarTarefa
           tarefa={novaTarefa}
           onChangeText={setNovaTarefa}

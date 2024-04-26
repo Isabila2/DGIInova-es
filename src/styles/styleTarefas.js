@@ -2,15 +2,18 @@ import { StyleSheet } from "react-native";
 
 export const styleTarefa = StyleSheet.create({
   inicio: {
-    justifyContent: "center",
-    alignItems: "center",
+   
+    backgroundColor: "white",
   },
   img: {
-    width: 340,
-    height: 45,
+    width: 250,
+    height: 105,
     justifyContent: "center",
     alignItems: "center",
-    marginTop: 250,
+    marginTop: 20,
+    marginBottom:50,
+    marginLeft: 70,
+    
   },
   btn: {
     width: 250,
@@ -35,18 +38,26 @@ export const styleTarefa = StyleSheet.create({
   fontWeight: "300",
   borderBottomWidth: 1,
   borderBottomColor: "#DBA3DB",
+  width: 350,
  },
  btnimg: {
   justifyContent: "center",
   alignItems: "center",
-marginLeft: 150,
+
 marginTop: 5,
  },
  texto: {
   fontSize: 18,
   textAlign: "center",
   fontWeight: "300",
-  marginTop: 20,
+  marginTop: 15,
+ color: "#DBA3DB" ,
   
+ },
+ textoo: {
+  fontSize: 18,
+  textAlign: "center",
+  fontWeight: "200",
+  marginTop: 2,
  }
 });

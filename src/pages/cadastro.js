@@ -64,7 +64,10 @@ export default function Cadastro() {
   };
 
   return (
+    // View principal
     <View style={stylesLoginCadastro.tela}>
+
+      {/* Imagem da logo */}
       <ImagemComponent
         RotaImagem={require("../assets/images/LogoHome.png")}
         style={stylesLoginCadastro.img}
@@ -72,6 +75,7 @@ export default function Cadastro() {
       {errors.usuario && (
         <Text style={stylesLoginCadastro.erro}>{errors.usuario?.message}</Text>
       )}
+      
       <Controller
         control={control}
         name="usuario"
@@ -87,6 +91,7 @@ export default function Cadastro() {
       {errors.email && (
         <Text style={stylesLoginCadastro.erro}>{errors.email?.message}</Text>
       )}
+
       <Controller
         control={control}
         name="email"
@@ -102,6 +107,7 @@ export default function Cadastro() {
       {errors.senha && (
         <Text style={stylesLoginCadastro.erro}>{errors.senha?.message}</Text>
       )}
+
       <Controller
         control={control}
         name="senha"
@@ -132,12 +138,15 @@ export default function Cadastro() {
           />
         )}
       />
+
+      {/* Botão de Cadastrar */}
       <TouchableOpacity
         onPress={handleSubmit(handleCadastro)}
         style={stylesLoginCadastro.botao}
       >
         <Text style={stylesLoginCadastro.BotaoTxt}> Cadastrar </Text>
       </TouchableOpacity>
+
     </View>
   );
 }

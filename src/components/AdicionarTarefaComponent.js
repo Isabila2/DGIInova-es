@@ -13,9 +13,11 @@ export default function AdicionarTarefa({
   styleAdd,
   styleImg,
   styleTxt,
+  styleTxtt,
+
 }) {
   return (
-    <View style={{ backgroundColor: "white",}}>
+    <View style={{ backgroundColor: "white", justifyContent: "center", alignItems: "center"}}>
       <InputComponent
         placeholder={"Adicione uma nova Tarefa"}
         value={tarefa}
@@ -25,20 +27,20 @@ export default function AdicionarTarefa({
 
       <BotaoImagemComponent
         name={"plus-circle-outline"}
-        size={35}
+        size={30}
         onPress={onPress}
         styleBtn={styleImg}
               />
       <View>
         <TxtComponent texto={"CRIADOS"} styleTxt={styleTxt}  />
         <View>
-          <TxtComponent texto={QuantidadeTarefasCriadas}  styleTxt={styleTxt}/>
+          <TxtComponent texto={QuantidadeTarefasCriadas}  styleTxt={styleTxtt}/>
         </View>
       </View>
       <View>
-        <TxtComponent texto={"Concluidos"}  styleTxt={styleTxt}/>
+        <TxtComponent texto={"CONCLUÍDOS"}  styleTxt={styleTxt}/>
         <View>
-          <TxtComponent texto={QuantidadeTarefasConcluidas} styleTxt={styleTxt} />
+          <TxtComponent texto={QuantidadeTarefasConcluidas} styleTxt={styleTxtt} />
         </View>
       </View>
     </View>

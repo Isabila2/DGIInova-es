@@ -69,6 +69,7 @@ export default function HomePrincipal() {
     >
       {/* Parte do Scrool View */}
       <ScrollView>
+        
         {/* Parte do Boas-Vindas com animação */}
         <Animated.View
           style={{

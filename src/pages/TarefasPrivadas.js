@@ -1,11 +1,12 @@
 import { Alert, FlatList, View } from "react-native";
-import HeaderTarefas from "../components/HeaderTarefasComponent";
 import AdicionarTarefa from "../components/AdicionarTarefaComponent";
 import ContainerTarefa from "../components/ContainerTarefaComponent";
 import SemTarefa from "../components/SemTarefaComponent";
 import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { styleTarefa } from "../styles/styleTarefas";
+import ImagemComponent from "../components/ImagemComponent";
+import { ScrollView } from "react-native";
 
 export default function TarefasPrivadas() {
   const [tarefas, setTarefas] = useState([]);
@@ -54,11 +55,15 @@ export default function TarefasPrivadas() {
   ).length;
 
   return (
-    <View >
+    <View style={styleTarefa.inicio}>
+      <ScrollView>
       {/* Somente a Imagem */}
-      <HeaderTarefas />
+      <ImagemComponent
+        RotaImagem={require("../assets/images/LogoPrincipal.png")}
+        style={styleTarefa.img}
+      />
       {/* View onde tem o input e o botão para adicionar tarefa */}
-      <View>
+      <View style={{ justifyContent: "center", alignItems: "center"}}>
         {/* component com Input, Botão de adicionar e Contadores de Tarefas */}
         <AdicionarTarefa
           tarefa={novaTarefa}
@@ -69,6 +74,7 @@ export default function TarefasPrivadas() {
           styleAdd={styleTarefa.add}
           styleImg={styleTarefa.btnimg}
           styleTxt={styleTarefa.texto}
+          styleTxtt={styleTarefa.textoo}
         />
       </View>
       {/* View onde aparece as tarefas */}
@@ -88,6 +94,7 @@ export default function TarefasPrivadas() {
           ListEmptyComponent={<SemTarefa />}
         />
       </View>
+      </ScrollView>
     </View>
   );
 }
