@@ -14,12 +14,12 @@ export default function ContainerTarefa({
   return (
     <View
       style={{
-        backgroundColor: "#ebebeb",
+        backgroundColor: "#d46dd4",
         borderRadius: 5,
-        borderColor: "black",
+        borderColor: "#d46dd4",
         borderWidth: 1,
         height: 50,
-        width: "98%",
+        width: "95%",
         marginLeft: 10,
         marginTop: 15,
         flex: 1,
@@ -34,6 +34,7 @@ export default function ContainerTarefa({
         size={33}
         onPress={onPressCompleto}
         styleBtn={styleContainer}
+        color="white"
       />
       <TxtComponent texto={TituloTarefa} styleTxt={styleTexto} />
       <View style={styleContai}>
@@ -41,6 +42,7 @@ export default function ContainerTarefa({
           name={"trash-can-outline"}
           size={33}
           onPress={onPressExcluir}
+          color="white"
         />
       </View>
     </View>

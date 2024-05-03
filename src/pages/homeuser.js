@@ -6,6 +6,7 @@ import { ScrollView } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { auth } from "../services/firebaseConfig";
 import { getUserData } from "../services/firebaseConfig";
+import ModalCriarSalaComponent from "../components/ModalCriarSalaComponent";
 
 //importando style e configurações do vídeo
 import { styleUserHome, VIDEO_HEIGHT } from "../styles/stylesUserHome";
@@ -17,12 +18,14 @@ import YoutubeIframe from "react-native-youtube-iframe";
 import BotaoComponent from "../components/BotaoComponent";
 import ImagemComponent from "../components/ImagemComponent";
 import TxtComponent from "../components/TxtComponent";
+import { set } from "react-hook-form";
 
 //exportando as variaveis
 export default function HomeUsuario() {
   const navigation = useNavigation();
   const [videoReady, setVideoReady] = useState(false);
   const [userData, setUserData] = useState(null);
+  const [visible, setVisible] = useState(false);
 
   useEffect(() => {
     // Função para obter os dados do usuário após o login
@@ -41,6 +44,13 @@ export default function HomeUsuario() {
     fetchUserData();
   }, []);
 
+  function AbrirModal() {
+    if (!visible) {
+      setVisible(true);
+    } else {
+      setVisible(false);
+    }
+  }
   return (
     <View style={{ flex: 1, backgroundColor: "white" }}>
       <ScrollView>
@@ -70,6 +80,14 @@ export default function HomeUsuario() {
             style={styleUserHome.btn}
             styleTxtBtn={styleUserHome.txtbtn}
           />
+
+          <BotaoComponent
+            BtnTxt="Criar uma Sala Pública"
+            OnPress={AbrirModal}
+            style={styleUserHome.btn}
+            styleTxtBtn={styleUserHome.txtbtn}
+          />
+          <ModalCriarSalaComponent visible={visible} Close={AbrirModal} />
         </View>
         <View style={{ marginTop: 100 }}>
           {/**Vídeo explicativo sobre "como usar o site" */}

@@ -25,6 +25,8 @@ export const stylesHome = StyleSheet.create({
   },
   meio: {
     marginTop: 250,
+    alignItems: "center",
+    justifyContent: "center",
   },
   gif: {
     width: 300,
@@ -60,7 +62,7 @@ export const stylesHome = StyleSheet.create({
     marginTop: 50,
     width: "85%",
   },
-  caixas: {
+  touchable: {
     width: 200,
     height: 200,
     backgroundColor: "#dba3db",
@@ -69,6 +71,22 @@ export const stylesHome = StyleSheet.create({
     padding: 20,
     alignItems: "center",
     justifyContent: "center",
+  },
+  modal: {
+    width: "90%",
+    height: "50%",
+    backgroundColor: "#f6e1f6",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  imgmodal: {
+    height: 130,
+    width: 290,
+  },
+  txtmodal: {
+    fontWeight: "200",
+    justifyContent: "flex-end",
+    marginTop: 20,
   },
   footerlogo: {
     width: 120,

@@ -5,6 +5,7 @@ import TxtComponent from "./TxtComponent";
 import React, { useState, useEffect } from "react";
 import { auth } from "../services/firebaseConfig";
 import { getUserData } from "../services/firebaseConfig";
+import { styleUserHome } from "../styles/stylesUserHome";
 
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
@@ -37,8 +38,13 @@ export default function LogOutDrawer() {
   };
 
   return (
-    <View>
-      <TxtComponent texto={""} />
+    <View
+      style={{ justifyContent: "center", alignItems: "center", marginTop: 50 }}
+    >
+      <ImagemComponent
+        RotaImagem={require("../assets/images/LogoPrincipal.png")}
+        style={styleUserHome.img}
+      />
       <MaterialCommunityIcons name="account-circle" size={100} />
       <TxtComponent texto={`Olá ${userData ? userData.usuario : ""}!`} />
       <BotaoImagemComponent
@@ -46,6 +52,7 @@ export default function LogOutDrawer() {
         size={50}
         color={"gray"}
         onPress={handleLogout}
+        texto={"Sair"}
       />
     </View>
   );

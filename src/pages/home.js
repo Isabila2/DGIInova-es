@@ -1,4 +1,11 @@
-import { View, Animated, FlatList, Text } from "react-native";
+import {
+  View,
+  Animated,
+  FlatList,
+  Text,
+  TouchableOpacity,
+  Modal,
+} from "react-native";
 import ImagemComponent from "../components/ImagemComponent";
 import { stylesHome } from "../styles/styleHome";
 import { ScrollView } from "react-native";
@@ -15,6 +22,12 @@ export default function HomePrincipal() {
   // Consts para a Animação
   const [largura, setLargura] = useState(new Animated.Value(0));
   const [altura, setAltura] = useState(new Animated.Value(30));
+  // Abrir modal
+  const [visible, setVisible] = useState(false);
+
+  visModal = (vis) => {
+    !visible ? setVisible(vis) : setVisible(vis);
+  };
 
   Animated.sequence([
     Animated.timing(largura, {
@@ -31,29 +44,51 @@ export default function HomePrincipal() {
   const data = [
     {
       id: 1,
-
+      txtextra: "É DINAMICOO",
       txt: "Dinâmico",
     },
     {
       id: 2,
-
+      txtextra: "É FÁCIL E CLARO",
       txt: "Fácil e claro",
     },
     {
       id: 3,
-
+      txtextra: "É PRÁTICO",
       txt: "Prático",
     },
     {
       id: 4,
-
+      txtextra: "É COMPLETO",
       txt: "Completo",
     },
   ];
 
   const renderItem = ({ item }) => (
-    <View style={stylesHome.caixas}>
-      <TxtComponent texto={item.txt} />
+    <View>
+      {/* View do botão que aparece na home */}
+      <View style={stylesHome.caixas}>
+        <TouchableOpacity
+          onPress={() => visModal(true)}
+          style={stylesHome.touchable}
+        >
+          <TxtComponent texto={item.txt} />
+        </TouchableOpacity>
+      </View>
+      {/*Modal e View do modal */}
+      <Modal
+        transparent={true}
+        animationType="fade"
+        visible={visible}
+        style={{ justifyContent: "center", alignItems: "center" }}
+      >
+        <View style={stylesHome.modal}>
+          <TxtComponent texto={item.txtextra} />
+          <TouchableOpacity onPress={() => visModal(false)}>
+            <TxtComponent texto="Fechar" styleTxt={stylesHome.txtmodal} />
+          </TouchableOpacity>
+        </View>
+      </Modal>
     </View>
   );
 
@@ -83,18 +118,6 @@ export default function HomePrincipal() {
           <ImagemComponent
             RotaImagem={require("../assets/images/LogoHome.png")}
             style={stylesHome.img}
-          />
-          <BotaoComponent
-            BtnTxt="Começe Login*"
-            OnPress={() => navigation.navigate("Login")}
-            style={stylesHome.btn}
-            styleTxtBtn={stylesHome.txtbtn}
-          />
-          <BotaoComponent
-            BtnTxt="Minhas Tarefas"
-            OnPress={() => navigation.navigate("TarefaSemLogin")}
-            style={stylesHome.btn}
-            styleTxtBtn={stylesHome.txtbtn}
           />
         </Animated.View>
 

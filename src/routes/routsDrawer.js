@@ -10,7 +10,6 @@ import LogOutDrawer from "../components/LogOutDrawer";
 
 import Tarefas from "../pages/tarefasUsuario";
 import HomeUsuario from "../pages/homeuser";
-import HomeProfessor from "../pages/homeprofessor";
 import TarefasPrivadas from "../pages/TarefasPrivadas";
 
 import "react-native-get-random-values";
@@ -47,7 +46,6 @@ export default function RoutesDrawer({ navigation, ...rest }) {
       {...rest} // Espalhando as outras props
     >
       <Drawer.Screen name="Usuário(Aluno)" component={HomeUsuario} />
-      <Drawer.Screen name="Usuário(Professor)" component={HomeProfessor} />
       <Drawer.Screen name="TarefasPrivadas" component={TarefasPrivadas} />
       <Drawer.Screen name="Tarefas" component={Tarefas} />
     </Drawer.Navigator>

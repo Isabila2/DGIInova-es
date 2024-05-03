@@ -1,5 +1,6 @@
 import { TouchableOpacity } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import TxtComponent from "./TxtComponent";
 
 export default function BotaoImagemComponent({
   name,
@@ -7,6 +8,7 @@ export default function BotaoImagemComponent({
   color,
   onPress,
   styleBtn,
+  texto,
 }) {
   return (
     <TouchableOpacity>
@@ -17,6 +19,7 @@ export default function BotaoImagemComponent({
         onPress={onPress}
         style={styleBtn}
       />
+      <TxtComponent texto={texto} />
     </TouchableOpacity>
   );
 }
