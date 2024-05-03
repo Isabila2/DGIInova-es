@@ -1,92 +1,51 @@
 import { Alert, FlatList, View } from "react-native";
+import HeaderTarefas from "../components/HeaderTarefasComponent";
 import AdicionarTarefa from "../components/AdicionarTarefaComponent";
 import ContainerTarefa from "../components/ContainerTarefaComponent";
 import SemTarefa from "../components/SemTarefaComponent";
 import { useState } from "react";
+import { v4 as uuidv4 } from "uuid";
 import { styleTarefa } from "../styles/styleTarefas";
 import ImagemComponent from "../components/ImagemComponent";
 import { ScrollView } from "react-native";
-import { useEffect } from "react";
-import { db, auth } from "../services/firebaseConfig"; // Importe a referência ao banco de dados Firebase e ao objeto de autenticação
-import {
-  collection,
-  addDoc,
-  query,
-  where,
-  onSnapshot,
-  doc,
-  updateDoc,
-  deleteDoc,
-} from "firebase/firestore";
 
-export default function TarefasPrivadas() {
+export default function TarefasSemLogin() {
   const [tarefas, setTarefas] = useState([]);
   const [novaTarefa, setNovaTarefa] = useState("");
-
-  const marcarTarefaComoCompleta = async (id) => {
-    try {
-      const tarefaRef = doc(db, "tarefas", id);
-      await updateDoc(tarefaRef, {
-        completo: true,
-      });
-    } catch (error) {
-      console.error("Erro ao marcar tarefa como completa:", error);
-    }
+  const definirCompleto = (id) => {
+    setTarefas((prevTarefas) =>
+      prevTarefas.map((tarefa) =>
+        tarefa.id === id ? { ...tarefa, completo: !tarefa.completo } : tarefa
+      )
+    );
   };
-
-  useEffect(() => {
-    if (auth.currentUser) {
-      buscarTarefasDoUsuario();
-    }
-  }, []);
-
-  const buscarTarefasDoUsuario = async () => {
-    try {
-      const q = query(
-        collection(db, "tarefas"),
-        where("userId", "==", auth.currentUser.uid)
-      );
-      onSnapshot(q, (snapshot) => {
-        const tarefasUsuario = [];
-        snapshot.forEach((doc) => {
-          tarefasUsuario.push({ id: doc.id, ...doc.data() });
-        });
-        setTarefas(tarefasUsuario);
-      });
-    } catch (error) {
-      console.error("Erro ao buscar tarefas do usuário:", error);
-    }
-  };
-
+  function ExcluirTarefa(id) {
+    Alert.alert("Excluir tarefa", "Deseja excluir essa Tarefa?", [
+      {
+        text: "Sim",
+        style: "default",
+        onPress: () =>
+          setTarefas((tarefas) =>
+            tarefas.filter((tarefas) => tarefas.id !== id)
+          ),
+      },
+      {
+        text: "Não",
+        style: "cancel",
+      },
+    ]);
+  }
   const addTarefa = () => {
     if (novaTarefa !== "" && novaTarefa.length >= 5) {
       const novaTarefaObj = {
-        userId: auth.currentUser.uid,
+        id: uuidv4(),
         completo: false,
         titulo: novaTarefa,
       };
-      adicionarTarefaNoFirebase(novaTarefaObj);
+      setTarefas((prevTarefas) => [...prevTarefas, novaTarefaObj]);
       setNovaTarefa("");
     }
   };
-
-  const adicionarTarefaNoFirebase = async (novaTarefaObj) => {
-    try {
-      await addDoc(collection(db, "tarefas"), novaTarefaObj);
-    } catch (error) {
-      console.error("Erro ao adicionar tarefa:", error);
-    }
-  };
-
-  const excluirTarefa = async (id) => {
-    try {
-      const tarefaRef = doc(db, "tarefas", id);
-      await deleteDoc(tarefaRef);
-    } catch (error) {
-      console.error("Erro ao excluir tarefa:", error);
-    }
-  };
-
   const TotalTarefasCriadas = tarefas.length;
   const TotalTarefasConcluidas = tarefas.filter(
     ({ completo }) => completo
@@ -95,7 +54,6 @@ export default function TarefasPrivadas() {
   return (
     <View style={styleTarefa.inicio}>
       <ScrollView>
-        {/* Somente a Imagem */}
         <ImagemComponent
           RotaImagem={require("../assets/images/LogoPrincipal.png")}
           style={styleTarefa.img}
@@ -116,20 +74,17 @@ export default function TarefasPrivadas() {
           />
         </View>
         {/* View onde aparece as tarefas */}
-        <View style={{ alignItems: "center", justifyContent: " center" }}>
+        <View>
           {/* Essa é a lista de Tarefas */}
           <FlatList
             data={tarefas}
             keyExtractor={(tarefa) => tarefa.id}
             renderItem={({ item }) => (
               <ContainerTarefa
-                styleContainer={styleTarefa.iconeprimeiro}
-                styleTexto={styleTarefa.textarefa}
-                styleContai={styleTarefa.iconesegundo}
                 TituloTarefa={item.titulo}
                 completo={item.completo}
-                onPressCompleto={() => marcarTarefaComoCompleta(item.id)}
-                onPressExcluir={() => excluirTarefa(item.id)}
+                onPressCompleto={() => definirCompleto(item.id)}
+                onPressExcluir={() => ExcluirTarefa(item.id)}
               />
             )}
             ListEmptyComponent={<SemTarefa />}

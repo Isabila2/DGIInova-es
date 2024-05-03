@@ -2,8 +2,8 @@ import { StyleSheet } from "react-native";
 
 export const styleTarefa = StyleSheet.create({
   inicio: {
-   
     backgroundColor: "white",
+    flex: 1,
   },
   img: {
     width: 250,
@@ -11,9 +11,8 @@ export const styleTarefa = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     marginTop: 20,
-    marginBottom:50,
+    marginBottom: 50,
     marginLeft: 70,
-    
   },
   btn: {
     width: 250,
@@ -32,32 +31,38 @@ export const styleTarefa = StyleSheet.create({
     textAlign: "center",
     fontWeight: "300",
   },
- add: {
-  fontSize: 15,
-  textAlign: "center",
-  fontWeight: "300",
-  borderBottomWidth: 1,
-  borderBottomColor: "#DBA3DB",
-  width: 350,
- },
- btnimg: {
-  justifyContent: "center",
-  alignItems: "center",
-
-marginTop: 5,
- },
- texto: {
-  fontSize: 18,
-  textAlign: "center",
-  fontWeight: "300",
-  marginTop: 15,
- color: "#DBA3DB" ,
-  
- },
- textoo: {
-  fontSize: 18,
-  textAlign: "center",
-  fontWeight: "200",
-  marginTop: 2,
- }
+  add: {
+    fontSize: 15,
+    textAlign: "center",
+    fontWeight: "300",
+    borderWidth: 1,
+    borderColor: "black",
+    borderRadius: 5,
+    height: 50,
+    width: 270,
+    backgroundColor: "#ebebeb",
+  },
+  btnimg: {
+    marginLeft: 280,
+    marginTop: -45,
+  },
+  textoo: {
+    fontSize: 18,
+    fontWeight: "200",
+    marginTop: 20,
+    borderBottomWidth: 1,
+    borderBottomColor: "black",
+  },
+  iconeprimeiro: {
+    marginTop: 7,
+  },
+  textarefa: {
+    color: "black",
+    marginTop: -28,
+    marginLeft: 40,
+  },
+  iconesegundo: {
+    marginTop: -25,
+    marginLeft: 270,
+  },
 });

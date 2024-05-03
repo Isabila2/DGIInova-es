@@ -12,36 +12,40 @@ export default function AdicionarTarefa({
   QuantidadeTarefasConcluidas,
   styleAdd,
   styleImg,
-  styleTxt,
-  styleTxtt,
 
+  styleTxtt,
 }) {
   return (
-    <View style={{ backgroundColor: "white", justifyContent: "center", alignItems: "center"}}>
+    <View
+      style={{
+        backgroundColor: "white",
+      }}
+    >
       <InputComponent
         placeholder={"Adicione uma nova Tarefa"}
         value={tarefa}
         onChangeText={onChangeText}
-     style={styleAdd}
+        style={styleAdd}
       />
 
       <BotaoImagemComponent
         name={"plus-circle-outline"}
-        size={30}
+        size={40}
         onPress={onPress}
         styleBtn={styleImg}
-              />
-      <View>
-        <TxtComponent texto={"CRIADOS"} styleTxt={styleTxt}  />
-        <View>
-          <TxtComponent texto={QuantidadeTarefasCriadas}  styleTxt={styleTxtt}/>
-        </View>
-      </View>
-      <View>
-        <TxtComponent texto={"CONCLUÍDOS"}  styleTxt={styleTxt}/>
-        <View>
-          <TxtComponent texto={QuantidadeTarefasConcluidas} styleTxt={styleTxtt} />
-        </View>
+      />
+
+      <View style={{ justifyContent: "center", alignItems: "center" }}>
+        <TxtComponent
+          texto={
+            "Criados: " +
+            QuantidadeTarefasCriadas +
+            "                     " +
+            "Concluídos: " +
+            QuantidadeTarefasConcluidas
+          }
+          styleTxt={styleTxtt}
+        />
       </View>
     </View>
   );

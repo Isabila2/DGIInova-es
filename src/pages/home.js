@@ -69,7 +69,6 @@ export default function HomePrincipal() {
     >
       {/* Parte do Scrool View */}
       <ScrollView>
-        
         {/* Parte do Boas-Vindas com animação */}
         <Animated.View
           style={{
@@ -91,9 +90,9 @@ export default function HomePrincipal() {
             style={stylesHome.btn}
             styleTxtBtn={stylesHome.txtbtn}
           />
-           <BotaoComponent
-            BtnTxt="Começe TarefasPrivadas"
-            OnPress={() => navigation.navigate("TarefasPrivadas")}
+          <BotaoComponent
+            BtnTxt="Minhas Tarefas"
+            OnPress={() => navigation.navigate("TarefaSemLogin")}
             style={stylesHome.btn}
             styleTxtBtn={stylesHome.txtbtn}
           />

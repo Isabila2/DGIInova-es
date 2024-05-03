@@ -7,11 +7,25 @@ export default function ContainerTarefa({
   completo,
   onPressCompleto,
   onPressExcluir,
-  styleContainer
+  styleContainer,
+  styleTexto,
+  styleContai,
 }) {
   return (
-    <View >
-      <BotaoImagemComponent style={{BackgroundColor: "red"}}
+    <View
+      style={{
+        backgroundColor: "#ebebeb",
+        borderRadius: 5,
+        borderColor: "black",
+        borderWidth: 1,
+        height: 50,
+        width: "98%",
+        marginLeft: 10,
+        marginTop: 15,
+        flex: 1,
+      }}
+    >
+      <BotaoImagemComponent
         name={
           completo
             ? "checkbox-marked-circle-outline"
@@ -19,15 +33,16 @@ export default function ContainerTarefa({
         }
         size={33}
         onPress={onPressCompleto}
-        styles={styleContainer}
+        styleBtn={styleContainer}
       />
-      <TxtComponent texto={TituloTarefa} />
-      <BotaoImagemComponent style={{BackgroundColor: "pink"}}
-        name={"trash-can-outline"}
-        size={33}
-        onPress={onPressExcluir}
-        styles={styleContainer}
-      />
+      <TxtComponent texto={TituloTarefa} styleTxt={styleTexto} />
+      <View style={styleContai}>
+        <BotaoImagemComponent
+          name={"trash-can-outline"}
+          size={33}
+          onPress={onPressExcluir}
+        />
+      </View>
     </View>
   );
 }

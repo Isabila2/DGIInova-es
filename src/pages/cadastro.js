@@ -1,4 +1,4 @@
-import { View, TouchableOpacity, Text } from "react-native";
+import { View, TouchableOpacity, Text, Alert } from "react-native";
 import InputComponent from "../components/InputComponent";
 import ImagemComponent from "../components/ImagemComponent";
 import { useNavigation } from "@react-navigation/native";
@@ -43,7 +43,6 @@ export default function Cadastro() {
       );
       const user = userCredential.user;
 
-      // Salva os dados do usuário no Firestore
       await setDoc(doc(db, "users", user.uid), {
         email: data.email,
         usuario: data.usuario,
@@ -52,21 +51,22 @@ export default function Cadastro() {
 
       console.log("Usuário cadastrado com sucesso:", user.uid);
 
-      // Navega para a tela de login após o cadastro
       navigation.navigate("Login", {
         successMessage: "Cadastro realizado com sucesso!",
       });
     } catch (error) {
-      console.error("Erro ao cadastrar:", error.message);
-      // Exibe mensagem de erro para o usuário
-      Alert.alert("Erro ao cadastrar", error.message);
+      if (error.code === "auth/email-already-in-use") {
+        Alert.alert("Este Email já está em uso");
+      }
+      if (error.code === "auth/invalid-email") {
+        Alert.alert("Email inválido");
+      }
     }
   };
 
   return (
     // View principal
     <View style={stylesLoginCadastro.tela}>
-
       {/* Imagem da logo */}
       <ImagemComponent
         RotaImagem={require("../assets/images/LogoHome.png")}
@@ -75,13 +75,13 @@ export default function Cadastro() {
       {errors.usuario && (
         <Text style={stylesLoginCadastro.erro}>{errors.usuario?.message}</Text>
       )}
-      
+
       <Controller
         control={control}
         name="usuario"
         render={({ field: { onChange, value } }) => (
           <InputComponent
-            placeholder={"Digite seu Usuario"}
+            placeholder={"Digite seu Usuário"}
             onChangeText={onChange}
             value={value}
             style={stylesLoginCadastro.inputs_cadastro}
@@ -146,7 +146,6 @@ export default function Cadastro() {
       >
         <Text style={stylesLoginCadastro.BotaoTxt}> Cadastrar </Text>
       </TouchableOpacity>
-
     </View>
   );
 }

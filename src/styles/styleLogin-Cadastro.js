@@ -33,6 +33,7 @@ export const stylesLoginCadastro = StyleSheet.create({
     fontSize: 20,
     flex: 1,
     marginLeft: 10,
+    fontWeight: "300",
   },
   botao: {
     width: 250,
@@ -50,13 +51,15 @@ export const stylesLoginCadastro = StyleSheet.create({
     color: "white",
     fontSize: 20,
     textAlign: "center",
+    fontWeight: "300",
   },
   inputs_cadastro: {
     width: "90%",
     borderWidth: 1,
-    borderColor: "#DBA3DB",
+    borderColor: "#d8d8d8",
     padding: 10,
     marginBottom: 20,
+    borderRadius: 5,
   },
   erro: {
     alignItems: "center",

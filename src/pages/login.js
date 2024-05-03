@@ -1,4 +1,4 @@
-import { View, Text } from "react-native";
+import { View, Text, Alert } from "react-native";
 import React from "react";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -45,7 +45,9 @@ export default function Login() {
       // Navegue para a próxima tela após o login
       navigation.navigate("Usuário(Aluno)");
     } catch (error) {
-      console.error("Erro ao fazer login:", error.message);
+      if (error.code === "auth/invalid-credential") {
+        Alert.alert("Email ou Senha Inválidos.");
+      }
     }
   };
 

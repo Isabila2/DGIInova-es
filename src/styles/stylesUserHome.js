@@ -18,7 +18,6 @@ export const styleUserHome = StyleSheet.create({
     height: 100,
     justifyContent: "center",
     alignItems: "center",
-    marginTop: 15,
   },
   btn: {
     width: 250,
@@ -30,12 +29,17 @@ export const styleUserHome = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     marginTop: 20,
-    margin: 60,
   },
   txtbtn: {
     color: "white",
     fontSize: 15,
     textAlign: "center",
     fontWeight: "300",
+  },
+  txttutorial: {
+    textAlign: "center",
+    fontSize: 22,
+    marginBottom: 10,
+    fontWeight: "200",
   },
 });

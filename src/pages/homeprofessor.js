@@ -37,7 +37,8 @@ export default function HomeProfessor() {
             styleTxtBtn={styleUserHome.txtbtn}
           />
         </View>
-        <View>
+        <View style={{ marginTop: 100 }}>
+          <TxtComponent texto="Tutorial" styleTxt={styleUserHome.txttutorial} />
           <YoutubeIframe
             videoId="A6PWu3EH7Xw"
             height={VIDEO_HEIGHT}

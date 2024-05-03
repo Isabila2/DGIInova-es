@@ -57,7 +57,7 @@ export default function HomeUsuario() {
           />
           {/**Botão para criar uma sala */}
           <BotaoComponent
-            BtnTxt="Criar uma Sala Privada"
+            BtnTxt="Entrar em uma Sala"
             OnPress={() => navigation.navigate("TarefasPrivadas")}
             style={styleUserHome.btn}
             styleTxtBtn={styleUserHome.txtbtn}
@@ -65,16 +65,15 @@ export default function HomeUsuario() {
 
           {/**Botão para entrar em uma sala já criada */}
           <BotaoComponent
-            BtnTxt="Entrar em uma Sala"
+            BtnTxt="Criar uma Sala Privada"
             OnPress={() => navigation.navigate("Tarefas")}
             style={styleUserHome.btn}
             styleTxtBtn={styleUserHome.txtbtn}
           />
-          
         </View>
-        <View>
-          
+        <View style={{ marginTop: 100 }}>
           {/**Vídeo explicativo sobre "como usar o site" */}
+          <TxtComponent texto="Tutorial" styleTxt={styleUserHome.txttutorial} />
           <YoutubeIframe
             videoId="A6PWu3EH7Xw"
             height={VIDEO_HEIGHT}

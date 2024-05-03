@@ -38,11 +38,11 @@ export default function TarefasSala() {
   return (
     <View>
       {/* Somente a Imagem */}
-  
+
       {/* View onde tem o input e o botão para adicionar tarefa */}
       <View>
         {/* component com Input, Botão de adicionar e Contadores de Tarefas */}
-      
+
         <AdicionarTarefa
           tarefa={novaTarefa}
           onChangeText={setNovaTarefa}

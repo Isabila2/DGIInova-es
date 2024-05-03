@@ -20,7 +20,12 @@ export default function InputSenhaComponent({ onChangeText, value }) {
       <TextInput
         placeholder="Digite sua senha"
         secureTextEntry={showPassword}
-        style={{ fontSize: 20, width: "87%", marginLeft: 10 }}
+        style={{
+          fontSize: 20,
+          width: "87%",
+          marginLeft: 10,
+          fontWeight: "300",
+        }}
         onChangeText={onChangeText}
         value={value}
       />
