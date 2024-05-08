@@ -5,7 +5,12 @@ import { View, ActivityIndicator, Text, TextComponent } from "react-native";
 import { ScrollView } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { auth } from "../services/firebaseConfig";
-import { getUserData } from "../services/firebaseConfig";
+import {
+  getUserData,
+  getDocs,
+  collection,
+  db,
+} from "../services/firebaseConfig";
 import ModalCriarSalaComponent from "../components/ModalCriarSalaComponent";
 
 //importando style e configurações do vídeo
@@ -26,6 +31,7 @@ export default function HomeUsuario() {
   const [videoReady, setVideoReady] = useState(false);
   const [userData, setUserData] = useState(null);
   const [visible, setVisible] = useState(false);
+  const [rooms, setRooms] = useState([]);
 
   useEffect(() => {
     // Função para obter os dados do usuário após o login
@@ -51,6 +57,38 @@ export default function HomeUsuario() {
       setVisible(false);
     }
   }
+
+  useEffect(() => {
+    loadRooms(); // Carregue as salas quando o componente for montado
+  }, []);
+
+  const loadRooms = async () => {
+    try {
+      const querySnapshot = await getDocs(collection(db, "Salas")); // Obtenha todas as salas do banco de dados
+      const loadedRooms = []; // Array para armazenar as salas carregadas
+
+      // Itere sobre os documentos da coleção de salas
+      querySnapshot.forEach((doc) => {
+        // Extraia os dados de cada sala
+        const roomData = doc.data();
+        const roomId = doc.id;
+
+        // Adicione a sala ao array de salas carregadas
+        loadedRooms.push({
+          id: roomId,
+          name: roomData.nome,
+          // Outros campos da sala, se houver
+        });
+      });
+
+      // Atualize o estado das salas com as salas carregadas
+      setRooms(loadedRooms);
+      console.log(loadedRooms); // Adicione esta linha para verificar se as salas foram carregadas corretamente
+    } catch (error) {
+      console.error("Erro ao carregar salas:", error);
+    }
+  };
+
   return (
     <View style={{ flex: 1, backgroundColor: "white" }}>
       <ScrollView>
@@ -67,27 +105,30 @@ export default function HomeUsuario() {
           />
           {/**Botão para criar uma sala */}
           <BotaoComponent
-            BtnTxt="Entrar em uma Sala"
+            BtnTxt="Minhas Tarefas"
             OnPress={() => navigation.navigate("TarefasPrivadas")}
             style={styleUserHome.btn}
             styleTxtBtn={styleUserHome.txtbtn}
           />
 
-          {/**Botão para entrar em uma sala já criada */}
           <BotaoComponent
-            BtnTxt="Criar uma Sala Privada"
-            OnPress={() => navigation.navigate("Tarefas")}
-            style={styleUserHome.btn}
-            styleTxtBtn={styleUserHome.txtbtn}
-          />
-
-          <BotaoComponent
-            BtnTxt="Criar uma Sala Pública"
+            BtnTxt="Criar uma Sala"
             OnPress={AbrirModal}
             style={styleUserHome.btn}
             styleTxtBtn={styleUserHome.txtbtn}
           />
-          <ModalCriarSalaComponent visible={visible} Close={AbrirModal} />
+          {/**Botão para entrar em uma sala já criada */}
+          <BotaoComponent
+            BtnTxt="Minhas Salas"
+            OnPress={() => navigation.navigate("Minhas Salas")}
+            style={styleUserHome.btn}
+            styleTxtBtn={styleUserHome.txtbtn}
+          />
+          <ModalCriarSalaComponent
+            visible={visible}
+            Close={() => setVisible(false)}
+            updateRooms={loadRooms}
+          />
         </View>
         <View style={{ marginTop: 100 }}>
           {/**Vídeo explicativo sobre "como usar o site" */}

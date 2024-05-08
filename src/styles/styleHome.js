@@ -78,16 +78,38 @@ export const stylesHome = StyleSheet.create({
     backgroundColor: "#f6e1f6",
     justifyContent: "center",
     alignItems: "center",
+    textAlign: "center",
+    borderRadius: 20,
+    borderColor: "#edc9ed",
+    borderWidth: 1,
   },
   imgmodal: {
     height: 130,
     width: 290,
   },
+  itemContent: {
+    width: 300,
+    height: 300,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "#e0e0e0",
+    padding: 16,
+    borderRadius: 16,
+  },
   txtmodal: {
+    width: 250,
+    height: 200,
+    textAlign: "center",
+    marginTop: 25,
+    fontWeight: "300",
+  },
+  txtmodalbtn: {
     fontWeight: "200",
     justifyContent: "flex-end",
     marginTop: 20,
+    fontSize: 18,
   },
+
   footerlogo: {
     width: 120,
     height: 50,

@@ -13,6 +13,7 @@ import HomeUsuario from "../pages/homeuser";
 import TarefasPrivadas from "../pages/TarefasPrivadas";
 
 import "react-native-get-random-values";
+import MinhasSalas from "../pages/MinhasSalas";
 // Const para o uso do Stack (rotas)
 const Drawer = createDrawerNavigator();
 
@@ -48,6 +49,7 @@ export default function RoutesDrawer({ navigation, ...rest }) {
       <Drawer.Screen name="Usuário(Aluno)" component={HomeUsuario} />
       <Drawer.Screen name="TarefasPrivadas" component={TarefasPrivadas} />
       <Drawer.Screen name="Tarefas" component={Tarefas} />
+      <Drawer.Screen name="Minhas Salas" component={MinhasSalas} />
     </Drawer.Navigator>
   );
 }

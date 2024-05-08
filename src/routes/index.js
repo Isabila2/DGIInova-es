@@ -20,6 +20,7 @@ import { AntDesign } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
+import MinhasSalas from "../pages/MinhasSalas";
 
 // Const para o uso do Stack (rotas)
 const Tab = createBottomTabNavigator();
@@ -89,6 +90,16 @@ export default function Routes() {
           <Tab.Screen
             name="SalaPublica"
             component={SalaPublica}
+            options={{
+              headerShown: false,
+              tabBarIcon: ({ color, size }) => {
+                return <Feather name="user" size={24} color="#c0c0c0" />;
+              },
+            }}
+          />
+          <Tab.Screen
+            name="Minhas Salas"
+            component={MinhasSalas}
             options={{
               headerShown: false,
               tabBarIcon: ({ color, size }) => {

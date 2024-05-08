@@ -14,6 +14,15 @@ import { useNavigation } from "@react-navigation/native";
 import TxtComponent from "../components/TxtComponent";
 import React, { useState } from "react";
 import FlatComponent from "../components/FlatListComponent";
+import Reanimated, {
+  FadeInDown,
+  FadeInUp,
+  FadeOutDown,
+  SlideInRight,
+  SlideInUp,
+  SlideOutDown,
+  SlideOutLeft,
+} from "react-native-reanimated";
 
 export default function HomePrincipal() {
   // Const para a navegação
@@ -24,6 +33,7 @@ export default function HomePrincipal() {
   const [altura, setAltura] = useState(new Animated.Value(30));
   // Abrir modal
   const [visible, setVisible] = useState(false);
+  const [select, setSelect] = useState(null);
 
   visModal = (vis) => {
     !visible ? setVisible(vis) : setVisible(vis);
@@ -44,32 +54,39 @@ export default function HomePrincipal() {
   const data = [
     {
       id: 1,
-      txtextra: "É DINAMICOO",
+      txtextra:
+        "Com um design dinâmico e intuitivo, o Task Management é a escolha ideal para quem busca otimizar sua produtividade. Este gerenciador de tarefas oferece uma variedade de recursos poderosos, desde a organização de projetos até o acompanhamento do progresso em tempo real. ",
       txt: "Dinâmico",
     },
     {
       id: 2,
-      txtextra: "É FÁCIL E CLARO",
+      txtextra:
+        "Com uma abordagem fácil e clara, o Taks Management simplifica o gerenciamento de tarefas como nunca antes. Desde a atribuição de tarefas até o monitoramento do progresso, o Taks Management oferece todas as ferramentas necessárias para uma gestão eficaz.",
       txt: "Fácil e claro",
     },
     {
       id: 3,
-      txtextra: "É PRÁTICO",
+      txtextra:
+        "O Taks Management é um gerenciador de tarefas prático, projetado para simplificar o seu dia a dia. Simplifique sua rotina e alcance seus objetivos com facilidade, utilizando essa poderosa plataforma de gestão de tarefas, garantindo produtividade e controle.",
       txt: "Prático",
     },
     {
       id: 4,
-      txtextra: "É COMPLETO",
+      txtextra:
+        "O Taks Management é um gerenciador de tarefas completo, ideal para quem busca organização e eficiência em suas atividades diárias. Com uma ampla gama de recursos, desde a criação de listas personalizadas até a definição de lembretes e prioridades. ",
       txt: "Completo",
     },
   ];
 
   const renderItem = ({ item }) => (
-    <View>
+    <View style={{ justifyContent: "center", alignItems: "center" }}>
       {/* View do botão que aparece na home */}
       <View style={stylesHome.caixas}>
         <TouchableOpacity
-          onPress={() => visModal(true)}
+          onPress={() => {
+            setVisible(true);
+            setSelect(item.txtextra);
+          }}
           style={stylesHome.touchable}
         >
           <TxtComponent texto={item.txt} />
@@ -80,17 +97,31 @@ export default function HomePrincipal() {
         transparent={true}
         animationType="fade"
         visible={visible}
-        style={{ justifyContent: "center", alignItems: "center" }}
+        style={{ justifyContent: "center", alignItems: "center", flex: 1 }}
       >
         <View style={stylesHome.modal}>
-          <TxtComponent texto={item.txtextra} />
+          <View
+            style={{
+              backgroundColor: "#efd4ef",
+              width: 280,
+              height: 200,
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <TxtComponent texto={select} styleTxt={stylesHome.txtmodal} />
+          </View>
           <TouchableOpacity onPress={() => visModal(false)}>
-            <TxtComponent texto="Fechar" styleTxt={stylesHome.txtmodal} />
+            <TxtComponent texto="Fechar" styleTxt={stylesHome.txtmodalbtn} />
           </TouchableOpacity>
         </View>
       </Modal>
     </View>
   );
+
+  {
+    /* TESTEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE */
+  }
 
   return (
     // View Principal

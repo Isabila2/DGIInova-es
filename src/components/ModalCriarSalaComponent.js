@@ -1,21 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, Modal, Alert } from "react-native";
-import { useState } from "react";
 import { useNavigation } from "@react-navigation/native";
-import {
-  collection,
-  addDoc,
-  doc,
-  setDoc,
-  serverTimestamp,
-} from "firebase/firestore";
-import { db } from "../services/firebaseConfig"; // Importe a referência ao banco de dados Firebase
+import { addDoc, doc, setDoc, serverTimestamp } from "firebase/firestore";
+import { db, collection } from "../services/firebaseConfig"; // Importe a referência ao banco de dados Firebase
 
 import InputComponent from "./InputComponent";
 import BotaoComponent from "./BotaoComponent";
 import TxtComponent from "./TxtComponent";
 
-export default function ModalCriarSalaComponent({ visible, Close }) {
+export default function ModalCriarSalaComponent({
+  visible,
+  Close,
+  updateRooms,
+}) {
   const [value, setValue] = useState("");
   const [NomeSala, setNomeSala] = useState("");
   const navigation = useNavigation();
@@ -33,7 +30,7 @@ export default function ModalCriarSalaComponent({ visible, Close }) {
         const novaSalaId = novaSalaRef.id;
 
         // Crie um código único para a sala
-        const codigoSala = novaSalaId.slice(0, 6); // Pegue os primeiros 6 caracteres do ID
+        const codigoSala = novaSalaId.slice(0, 9); // Pegue os primeiros 6 caracteres do ID
 
         // Atualize o documento da sala com o código
         await setDoc(
@@ -45,9 +42,10 @@ export default function ModalCriarSalaComponent({ visible, Close }) {
         );
         adicionarSalaDB(value, codigoSala); // Passando o nome da sala e o código
         Close(); // Fecha o modal
+        updateRooms(); // Atualiza a lista de salas
         // Navegue para a tela da sala recém-criada, passando o ID da sala como parâmetro de rota
-        navigation.navigate("SalaPublica", { salaId: novaSalaId });
-        Close();
+        navigation.navigate("Minhas Salas", { salaId: novaSalaId });
+        setValue("");
       } catch (error) {
         console.error("Erro ao criar sala:", error);
       }
@@ -69,7 +67,14 @@ export default function ModalCriarSalaComponent({ visible, Close }) {
 
   return (
     <Modal transparent={true} animationType="fade" visible={visible}>
-      <View>
+      <View
+        style={{
+          flex: 1,
+          backgroundColor: "white",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
         <TxtComponent texto={"Criar Sala"} />
         <InputComponent
           onChangeText={setValue}
