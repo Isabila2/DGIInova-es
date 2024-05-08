@@ -16,7 +16,7 @@ import ContainerTarefa from "../components/ContainerTarefaComponent";
 import SemTarefa from "../components/SemTarefaComponent";
 import { styleTarefa } from "../styles/styleTarefas";
 
-export default function TarefasSala() {
+export default function TarefasSalaAdministrador() {
   const [tarefas, setTarefas] = useState([]);
   const [novaTarefa, setNovaTarefa] = useState("");
 
