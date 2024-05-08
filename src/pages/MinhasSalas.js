@@ -5,6 +5,7 @@ import {
   FlatList,
   TouchableOpacity,
   StyleSheet,
+  Button,
 } from "react-native";
 import { collection, getDocs } from "firebase/firestore"; // Importe a função getDocs
 import { db } from "../services/firebaseConfig"; // Importe a referência ao banco de dados Firebase
@@ -54,6 +55,8 @@ const MinhasSalas = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
+      <Button title="Atualizar Salas" onPress={loadRooms} />
+      {/* Botão de atualização */}
       <FlatList
         data={rooms}
         renderItem={renderRoomItem}

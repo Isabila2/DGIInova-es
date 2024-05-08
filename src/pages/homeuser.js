@@ -83,7 +83,6 @@ export default function HomeUsuario() {
 
       // Atualize o estado das salas com as salas carregadas
       setRooms(loadedRooms);
-      console.log(loadedRooms); // Adicione esta linha para verificar se as salas foram carregadas corretamente
     } catch (error) {
       console.error("Erro ao carregar salas:", error);
     }

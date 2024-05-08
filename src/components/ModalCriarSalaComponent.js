@@ -40,7 +40,7 @@ export default function ModalCriarSalaComponent({
           },
           { merge: true }
         );
-        adicionarSalaDB(value, codigoSala); // Passando o nome da sala e o código
+
         Close(); // Fecha o modal
         updateRooms(); // Atualiza a lista de salas
         // Navegue para a tela da sala recém-criada, passando o ID da sala como parâmetro de rota
@@ -51,19 +51,6 @@ export default function ModalCriarSalaComponent({
       }
     }
   }
-
-  const adicionarSalaDB = async (nomeSala, codigoSala) => {
-    try {
-      await addDoc(collection(db, "Salas"), {
-        nome: nomeSala,
-        codigo: codigoSala,
-        // Outros campos da sala, se houver
-      });
-    } catch (error) {
-      console.error("Erro ao adicionar sala:", error);
-      throw error;
-    }
-  };
 
   return (
     <Modal transparent={true} animationType="fade" visible={visible}>
