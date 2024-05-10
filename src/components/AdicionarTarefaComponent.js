@@ -18,12 +18,12 @@ export default function AdicionarTarefa({
   return (
     <View
       style={{
-        backgroundColor: "#f6def6",
+        backgroundColor: "#white",
       }}
     >
       <InputComponent
         placeholder={"Adicione uma nova Tarefa"}
-        style={{ color: "white" }}
+        style={{ color: "black" }}
         value={tarefa}
         onChangeText={onChangeText}
         style={styleAdd}
@@ -34,7 +34,7 @@ export default function AdicionarTarefa({
         size={40}
         onPress={onPress}
         styleBtn={styleImg}
-        color="#d46dd4"
+        color="black"
       />
 
       <View style={{ justifyContent: "center", alignItems: "center" }}>

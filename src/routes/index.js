@@ -8,19 +8,19 @@ import Cadastro from "../pages/cadastro";
 import Tarefas from "../pages/tarefasUsuario";
 import HomeUsuario from "../pages/homeuser";
 import TarefasPrivadas from "../pages/TarefasPrivadas";
-import TarefasSemLogin from "../pages/Tarefas-SemCadastro";
 import TarefasSala from "../pages/tarefasUsuario";
 import SalaPublica from "../pages/SalaPublica";
-
+import TarefasSemLogin from "../pages/Tarefas-SemCadastro";
 import "react-native-get-random-values";
 import RoutesDrawer from "./routsDrawer";
 import HomePrincipal from "../pages/home";
+import EntrarSala from "../pages/EntrarSala";
 
 import { AntDesign } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
-import { FontAwesome5 } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
 import MinhasSalas from "../pages/MinhasSalas";
+import TarefasSalaAdministrador from "../pages/TarefasSalaAdministrador";
 
 // Const para o uso do Stack (rotas)
 const Tab = createBottomTabNavigator();
@@ -56,7 +56,7 @@ export default function Routes() {
           />
 
           <Tab.Screen
-            name="TarefasPrivadas"
+            name="Tarefas"
             component={TarefasPrivadas}
             options={{
               headerShown: false,
@@ -90,6 +90,16 @@ export default function Routes() {
           <Tab.Screen
             name="SalaPublica"
             component={SalaPublica}
+            options={{
+              headerShown: false,
+              tabBarIcon: ({ color, size }) => {
+                return <Feather name="user" size={24} color="#c0c0c0" />;
+              },
+            }}
+          />
+          <Tab.Screen
+            name="Entrar em uma Sala"
+            component={EntrarSala}
             options={{
               headerShown: false,
               tabBarIcon: ({ color, size }) => {

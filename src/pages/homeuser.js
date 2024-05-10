@@ -109,7 +109,12 @@ export default function HomeUsuario() {
             style={styleUserHome.btn}
             styleTxtBtn={styleUserHome.txtbtn}
           />
-
+          <BotaoComponent
+            BtnTxt="Entrar em uma Sala"
+            OnPress={() => navigation.navigate("Entrar em uma Sala")}
+            style={styleUserHome.btn}
+            styleTxtBtn={styleUserHome.txtbtn}
+          />
           <BotaoComponent
             BtnTxt="Criar uma Sala"
             OnPress={AbrirModal}

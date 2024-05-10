@@ -120,4 +120,8 @@ export const stylesHome = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
+  gifmodal: {
+    width: 20,
+    height: 20,
+  },
 });

@@ -6,7 +6,7 @@ export default function SemTarefa() {
   return (
     <View
       style={{
-        backgroundColor: "#f6def6",
+        backgroundColor: "white",
         alignItems: "center",
         justifyContent: "center",
         marginTop: 90,

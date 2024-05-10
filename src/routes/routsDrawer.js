@@ -5,6 +5,7 @@ import BotaoImagemComponent from "../components/BotaoImagemComponent";
 import { View } from "react-native";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import LogOutDrawer from "../components/LogOutDrawer";
+import LogInDrawer from "../components/LogInDrawer";
 
 // Importando as páginas que aparecerão
 
@@ -37,18 +38,18 @@ export default function RoutesDrawer({ navigation, ...rest }) {
       }}
       drawerContent={(drawerProps) => (
         <View style={{ flex: 1 }}>
-          <LogOutDrawer />
+          <LogInDrawer />
           <DrawerContentScrollView {...drawerProps}>
             <DrawerItemList {...drawerProps} />
           </DrawerContentScrollView>
+          <LogOutDrawer />
         </View>
       )}
       navigation={navigation} // Passando a propriedade navigation
       {...rest} // Espalhando as outras props
     >
       <Drawer.Screen name="Usuário(Aluno)" component={HomeUsuario} />
-      <Drawer.Screen name="TarefasPrivadas" component={TarefasPrivadas} />
-      <Drawer.Screen name="Tarefas" component={Tarefas} />
+      <Drawer.Screen name="Tarefas" component={TarefasPrivadas} />
       <Drawer.Screen name="Minhas Salas" component={MinhasSalas} />
     </Drawer.Navigator>
   );

@@ -9,6 +9,7 @@ export default function BotaoImagemComponent({
   onPress,
   styleBtn,
   texto,
+  styletexto,
 }) {
   return (
     <TouchableOpacity>
@@ -19,7 +20,7 @@ export default function BotaoImagemComponent({
         onPress={onPress}
         style={styleBtn}
       />
-      <TxtComponent texto={texto} />
+      <TxtComponent texto={texto} styleTxt={styletexto} />
     </TouchableOpacity>
   );
 }

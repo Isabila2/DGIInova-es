@@ -47,7 +47,9 @@ const MinhasSalas = ({ navigation }) => {
   const renderRoomItem = ({ item }) => (
     <TouchableOpacity
       style={styles.roomItem}
-      onPress={() => navigation.navigate("RoomDetail", { roomId: item.id })}
+      onPress={() =>
+        navigation.navigate("TarefasSalaAdministrador", { salaId: item.id })
+      }
     >
       <Text style={styles.roomName}>{item.name}</Text>
     </TouchableOpacity>

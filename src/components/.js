@@ -9,7 +9,7 @@ import { styleUserHome } from "../styles/stylesUserHome";
 
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
-export default function LogOutDrawer() {
+export default function LogInDrawer() {
   const [userData, setUserData] = useState(null);
 
   useEffect(() => {
@@ -40,15 +40,28 @@ export default function LogOutDrawer() {
   return (
     <View
       style={{
-        marginTop: 20,
-        justifyContent: "flex-end",
+        marginTop: 50,
       }}
     >
-      <View style={{ flexDirection: "row", marginTop: 1 }}>
+      <ImagemComponent
+        RotaImagem={require("../assets/images/LogoPrincipal.png")}
+        style={styleUserHome.img}
+      />
+      <View
+        style={{
+          alignItems: "center",
+          flexDirection: "row",
+          marginTop: 20,
+        }}
+      >
+        <MaterialCommunityIcons name="account-circle" size={70} />
+        <TxtComponent texto={`Olá ${userData ? userData.usuario : ""}!`} />
+      </View>
+      <View style={{ flexDirection: "row", marginTop: 10 }}>
         <BotaoImagemComponent
           name={"exit-run"}
           size={50}
-          color={"black"}
+          color={"gray"}
           onPress={handleLogout}
           styleBtn={styleUserHome.lougout}
         />

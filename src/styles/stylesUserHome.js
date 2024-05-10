@@ -19,6 +19,19 @@ export const styleUserHome = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
+  lougout: {
+    height: 60,
+  },
+  sairtxt: {
+    height: 60,
+    textAlign: "center",
+    justifyContent: "center",
+    fontSize: 17,
+    marginTop: 15,
+    marginLeft: 5,
+    flexDirection: "row",
+    fontWeight: "300",
+  },
   btn: {
     width: 250,
     height: 50,
