@@ -41,85 +41,6 @@ export default function HomePrincipal() {
     }),
   ]).start();
 
-  // Const para o FlatList
-  const dinamico = require("../assets/Gifs/Dinamico.gif");
-  const facil = require("../assets/Gifs/Facil.gif");
-  const pratico = require("../assets/Gifs/Pratico.gif");
-  const completo = require("../assets/Gifs/Completed.gif");
-
-  const data = [
-    {
-      id: 1,
-      txtextra:
-        "Com um design dinâmico e intuitivo, o Task Management é a escolha ideal para quem busca otimizar sua produtividade. Este gerenciador de tarefas oferece uma variedade de recursos poderosos, desde a organização de projetos até o acompanhamento do progresso em tempo real. ",
-      txt: "Dinâmico",
-      img: dinamico,
-    },
-    {
-      id: 2,
-      txtextra:
-        "Com uma abordagem fácil e clara, o Taks Management simplifica o gerenciamento de tarefas como nunca antes. Desde a atribuição de tarefas até o monitoramento do progresso, o Taks Management oferece todas as ferramentas necessárias para uma gestão eficaz.",
-      txt: "Fácil e claro",
-      img: facil,
-    },
-    {
-      id: 3,
-      txtextra:
-        "O Taks Management é um gerenciador de tarefas prático, projetado para simplificar o seu dia a dia. Simplifique sua rotina e alcance seus objetivos com facilidade, utilizando essa poderosa plataforma de gestão de tarefas, garantindo produtividade e controle.",
-      txt: "Prático",
-      img: pratico,
-    },
-    {
-      id: 4,
-      txtextra:
-        "O Taks Management é um gerenciador de tarefas completo, ideal para quem busca organização e eficiência em suas atividades diárias. Com uma ampla gama de recursos, desde a criação de listas personalizadas até a definição de lembretes e prioridades. ",
-      txt: "Completo",
-      img: completo,
-    },
-  ];
-
-  const renderItem = ({ item }) => (
-    <View style={{ justifyContent: "center", alignItems: "center" }}>
-      {/* View do botão que aparece na home */}
-      <View style={stylesHome.caixas}>
-        <TouchableOpacity
-          onPress={() => {
-            setVisible(true);
-            setSelect(item.txtextra);
-          }}
-          style={stylesHome.touchable}
-        >
-          <ImagemComponent RotaImagem={item.img} style={stylesHome.gifmodal} />
-          <TxtComponent texto={item.txt} />
-        </TouchableOpacity>
-      </View>
-      {/*Modal e View do modal */}
-      <Modal
-        transparent={true}
-        animationType="fade"
-        visible={visible}
-        style={{ justifyContent: "center", alignItems: "center", flex: 1 }}
-      >
-        <View style={stylesHome.modal}>
-          <View
-            style={{
-              backgroundColor: "#efd4ef",
-              width: 280,
-              height: 200,
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-            <TxtComponent texto={select} styleTxt={stylesHome.txtmodal} />
-          </View>
-          <TouchableOpacity onPress={() => visModal(false)}>
-            <TxtComponent texto="Fechar" styleTxt={stylesHome.txtmodalbtn} />
-          </TouchableOpacity>
-        </View>
-      </Modal>
-    </View>
-  );
-
   return (
     // View Principal
     <View
@@ -169,16 +90,6 @@ export default function HomePrincipal() {
               RotaImagem={require("../assets/images/frase2.png")}
               style={stylesHome.frase2}
             />
-
-            {/* Parte do FlatList  */}
-            <View style={stylesHome.listas}>
-              <FlatList
-                data={data}
-                keyExtractor={(item) => item.id.toString()}
-                renderItem={renderItem}
-                horizontal={false}
-              />
-            </View>
           </View>
         </View>
       </ScrollView>

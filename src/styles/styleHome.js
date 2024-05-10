@@ -52,7 +52,7 @@ export const stylesHome = StyleSheet.create({
     marginLeft: 10,
   },
   box: {
-    width: "90%",
+    width: "80%",
     height: "100%",
     //backgroundColor: "#ffcbff",
     borderRadius: 5,
@@ -60,21 +60,29 @@ export const stylesHome = StyleSheet.create({
   },
   listas: {
     marginTop: 50,
-    width: "85%",
+    width: "100%",
+    backgroundColor: "red",
   },
   touchable: {
-    width: 200,
+    width: "100%",
     height: 200,
-    backgroundColor: "#dba3db",
+    flexDirection: "row",
     borderRadius: 20,
-    margin: 10,
-    padding: 20,
+
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  touchablee: {
+    width: "100%",
+    height: 200,
+
+    borderRadius: 20,
     alignItems: "center",
     justifyContent: "center",
   },
   modal: {
-    width: "90%",
-    height: "50%",
+    width: "100%",
+    height: "100%",
     backgroundColor: "#f6e1f6",
     justifyContent: "center",
     alignItems: "center",
@@ -121,7 +129,14 @@ export const stylesHome = StyleSheet.create({
     justifyContent: "center",
   },
   gifmodal: {
-    width: 20,
-    height: 20,
+    width: 200,
+    height: 200,
+    marginRight: 120,
+    marginTop: 550,
+  },
+  gifmodaal: {
+    width: 200,
+    height: 200,
+    marginLeft: 120,
   },
 });

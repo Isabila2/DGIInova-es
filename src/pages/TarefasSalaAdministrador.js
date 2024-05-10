@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { View, ScrollView } from "react-native";
+import { View, ScrollView, FlatList } from "react-native";
 import {
   collection,
   addDoc,
@@ -14,6 +14,7 @@ import { db, auth } from "../services/firebaseConfig";
 import AdicionarTarefa from "../components/AdicionarTarefaComponent";
 import ContainerTarefa from "../components/ContainerTarefaComponent";
 import SemTarefa from "../components/SemTarefaComponent";
+import ImagemComponent from "../components/ImagemComponent";
 import { styleTarefa } from "../styles/styleTarefas";
 
 export default function TarefasSalaAdministrador() {
@@ -80,13 +81,27 @@ export default function TarefasSalaAdministrador() {
     }
   };
 
+  const TotalTarefasCriadas = tarefas.length;
+  const TotalTarefasConcluidas = tarefas.filter(
+    ({ completo }) => completo
+  ).length;
   return (
     <View style={styleTarefa.inicio}>
       <ScrollView>
+        <ImagemComponent
+          RotaImagem={require("../assets/images/LogoPrincipal.png")}
+          style={styleTarefa.img}
+        />
         <AdicionarTarefa
           tarefa={novaTarefa}
           onChangeText={setNovaTarefa}
           onPress={addTarefa}
+          QuantidadeTarefasCriadas={TotalTarefasCriadas}
+          QuantidadeTarefasConcluidas={TotalTarefasConcluidas}
+          styleAdd={styleTarefa.add}
+          styleImg={styleTarefa.btnimg}
+          styleTxt={styleTarefa.texto}
+          styleTxtt={styleTarefa.textoo}
         />
         <View>
           <FlatList

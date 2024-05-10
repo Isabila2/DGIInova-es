@@ -3,10 +3,12 @@ import { View, Modal, Alert } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { addDoc, doc, setDoc, serverTimestamp } from "firebase/firestore";
 import { db, collection } from "../services/firebaseConfig"; // Importe a referência ao banco de dados Firebase
+import { styleUserHome } from "../styles/stylesUserHome";
 
 import InputComponent from "./InputComponent";
 import BotaoComponent from "./BotaoComponent";
 import TxtComponent from "./TxtComponent";
+import ImagemComponent from "./ImagemComponent";
 
 export default function ModalCriarSalaComponent({
   visible,
@@ -57,19 +59,27 @@ export default function ModalCriarSalaComponent({
       <View
         style={{
           flex: 1,
-          backgroundColor: "white",
+          backgroundColor: "#DBA3DB",
           justifyContent: "center",
           alignItems: "center",
         }}
       >
-        <TxtComponent texto={"Criar Sala"} />
+        <TxtComponent
+          texto={"Criar Sala"}
+          styleTxt={styleUserHome.txtcriarsala}
+        />
         <InputComponent
           onChangeText={setValue}
           placeholder={"Nome da Sala"}
           value={value}
+          style={styleUserHome.tIncriarsala}
         />
         <BotaoComponent OnPress={CriarSala} BtnTxt={"Criar Sala"} />
         <BotaoComponent OnPress={Close} BtnTxt={"Cancelar"} />
+        <ImagemComponent
+          RotaImagem={require("../assets/Gifs/Completed.gif")}
+          style={styleUserHome.gifmodal1}
+        />
       </View>
     </Modal>
   );

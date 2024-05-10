@@ -88,6 +88,83 @@ export default function HomeUsuario() {
     }
   };
 
+  // Const para o FlatList
+  const dinamico = require("../assets/Gifs/Dinamico.gif");
+  const facil = require("../assets/Gifs/Facil.gif");
+  const pratico = require("../assets/Gifs/Pratico.gif");
+  const completo = require("../assets/Gifs/Completed.gif");
+
+  const data = [
+    {
+      id: 1,
+      txtextra:
+        "Com um design dinâmico e intuitivo, o Task Management é a escolha ideal para quem busca otimizar sua produtividade. Este gerenciador de tarefas oferece uma variedade de recursos poderosos, desde a organização de projetos até o acompanhamento do progresso em tempo real. ",
+      txt: "Dinâmico",
+      img: dinamico,
+    },
+    {
+      id: 2,
+      txtextraa:
+        "Com uma abordagem fácil e clara, o Taks Management simplifica o gerenciamento de tarefas como nunca antes. Desde a atribuição de tarefas até o monitoramento do progresso, o Taks Management oferece todas as ferramentas necessárias para uma gestão eficaz.",
+      txtt: "Fácil e claro",
+      imgg: facil,
+    },
+    {
+      id: 3,
+      txtextra:
+        "O Taks Management é um gerenciador de tarefas prático, projetado para simplificar o seu dia a dia. Simplifique sua rotina e alcance seus objetivos com facilidade, utilizando essa poderosa plataforma de gestão de tarefas, garantindo produtividade e controle.",
+      txt: "Prático",
+      img: pratico,
+    },
+    {
+      id: 4,
+      txtextraa:
+        "O Taks Management é um gerenciador de tarefas completo, ideal para quem busca organização e eficiência em suas atividades diárias. Com uma ampla gama de recursos, desde a criação de listas personalizadas até a definição de lembretes e prioridades. ",
+      txtt: "Completo",
+      imgg: completo,
+    },
+  ];
+
+  const renderItem = ({ item }) => (
+    <View
+      style={{
+        justifyContent: "center",
+        alignItems: "center",
+
+        width: "100%",
+      }}
+    >
+      {/* View do botão que aparece na home */}
+      <View>
+        <TouchableOpacity
+          onPress={() => {
+            setVisible(true);
+            setSelect(item.txtextra);
+          }}
+          style={stylesHome.touchable}
+        >
+          <ImagemComponent RotaImagem={item.img} style={stylesHome.gifmodal} />
+          <TxtComponent texto={item.txt} />
+        </TouchableOpacity>
+      </View>
+      <View>
+        <TouchableOpacity
+          onPress={() => {
+            setVisible(true);
+            setSelect(item.txtextraa);
+          }}
+          style={stylesHome.touchablee}
+        >
+          <ImagemComponent
+            RotaImagem={item.imgg}
+            style={stylesHome.gifmodaal}
+          />
+          <TxtComponent texto={item.txtt} />
+        </TouchableOpacity>
+      </View>
+    </View>
+  );
+
   return (
     <View style={{ flex: 1, backgroundColor: "white" }}>
       <ScrollView>
@@ -98,6 +175,7 @@ export default function HomeUsuario() {
             styleTxt={styleUserHome.txtboasv}
           />
           {/**imagem da Logo principal */}
+
           <ImagemComponent
             RotaImagem={require("../assets/images/LogoPrincipal.png")}
             style={styleUserHome.img}

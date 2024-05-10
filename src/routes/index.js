@@ -88,6 +88,22 @@ export default function Routes() {
             }}
           />
           <Tab.Screen
+            name="TarefasAdmin"
+            component={TarefasSalaAdministrador}
+            options={{
+              headerShown: false,
+              tabBarIcon: ({ color, size }) => {
+                return (
+                  <MaterialIcons
+                    name="playlist-add-check"
+                    size={24}
+                    color="#c0c0c0"
+                  />
+                );
+              },
+            }}
+          />
+          <Tab.Screen
             name="SalaPublica"
             component={SalaPublica}
             options={{

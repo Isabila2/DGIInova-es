@@ -55,4 +55,26 @@ export const styleUserHome = StyleSheet.create({
     marginBottom: 10,
     fontWeight: "200",
   },
+  tIncriarsala: {
+    width: 250,
+    height: 50,
+    borderRadius: 10,
+    borderWidth: 1,
+    borderColor: "grey",
+    backgroundColor: "white",
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: 20,
+    textDecorationColor: "white",
+    textAlign: "center",
+  },
+  txtcriarsala: {
+    color: "white",
+  },
+  gifmodal1: {
+    width: 200,
+    height: 200,
+    marginRight: 10,
+    marginTop: 10,
+  },
 });
