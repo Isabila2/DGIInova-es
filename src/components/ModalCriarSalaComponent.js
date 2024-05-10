@@ -76,10 +76,10 @@ export default function ModalCriarSalaComponent({
         />
         <BotaoComponent OnPress={CriarSala} BtnTxt={"Criar Sala"} />
         <BotaoComponent OnPress={Close} BtnTxt={"Cancelar"} />
-        <ImagemComponent
+        {/* <ImagemComponent
           RotaImagem={require("../assets/Gifs/Completed.gif")}
           style={styleUserHome.gifmodal1}
-        />
+        /> */}
       </View>
     </Modal>
   );
