@@ -5,16 +5,14 @@ import { auth } from "../services/firebaseConfig";
 // Importando as páginas que aparecerão
 import Login from "../pages/login";
 import Cadastro from "../pages/cadastro";
-import Tarefas from "../pages/tarefasUsuario";
-import HomeUsuario from "../pages/homeuser";
 import TarefasPrivadas from "../pages/TarefasPrivadas";
 import TarefasSala from "../pages/tarefasUsuario";
-import SalaPublica from "../pages/SalaPublica";
 import TarefasSemLogin from "../pages/Tarefas-SemCadastro";
 import "react-native-get-random-values";
 import RoutesDrawer from "./routsDrawer";
 import HomePrincipal from "../pages/home";
 import EntrarSala from "../pages/EntrarSala";
+import HomeUsuario from "../pages/homeuser";
 
 import { AntDesign } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
@@ -103,16 +101,7 @@ export default function Routes() {
               },
             }}
           />
-          <Tab.Screen
-            name="SalaPublica"
-            component={SalaPublica}
-            options={{
-              headerShown: false,
-              tabBarIcon: ({ color, size }) => {
-                return <Feather name="user" size={24} color="#c0c0c0" />;
-              },
-            }}
-          />
+
           <Tab.Screen
             name="Entrar em uma Sala"
             component={EntrarSala}

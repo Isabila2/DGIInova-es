@@ -1,31 +1,28 @@
-import { Alert, FlatList, View } from "react-native";
-import AdicionarTarefa from "../components/AdicionarTarefaComponent";
+import { FlatList, View } from "react-native";
 import ContainerTarefa from "../components/ContainerTarefaComponent";
 import SemTarefa from "../components/SemTarefaComponent";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { styleTarefa } from "../styles/styleTarefas";
 import ImagemComponent from "../components/ImagemComponent";
 import { ScrollView } from "react-native";
-import { useEffect } from "react";
-import { db, auth } from "../services/firebaseConfig"; // Importe a referência ao banco de dados Firebase e ao objeto de autenticação
+import { db, auth } from "../services/firebaseConfig";
 import {
   collection,
-  addDoc,
   query,
   where,
   onSnapshot,
   doc,
   updateDoc,
-  deleteDoc,
 } from "firebase/firestore";
+import { useRoute } from "@react-navigation/native";
 
-export default function TarefasPrivadas() {
+export default function TarefasSala() {
   const [tarefas, setTarefas] = useState([]);
-  const [novaTarefa, setNovaTarefa] = useState("");
+  const route = useRoute();
 
   const marcarTarefaComoCompleta = async (id) => {
     try {
-      const tarefaRef = doc(db, "tarefas", id);
+      const tarefaRef = doc(db, "adminTarefa", id); // Corrigido o caminho para o documento
       await updateDoc(tarefaRef, {
         completo: true,
       });
@@ -36,25 +33,27 @@ export default function TarefasPrivadas() {
 
   useEffect(() => {
     if (auth.currentUser) {
-      buscarTarefasDoUsuario();
+      if (route.params && route.params.salaId) {
+        buscarTarefasDaSala(route.params.salaId);
+      }
     }
-  }, []);
+  }, [route.params]);
 
-  const buscarTarefasDoUsuario = async () => {
+  const buscarTarefasDaSala = async (salaId) => {
     try {
       const q = query(
-        collection(db, "tarefas"),
-        where("userId", "==", auth.currentUser.uid)
+        collection(db, "adminTarefa"), // Corrigido o nome da coleção
+        where("salaId", "==", salaId)
       );
       onSnapshot(q, (snapshot) => {
-        const tarefasUsuario = [];
+        const tarefasDaSala = [];
         snapshot.forEach((doc) => {
-          tarefasUsuario.push({ id: doc.id, ...doc.data() });
+          tarefasDaSala.push({ id: doc.id, ...doc.data() });
         });
-        setTarefas(tarefasUsuario);
+        setTarefas(tarefasDaSala);
       });
     } catch (error) {
-      console.error("Erro ao buscar tarefas do usuário:", error);
+      console.error("Erro ao buscar tarefas da sala:", error);
     }
   };
 
@@ -66,15 +65,11 @@ export default function TarefasPrivadas() {
   return (
     <View style={styleTarefa.inicio}>
       <ScrollView>
-        {/* Somente a Imagem */}
         <ImagemComponent
           RotaImagem={require("../assets/images/LogoPrincipal.png")}
           style={styleTarefa.img}
         />
-
-        {/* View onde aparece as tarefas */}
         <View>
-          {/* Essa é a lista de Tarefas */}
           <FlatList
             data={tarefas}
             keyExtractor={(tarefa) => tarefa.id}
@@ -85,7 +80,7 @@ export default function TarefasPrivadas() {
                 styleContai={styleTarefa.iconesegundo}
                 TituloTarefa={item.titulo}
                 completo={item.completo}
-                onPressCompleto={marcarTarefaComoCompleta}
+                onPressCompleto={() => marcarTarefaComoCompleta(item.id)}
               />
             )}
             ListEmptyComponent={<SemTarefa />}

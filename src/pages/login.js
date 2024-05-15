@@ -74,7 +74,7 @@ export default function Login() {
               placeholder={"Digite seu Email"}
               onChangeText={onChange}
               value={value}
-              style={stylesLoginCadastro.inputTxt}
+              style={stylesLoginCadastro.inputTxtemail}
             />
           )}
         />

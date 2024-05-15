@@ -4,11 +4,13 @@ import { useNavigation } from "@react-navigation/native";
 import { addDoc, doc, setDoc, serverTimestamp } from "firebase/firestore";
 import { db, collection } from "../services/firebaseConfig"; // Importe a referência ao banco de dados Firebase
 import { styleUserHome } from "../styles/stylesUserHome";
+import { v4 as uuidv4 } from "uuid";
 
 import InputComponent from "./InputComponent";
 import BotaoComponent from "./BotaoComponent";
 import TxtComponent from "./TxtComponent";
 import ImagemComponent from "./ImagemComponent";
+import { auth } from "../services/firebaseConfig";
 
 export default function ModalCriarSalaComponent({
   visible,
@@ -16,23 +18,21 @@ export default function ModalCriarSalaComponent({
   updateRooms,
 }) {
   const [value, setValue] = useState("");
-  const [NomeSala, setNomeSala] = useState("");
   const navigation = useNavigation();
+  const userId = auth.currentUser.uid;
 
   async function CriarSala() {
     if (value === "") {
       Alert.alert("Digite um nome para sua Sala");
     } else {
       try {
+        const codigoSala = uuidv4().split("-")[0].substring(0, 10);
         const novaSalaRef = await addDoc(collection(db, "Salas"), {
           nome: value,
+          userId: userId,
+          codigo: codigoSala, // Adiciona o código da sala ao documento
         });
-
-        // Recupere o ID da nova sala
         const novaSalaId = novaSalaRef.id;
-
-        // Crie um código único para a sala
-        const codigoSala = novaSalaId.slice(0, 9); // Pegue os primeiros 6 caracteres do ID
 
         // Atualize o documento da sala com o código
         await setDoc(
@@ -59,27 +59,33 @@ export default function ModalCriarSalaComponent({
       <View
         style={{
           flex: 1,
-          backgroundColor: "#DBA3DB",
+          backgroundColor: "white",
           justifyContent: "center",
           alignItems: "center",
         }}
       >
-        <TxtComponent
-          texto={"Criar Sala"}
-          styleTxt={styleUserHome.txtcriarsala}
+        <ImagemComponent
+          RotaImagem={require("../assets/images/modalcriar1.png")}
+          style={styleUserHome.imgModal}
         />
         <InputComponent
           onChangeText={setValue}
           placeholder={"Nome da Sala"}
           value={value}
           style={styleUserHome.tIncriarsala}
+          styleTxtBtn={styleUserHome.btnTextCiar}
         />
-        <BotaoComponent OnPress={CriarSala} BtnTxt={"Criar Sala"} />
-        <BotaoComponent OnPress={Close} BtnTxt={"Cancelar"} />
-        {/* <ImagemComponent
-          RotaImagem={require("../assets/Gifs/Completed.gif")}
-          style={styleUserHome.gifmodal1}
-        /> */}
+        <BotaoComponent
+          OnPress={CriarSala}
+          BtnTxt={"Criar Sala"}
+          style={styleUserHome.btn1}
+        />
+        <BotaoComponent
+          OnPress={Close}
+          BtnTxt={"Cancelar"}
+          style={styleUserHome.btnCancel}
+          styleTxtBtn={styleUserHome.btnTextCan}
+        />
       </View>
     </Modal>
   );

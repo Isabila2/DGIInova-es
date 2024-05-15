@@ -31,9 +31,20 @@ export const stylesLoginCadastro = StyleSheet.create({
   },
   inputTxt: {
     fontSize: 20,
-    flex: 1,
+
     marginLeft: 10,
     fontWeight: "300",
+    marginTop: -10,
+    height: 30,
+    marginBottom: 10,
+  },
+  inputTxtemail: {
+    fontSize: 20,
+
+    marginLeft: 10,
+    fontWeight: "300",
+    marginTop: 20,
+    height: 30,
   },
   botao: {
     width: 250,

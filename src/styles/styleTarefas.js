@@ -10,7 +10,7 @@ export const styleTarefa = StyleSheet.create({
     height: 105,
     justifyContent: "center",
     alignItems: "center",
-    marginTop: 20,
+    marginTop: 40,
     marginBottom: 50,
     marginLeft: 70,
   },
@@ -40,7 +40,7 @@ export const styleTarefa = StyleSheet.create({
   },
   btnimg: {
     marginLeft: 310,
-    marginTop: -45,
+    marginTop: -65,
   },
   textoo: {
     fontSize: 18,
@@ -53,7 +53,7 @@ export const styleTarefa = StyleSheet.create({
     marginTop: 7,
   },
   textarefa: {
-    color: "black",
+    color: "white",
     marginTop: -48,
     marginLeft: 40,
     fontWeight: "400",

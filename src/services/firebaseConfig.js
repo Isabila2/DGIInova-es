@@ -63,6 +63,7 @@ export async function login(email, senha) {
   try {
     const userCredential = await signInWithEmailAndPassword(auth, email, senha);
     const user = userCredential.user;
+    console.log(auth);
     console.log("Usuário logado com sucesso:", user);
     return user;
   } catch (error) {
