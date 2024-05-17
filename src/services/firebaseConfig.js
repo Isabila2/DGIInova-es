@@ -11,6 +11,7 @@ import {
   doc,
   setDoc,
   getDoc,
+  updateDoc,
   collection,
   getDocs,
 } from "firebase/firestore";
@@ -54,6 +55,16 @@ export async function cadastrar(email, senha, usuario) {
     return user;
   } catch (error) {
     console.error("Erro ao cadastrar usuário:", error);
+    throw error;
+  }
+}
+export async function updateUserData(userId, updatedData) {
+  try {
+    const userDocRef = doc(db, "users", userId);
+    await updateDoc(userDocRef, updatedData);
+    console.log("Dados do usuário atualizados com sucesso");
+  } catch (error) {
+    console.error("Erro ao atualizar dados do usuário:", error);
     throw error;
   }
 }

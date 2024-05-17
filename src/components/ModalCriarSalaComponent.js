@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Modal, Alert } from "react-native";
+import { View, Modal, Alert, ScrollView } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { addDoc, doc, setDoc, serverTimestamp } from "firebase/firestore";
 import { db, collection } from "../services/firebaseConfig"; // Importe a referência ao banco de dados Firebase
@@ -56,37 +56,39 @@ export default function ModalCriarSalaComponent({
 
   return (
     <Modal transparent={true} animationType="fade" visible={visible}>
-      <View
-        style={{
-          flex: 1,
-          backgroundColor: "white",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <ImagemComponent
-          RotaImagem={require("../assets/images/modalcriar1.png")}
-          style={styleUserHome.imgModal}
-        />
-        <InputComponent
-          onChangeText={setValue}
-          placeholder={"Nome da Sala"}
-          value={value}
-          style={styleUserHome.tIncriarsala}
-          styleTxtBtn={styleUserHome.btnTextCiar}
-        />
-        <BotaoComponent
-          OnPress={CriarSala}
-          BtnTxt={"Criar Sala"}
-          style={styleUserHome.btn1}
-        />
-        <BotaoComponent
-          OnPress={Close}
-          BtnTxt={"Cancelar"}
-          style={styleUserHome.btnCancel}
-          styleTxtBtn={styleUserHome.btnTextCan}
-        />
-      </View>
+      <ScrollView>
+        <View
+          style={{
+            flex: 1,
+            backgroundColor: "white",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <ImagemComponent
+            RotaImagem={require("../assets/images/modalCriarnovo.png")}
+            style={styleUserHome.imgModal}
+          />
+          <InputComponent
+            onChangeText={setValue}
+            placeholder={"Nome da Sala"}
+            value={value}
+            style={styleUserHome.tIncriarsala}
+            styleTxtBtn={styleUserHome.btnTextCiar}
+          />
+          <BotaoComponent
+            OnPress={CriarSala}
+            BtnTxt={"Criar Sala"}
+            style={styleUserHome.btn1}
+          />
+          <BotaoComponent
+            OnPress={Close}
+            BtnTxt={"Cancelar"}
+            style={styleUserHome.btnCancel}
+            styleTxtBtn={styleUserHome.btnTextCan}
+          />
+        </View>
+      </ScrollView>
     </Modal>
   );
 }

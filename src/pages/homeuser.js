@@ -22,6 +22,7 @@ import YoutubeIframe from "react-native-youtube-iframe";
 import BotaoComponent from "../components/BotaoComponent";
 import ImagemComponent from "../components/ImagemComponent";
 import TxtComponent from "../components/TxtComponent";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 export default function HomeUsuario() {
   const navigation = useNavigation();
@@ -91,59 +92,60 @@ export default function HomeUsuario() {
               styleTxt={styleUserHome.txtboasv}
               style={styleUserHome.bemvind}
             />
+            <ImagemComponent
+              RotaImagem={require("../assets/images/txtRec.png")}
+              style={styleUserHome.imgRec}
+            />
           </View>
           <View style={{ flexDirection: "row" }}>
-            <TouchableOpacity onPress={() => navigation.navigate("Tarefas")}>
-              <ImageBackground
-                source={require("../assets/images/CriarSala.png")}
-                style={styleUserHome.imgBtn1}
-              >
-                <TxtComponent
-                  texto="Minhas Tarefas"
-                  styleTxt={styleUserHome.txtbtn}
-                />
-              </ImageBackground>
+            <TouchableOpacity
+              onPress={() => navigation.navigate("Tarefas")}
+              style={styleUserHome.btn}
+            >
+              <MaterialIcons name="folder-shared" size={140} color="#D87AD8" />
+              <TxtComponent
+                texto="Minhas Tarefas"
+                styleTxt={styleUserHome.txtbtn2}
+              />
             </TouchableOpacity>
 
             <TouchableOpacity
               onPress={() => navigation.navigate("Entrar em uma Sala")}
+              style={styleUserHome.btn}
             >
-              <ImageBackground
-                source={require("../assets/images/EntrarSala.png")}
-                style={styleUserHome.imgBtn1}
-              >
-                <TxtComponent
-                  texto="Entrar em uma Sala"
-                  styleTxt={styleUserHome.txtbtn}
-                />
-              </ImageBackground>
+              <MaterialCommunityIcons
+                name="folder-search"
+                size={140}
+                color="#D87AD8"
+              />
+              <TxtComponent
+                texto="Entrar em uma Sala"
+                styleTxt={styleUserHome.txtbtn2}
+              />
             </TouchableOpacity>
           </View>
           <View style={{ flexDirection: "row" }}>
-            <TouchableOpacity onPress={AbrirModal}>
-              <ImageBackground
-                source={require("../assets/images/MinhaTarefas.png")}
-                style={styleUserHome.imgBtn1}
-              >
-                <TxtComponent
-                  texto="Criar uma Sala"
-                  styleTxt={styleUserHome.txtbtn}
-                />
-              </ImageBackground>
+            <TouchableOpacity onPress={AbrirModal} style={styleUserHome.btn}>
+              <MaterialIcons
+                name="create-new-folder"
+                size={140}
+                color="#D87AD8"
+              />
+              <TxtComponent
+                texto="  Criar uma Sala  "
+                styleTxt={styleUserHome.txtbtn}
+              />
             </TouchableOpacity>
 
             <TouchableOpacity
               onPress={() => navigation.navigate("Minhas Salas")}
+              style={styleUserHome.btn}
             >
-              <ImageBackground
-                source={require("../assets/images/MinhasSalas.png")}
-                style={styleUserHome.imgBtn1}
-              >
-                <TxtComponent
-                  texto="Minhas Salas"
-                  styleTxt={styleUserHome.txtbtn}
-                />
-              </ImageBackground>
+              <MaterialIcons name="folder-copy" size={140} color="#D87AD8" />
+              <TxtComponent
+                texto="   Minhas Salas   "
+                styleTxt={styleUserHome.txtbtn}
+              />
             </TouchableOpacity>
           </View>
         </View>
@@ -152,6 +154,10 @@ export default function HomeUsuario() {
           visible={visible}
           Close={() => setVisible(false)}
           updateRooms={loadRooms}
+        />
+        <ImagemComponent
+          RotaImagem={require("../assets/images/txtAnun.png")}
+          style={styleUserHome.imgAnun}
         />
 
         <View style={{ marginTop: 100 }}>

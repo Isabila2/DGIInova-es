@@ -55,7 +55,7 @@ export default function TarefasSemLogin() {
     <View style={styleTarefa.inicio}>
       <ScrollView>
         <ImagemComponent
-          RotaImagem={require("../assets/images/LogoPrincipal.png")}
+          RotaImagem={require("../assets/images/semlogintarefas.png")}
           style={styleTarefa.img}
         />
         {/* View onde tem o input e o botão para adicionar tarefa */}
@@ -84,6 +84,7 @@ export default function TarefasSemLogin() {
                 TituloTarefa={item.titulo}
                 completo={item.completo}
                 onPressCompleto={() => definirCompleto(item.id)}
+                styleIcone={styleTarefa.iconetrash}
                 onPressExcluir={() => ExcluirTarefa(item.id)}
               />
             )}

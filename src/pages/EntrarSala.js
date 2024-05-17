@@ -57,6 +57,7 @@ export default function EntrarSala({ navigation }) {
           style={{
             borderBottomColor: "black",
             borderBottomWidth: 0.2,
+            backgroundColor: "white",
           }}
         >
           <ImagemComponent
@@ -114,6 +115,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+    backgroundColor: "white",
   },
   img: {
     height: 310,

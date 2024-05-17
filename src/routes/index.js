@@ -12,13 +12,12 @@ import "react-native-get-random-values";
 import RoutesDrawer from "./routsDrawer";
 import HomePrincipal from "../pages/home";
 import EntrarSala from "../pages/EntrarSala";
-import HomeUsuario from "../pages/homeuser";
 
 import { AntDesign } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
-import MinhasSalas from "../pages/MinhasSalas";
 import TarefasSalaAdministrador from "../pages/TarefasSalaAdministrador";
+import MinhaConta from "../components/MinhaConta";
 
 // Const para o uso do Stack (rotas)
 const Tab = createBottomTabNavigator();
@@ -35,7 +34,6 @@ export default function Routes() {
       }
     });
 
-    // Cancela a inscrição do listener ao desmontar o componente
     return unsubscribe;
   }, []);
   return (
@@ -113,8 +111,8 @@ export default function Routes() {
             }}
           />
           <Tab.Screen
-            name="Minhas Salas"
-            component={MinhasSalas}
+            name="Minha Conta"
+            component={MinhaConta}
             options={{
               headerShown: false,
               tabBarIcon: ({ color, size }) => {

@@ -1,16 +1,18 @@
 import { View } from "react-native";
-import BotaoImagemComponent from "./BotaoImagemComponent";
 import ImagemComponent from "./ImagemComponent";
 import TxtComponent from "./TxtComponent";
+import { useNavigation } from "@react-navigation/native";
 import React, { useState, useEffect } from "react";
 import { auth } from "../services/firebaseConfig";
 import { getUserData } from "../services/firebaseConfig";
 import { styleUserHome } from "../styles/stylesUserHome";
 
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import BotaoComponent from "./BotaoComponent";
 
 export default function LogInDrawer() {
   const [userData, setUserData] = useState(null);
+  const navigation = useNavigation();
 
   useEffect(() => {
     // Função para obter os dados do usuário após o login
@@ -28,14 +30,6 @@ export default function LogInDrawer() {
 
     fetchUserData();
   }, []);
-
-  const handleLogout = async () => {
-    try {
-      await auth.signOut();
-    } catch (error) {
-      console.error("Erro ao fazer logout:", error.message);
-    }
-  };
 
   return (
     <View
@@ -60,6 +54,12 @@ export default function LogInDrawer() {
           texto={`Olá, ${userData ? userData.usuario : ""}!`}
           styleTxt={{ marginLeft: 5 }}
         />
+        <View>
+          <BotaoComponent
+            BtnTxt={"Minha Conta"}
+            OnPress={() => navigation.navigate("Minha Conta")}
+          />
+        </View>
       </View>
     </View>
   );

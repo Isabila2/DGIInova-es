@@ -112,6 +112,7 @@ export default function Login() {
       <BotaoComponent
         OnPress={() => navigation.navigate("Cadastro")} // Navegue para a tela de cadastro
         BtnTxt={"Cadastrar-se"}
+        styleTxtBtn={stylesLoginCadastro.textcadastrar}
       />
     </View>
   );

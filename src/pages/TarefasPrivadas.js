@@ -23,11 +23,11 @@ export default function TarefasPrivadas() {
   const [tarefas, setTarefas] = useState([]);
   const [novaTarefa, setNovaTarefa] = useState("");
 
-  const marcarTarefaComoCompleta = async (id) => {
+  const marcarTarefaComoCompleta = async (id, completo) => {
     try {
       const tarefaRef = doc(db, "tarefas", id);
       await updateDoc(tarefaRef, {
-        completo: true,
+        completo: !completo,
       });
     } catch (error) {
       console.error("Erro ao marcar tarefa como completa:", error);
@@ -97,11 +97,16 @@ export default function TarefasPrivadas() {
       <ScrollView>
         {/* Somente a Imagem */}
         <ImagemComponent
-          RotaImagem={require("../assets/images/LogoPrincipal.png")}
+          RotaImagem={require("../assets/images/pgtarefas.png")}
           style={styleTarefa.img}
         />
         {/* View onde tem o input e o botão para adicionar tarefa */}
-        <View style={{ justifyContent: "center", alignItems: "center" }}>
+        <View
+          style={{
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
           {/* component com Input, Botão de adicionar e Contadores de Tarefas */}
           <AdicionarTarefa
             tarefa={novaTarefa}
@@ -127,8 +132,11 @@ export default function TarefasPrivadas() {
                 styleTexto={styleTarefa.textarefa}
                 styleContai={styleTarefa.iconesegundo}
                 TituloTarefa={item.titulo}
+                styleIcone={styleTarefa.iconetrash}
                 completo={item.completo}
-                onPressCompleto={() => marcarTarefaComoCompleta(item.id)}
+                onPressCompleto={() =>
+                  marcarTarefaComoCompleta(item.id, item.completo)
+                }
                 onPressExcluir={() => excluirTarefa(item.id)}
               />
             )}

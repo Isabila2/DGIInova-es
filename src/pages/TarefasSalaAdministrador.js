@@ -83,11 +83,11 @@ export default function TarefasSalaAdministrador() {
     }
   };
 
-  const marcarTarefaComoCompleta = async (id) => {
+  const marcarTarefaComoCompleta = async (id, completo) => {
     try {
       const tarefaRef = doc(db, "adminTasks", id); // Alteração aqui
       await updateDoc(tarefaRef, {
-        completo: true,
+        completo: !completo,
       });
     } catch (error) {
       console.error("Erro ao marcar tarefa como completa:", error);
@@ -114,15 +114,14 @@ export default function TarefasSalaAdministrador() {
         {/* Exibe o código da sala */}
 
         <ImagemComponent
-          RotaImagem={require("../assets/images/LogoPrincipal.png")}
+          RotaImagem={require("../assets/images/tarefassala.png")}
           style={styleTarefa.img}
         />
         {/* view com o texto e codigo da sala */}
-        <View>
+        <View style={{ flexDirection: "row", marginBottom: 10 }}>
           <TxtComponent
-            texto={
-              "Compartilhe esse codigo com quem vocẽ quiser que acesse essas tarefas:"
-            }
+            texto={"Código da Sala: "}
+            styleTxt={styleTarefa.txtcodigo}
           />
           <TxtComponent texto={codigoSalaAtual} />
         </View>
@@ -147,8 +146,11 @@ export default function TarefasSalaAdministrador() {
                 styleTexto={styleTarefa.textarefa}
                 styleContai={styleTarefa.iconesegundo}
                 TituloTarefa={item.titulo}
+                styleIcone={styleTarefa.iconetrash}
                 completo={item.completo}
-                onPressCompleto={() => marcarTarefaComoCompleta(item.id)}
+                onPressCompleto={() =>
+                  marcarTarefaComoCompleta(item.id, item.completo)
+                }
                 onPressExcluir={() => excluirTarefa(item.id)}
               />
             )}

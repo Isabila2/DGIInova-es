@@ -10,6 +10,7 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../services/firebaseConfig";
 import { setDoc, doc } from "firebase/firestore";
 import { db } from "../services/firebaseConfig";
+import TxtComponent from "../components/TxtComponent";
 
 const schema = yup.object({
   usuario: yup.string().required("Informe seu Usuário"),
@@ -72,80 +73,105 @@ export default function Cadastro() {
         RotaImagem={require("../assets/images/LogoHome.png")}
         style={stylesLoginCadastro.img}
       />
-      {errors.usuario && (
-        <Text style={stylesLoginCadastro.erro}>{errors.usuario?.message}</Text>
-      )}
-
-      <Controller
-        control={control}
-        name="usuario"
-        render={({ field: { onChange, value } }) => (
-          <InputComponent
-            placeholder={"Digite seu Usuário"}
-            onChangeText={onChange}
-            value={value}
-            style={stylesLoginCadastro.inputs_cadastro}
-          />
-        )}
+      <TxtComponent
+        texto=" Fazer Cadastro"
+        styleTxt={stylesLoginCadastro.txttitulo}
       />
-      {errors.email && (
-        <Text style={stylesLoginCadastro.erro}>{errors.email?.message}</Text>
-      )}
-
-      <Controller
-        control={control}
-        name="email"
-        render={({ field: { onChange, value } }) => (
-          <InputComponent
-            placeholder={"Digite seu Email"}
-            onChangeText={onChange}
-            value={value}
-            style={stylesLoginCadastro.inputs_cadastro}
-          />
-        )}
-      />
-      {errors.senha && (
-        <Text style={stylesLoginCadastro.erro}>{errors.senha?.message}</Text>
-      )}
-
-      <Controller
-        control={control}
-        name="senha"
-        render={({ field: { onChange, value } }) => (
-          <InputComponent
-            placeholder={"Digite seu senha"}
-            onChangeText={onChange}
-            value={value}
-            style={stylesLoginCadastro.inputs_cadastro}
-          />
-        )}
-      />
-      {errors.ConfirmSenha && (
-        <Text style={stylesLoginCadastro.erro}>
-          {errors.ConfirmSenha?.message}
-        </Text>
-      )}
-
-      <Controller
-        control={control}
-        name="ConfirmSenha"
-        render={({ field: { onChange, value } }) => (
-          <InputComponent
-            placeholder={"Confirme sua senha"}
-            onChangeText={onChange}
-            value={value}
-            style={stylesLoginCadastro.inputs_cadastro}
-          />
-        )}
-      />
-
-      {/* Botão de Cadastrar */}
-      <TouchableOpacity
-        onPress={handleSubmit(handleCadastro)}
-        style={stylesLoginCadastro.botao}
+      <View
+        style={{
+          justifyContent: "center",
+          alignItems: "center",
+          marginTop: 20,
+        }}
       >
-        <Text style={stylesLoginCadastro.BotaoTxt}> Cadastrar </Text>
-      </TouchableOpacity>
+        {errors.usuario && (
+          <TxtComponent
+            texto={errors.usuario?.message}
+            styleTxt={stylesLoginCadastro.erro}
+          />
+        )}
+
+        <Controller
+          control={control}
+          name="usuario"
+          render={({ field: { onChange, value } }) => (
+            <InputComponent
+              placeholder={"Digite seu Usuário"}
+              onChangeText={onChange}
+              value={value}
+              style={stylesLoginCadastro.inputs_cadastro}
+            />
+          )}
+        />
+        {errors.email && (
+          <TxtComponent
+            texto={errors.email?.message}
+            styleTxt={stylesLoginCadastro.erro}
+          />
+        )}
+
+        <Controller
+          control={control}
+          name="email"
+          render={({ field: { onChange, value } }) => (
+            <InputComponent
+              placeholder={"Digite seu Email"}
+              onChangeText={onChange}
+              value={value}
+              style={stylesLoginCadastro.inputs_cadastro}
+            />
+          )}
+        />
+        {errors.senha && (
+          <TxtComponent
+            texto={errors.senha?.message}
+            styleTxt={stylesLoginCadastro.erro}
+          />
+        )}
+
+        <Controller
+          control={control}
+          name="senha"
+          render={({ field: { onChange, value } }) => (
+            <InputComponent
+              placeholder={"Digite seu senha"}
+              onChangeText={onChange}
+              value={value}
+              style={stylesLoginCadastro.inputs_cadastro}
+            />
+          )}
+        />
+        {errors.ConfirmSenha && (
+          <TxtComponent
+            texto={errors.ConfirmSenha?.message}
+            styleTxt={stylesLoginCadastro.erro}
+          />
+        )}
+
+        <Controller
+          control={control}
+          name="ConfirmSenha"
+          render={({ field: { onChange, value } }) => (
+            <InputComponent
+              placeholder={"Confirme sua senha"}
+              onChangeText={onChange}
+              value={value}
+              style={stylesLoginCadastro.inputs_cadastro}
+            />
+          )}
+        />
+
+        {/* Botão de Cadastrar */}
+        <TouchableOpacity
+          onPress={handleSubmit(handleCadastro)}
+          style={stylesLoginCadastro.botao}
+        >
+          <TxtComponent
+            texto="Cadastrar"
+            styleTxt={stylesLoginCadastro.BotaoTxt}
+          />
+        </TouchableOpacity>
+      </View>
     </View>
   );
 }

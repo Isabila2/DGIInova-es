@@ -30,7 +30,7 @@ export default function RoutesDrawer({ navigation, ...rest }) {
   return (
     <Drawer.Navigator
       screenOptions={{
-        drawerStyle: { backgroundColor: "white" },
+        drawerStyle: { backgroundColor: "#D87AD8" },
         drawerActiveBackgroundColor: "#F6E1F6",
         drawerActiveTintColor: "white",
         drawerInactiveBackgroundColor: "white",

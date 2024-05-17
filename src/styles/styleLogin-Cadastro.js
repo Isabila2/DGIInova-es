@@ -6,7 +6,11 @@ export const stylesLoginCadastro = StyleSheet.create({
     height: 45,
     justifyContent: "center",
     alignItems: "center",
-    marginBottom: 50,
+    marginBottom: 40,
+  },
+  txttitulo: {
+    fontWeight: "200",
+    fontSize: 20,
   },
   tela: {
     flex: 1,
@@ -65,17 +69,22 @@ export const stylesLoginCadastro = StyleSheet.create({
     fontWeight: "300",
   },
   inputs_cadastro: {
-    width: "90%",
-    borderWidth: 1,
-    borderColor: "#d8d8d8",
+    width: 330,
+    borderBottomWidth: 1,
+    borderColor: "#d46dd4",
     padding: 10,
     marginBottom: 20,
     borderRadius: 5,
+    fontWeight: "300",
+    color: "black",
   },
   erro: {
     alignItems: "center",
     color: "#ff375b",
     marginBottom: 5,
     marginTop: 5,
+  },
+  textcadastrar: {
+    fontWeight: "200",
   },
 });

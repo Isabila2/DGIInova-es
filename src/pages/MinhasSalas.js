@@ -93,7 +93,7 @@ const MinhasSalas = ({ navigation }) => {
           </TouchableOpacity>
           {/* Botão de atualização */}
           <View
-            style={{ backgroundColor: "#D87AD8", marginTop: 20, width: "100%" }}
+            style={{ backgroundColor: "white", marginTop: 20, width: "100%" }}
           >
             <FlatList
               data={rooms}
@@ -113,7 +113,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#D87AD8",
+    backgroundColor: "white",
   },
   imglogo: {
     width: 390,
@@ -137,6 +137,11 @@ const styles = StyleSheet.create({
     textAlign: "left",
     justifyContent: "center",
     backgroundColor: "white",
+    shadowColor: "black",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.7,
+    shadowRadius: 2,
+    elevation: 5,
   },
   img: {
     height: 70,
