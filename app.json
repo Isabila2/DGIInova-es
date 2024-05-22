@@ -7,7 +7,7 @@
     "icon": "./assets/LogoPrincipal.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/LogoPrincipal.png",
+      "videos": "./assets/logoEspera.mp4",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },

@@ -1,10 +1,15 @@
 import { StyleSheet } from "react-native";
 
+export const VIDEO_HEIGHT = 180;
+
 export const stylesHome = StyleSheet.create({
   img: {
-    width: 340,
+    width: 350,
     height: 45,
     marginTop: 250,
+    justifyContent: "center",
+    alignItems: "center",
+    marginLeft: -10,
   },
   btn: {
     width: 250,

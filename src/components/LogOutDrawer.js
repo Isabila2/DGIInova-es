@@ -8,6 +8,7 @@ import { getUserData } from "../services/firebaseConfig";
 import { styleUserHome } from "../styles/stylesUserHome";
 
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { MaterialIcons } from "@expo/vector-icons";
 
 export default function LogOutDrawer() {
   const [userData, setUserData] = useState(null);
@@ -46,9 +47,10 @@ export default function LogOutDrawer() {
     >
       <View style={{ flexDirection: "row", marginTop: 1 }}>
         <BotaoImagemComponent
-          name={"exit-run"}
-          size={50}
-          color={"black"}
+          MaterialIcons
+          name="logout"
+          size={30}
+          color="#c0c0c0"
           onPress={handleLogout}
           styleBtn={styleUserHome.lougout}
         />

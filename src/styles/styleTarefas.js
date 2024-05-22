@@ -2,7 +2,7 @@ import { StyleSheet } from "react-native";
 
 export const styleTarefa = StyleSheet.create({
   inicio: {
-    backgroundColor: "#f6f6f6",
+    backgroundColor: "white",
     flex: 1,
   },
   img: {
@@ -28,18 +28,27 @@ export const styleTarefa = StyleSheet.create({
     fontSize: 15,
     textAlign: "center",
     fontWeight: "500",
-    borderWidth: 1,
-    borderColor: "#e1e1e1",
     color: "black",
     borderRadius: 5,
     height: 50,
-    width: 335,
+    width: 375,
     backgroundColor: "white",
-    marginLeft: 5,
+    marginLeft: 2,
+    marginTop: 15,
+    shadowColor: "black",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.7,
+    shadowRadius: 2,
+    elevation: 5,
   },
   btnimg: {
-    marginLeft: 340,
-    marginTop: -65,
+    marginTop: 15,
+    shadowColor: "black",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.7,
+    shadowRadius: 2,
+    elevation: 5,
+    marginRight: 5,
   },
   textoo: {
     fontSize: 18,

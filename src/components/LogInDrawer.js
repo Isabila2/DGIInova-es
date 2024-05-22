@@ -9,6 +9,7 @@ import { styleUserHome } from "../styles/stylesUserHome";
 
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import BotaoComponent from "./BotaoComponent";
+import { Feather } from "@expo/vector-icons";
 
 export default function LogInDrawer() {
   const [userData, setUserData] = useState(null);
@@ -38,7 +39,7 @@ export default function LogInDrawer() {
       }}
     >
       <ImagemComponent
-        RotaImagem={require("../assets/images/LogoPrincipal.png")}
+        RotaImagem={require("../assets/images/DrawerFnd.png")}
         style={styleUserHome.img}
       />
       <View
@@ -49,17 +50,11 @@ export default function LogInDrawer() {
           marginBottom: 20,
         }}
       >
-        <MaterialCommunityIcons name="account-circle" size={70} />
+        <Feather name="user" size={24} color="white" />
         <TxtComponent
           texto={`Olá, ${userData ? userData.usuario : ""}!`}
-          styleTxt={{ marginLeft: 5 }}
+          styleTxt={{ marginLeft: 5, color: "#00000080" }}
         />
-        <View>
-          <BotaoComponent
-            BtnTxt={"Minha Conta"}
-            OnPress={() => navigation.navigate("Minha Conta")}
-          />
-        </View>
       </View>
     </View>
   );

@@ -6,7 +6,10 @@ import { stylesLoginCadastro } from "../styles/styleLogin-Cadastro";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  sendEmailVerification,
+} from "firebase/auth";
 import { auth } from "../services/firebaseConfig";
 import { setDoc, doc } from "firebase/firestore";
 import { db } from "../services/firebaseConfig";
@@ -44,6 +47,8 @@ export default function Cadastro() {
       );
       const user = userCredential.user;
 
+      await sendEmailVerification(auth.currentUser);
+
       await setDoc(doc(db, "users", user.uid), {
         email: data.email,
         usuario: data.usuario,
@@ -52,9 +57,8 @@ export default function Cadastro() {
 
       console.log("Usuário cadastrado com sucesso:", user.uid);
 
-      navigation.navigate("Login", {
-        successMessage: "Cadastro realizado com sucesso!",
-      });
+      Alert.alert("Cadastro feito com sucesso");
+      Alert.alert("Um Email foi enviado para fazer a verificação do seu Email");
     } catch (error) {
       if (error.code === "auth/email-already-in-use") {
         Alert.alert("Este Email já está em uso");
@@ -71,7 +75,7 @@ export default function Cadastro() {
       {/* Imagem da logo */}
       <ImagemComponent
         RotaImagem={require("../assets/images/LogoHome.png")}
-        style={stylesLoginCadastro.img}
+        style={stylesLoginCadastro.imgcadastro}
       />
       <TxtComponent
         texto=" Fazer Cadastro"
@@ -138,6 +142,7 @@ export default function Cadastro() {
               onChangeText={onChange}
               value={value}
               style={stylesLoginCadastro.inputs_cadastro}
+              securetextentry={true}
             />
           )}
         />
@@ -157,6 +162,7 @@ export default function Cadastro() {
               onChangeText={onChange}
               value={value}
               style={stylesLoginCadastro.inputs_cadastro}
+              securetextentry={true}
             />
           )}
         />

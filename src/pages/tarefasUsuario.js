@@ -32,9 +32,7 @@ export default function TarefasSala() {
   };
 
   function TentarApagarTask() {
-    Alert.alert(
-      "Você não tem permissão para Excluir uma Tarefa, entre em contato com o Administrador da Sala"
-    );
+    Alert.alert("Você não tem permissão para Excluir uma Tarefa");
   }
 
   useEffect(() => {
@@ -48,7 +46,7 @@ export default function TarefasSala() {
   const buscarTarefasDaSala = async (salaId) => {
     try {
       const q = query(
-        collection(db, "adminTasks"), // Corrigido o nome da coleção
+        collection(db, "adminTasks"),
         where("salaId", "==", salaId)
       );
       onSnapshot(q, (snapshot) => {

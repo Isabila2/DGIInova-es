@@ -6,6 +6,9 @@ import { View } from "react-native";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import LogOutDrawer from "../components/LogOutDrawer";
 import LogInDrawer from "../components/LogInDrawer";
+import EntrarSala from "../pages/EntrarSala";
+import MinhaConta from "../components/MinhaConta";
+import { styleUserHome } from "../styles/stylesUserHome";
 
 // Importando as páginas que aparecerão
 
@@ -30,11 +33,19 @@ export default function RoutesDrawer({ navigation, ...rest }) {
   return (
     <Drawer.Navigator
       screenOptions={{
-        drawerStyle: { backgroundColor: "#D87AD8" },
-        drawerActiveBackgroundColor: "#F6E1F6",
+        drawerStyle: { backgroundColor: "white" },
+        drawerActiveBackgroundColor: "#D87AD880",
         drawerActiveTintColor: "white",
         drawerInactiveBackgroundColor: "white",
-        drawerInactiveTintColor: "#DBA3DB",
+        drawerInactiveTintColor: "#c0c0c0",
+      }}
+      style={{
+        borderRadius: 100,
+        shadowColor: "black",
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.7,
+        shadowRadius: 2,
+        elevation: 5,
       }}
       drawerContent={(drawerProps) => (
         <View style={{ flex: 1 }}>
@@ -45,12 +56,14 @@ export default function RoutesDrawer({ navigation, ...rest }) {
           <LogOutDrawer />
         </View>
       )}
-      navigation={navigation} // Passando a propriedade navigation
-      {...rest} // Espalhando as outras props
+      navigation={navigation}
+      {...rest}
     >
-      <Drawer.Screen name="Usuário(Aluno)" component={HomeUsuario} />
-      <Drawer.Screen name="Tarefas" component={TarefasPrivadas} />
+      <Drawer.Screen name="Home" component={HomeUsuario} />
+      <Drawer.Screen name="Minhas Tarefas" component={TarefasPrivadas} />
+      <Drawer.Screen name="Entrar em uma Sala" component={EntrarSala} />
       <Drawer.Screen name="Minhas Salas" component={MinhasSalas} />
+      <Drawer.Screen name="Minha Conta" component={MinhaConta} />
     </Drawer.Navigator>
   );
 }

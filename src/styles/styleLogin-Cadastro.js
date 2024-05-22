@@ -7,6 +7,16 @@ export const stylesLoginCadastro = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     marginBottom: 40,
+    marginLeft: 5,
+  },
+  imgcadastro: {
+    width: 340,
+    height: 45,
+    justifyContent: "center",
+    alignItems: "center",
+    marginBottom: 40,
+    marginLeft: 5,
+    marginTop: 80,
   },
   txttitulo: {
     fontWeight: "200",
@@ -35,7 +45,6 @@ export const stylesLoginCadastro = StyleSheet.create({
   },
   inputTxt: {
     fontSize: 20,
-
     marginLeft: 10,
     fontWeight: "300",
     marginTop: -10,
@@ -44,7 +53,6 @@ export const stylesLoginCadastro = StyleSheet.create({
   },
   inputTxtemail: {
     fontSize: 20,
-
     marginLeft: 10,
     fontWeight: "300",
     marginTop: 20,

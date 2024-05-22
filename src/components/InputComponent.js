@@ -7,6 +7,7 @@ export default function InputComponent({
   value,
   styleTxtBtn,
   BtnTxt,
+  securetextentry,
 }) {
   const changeTxt = (textInput) => {
     onChangeText(textInput);
@@ -18,6 +19,7 @@ export default function InputComponent({
         style={style}
         onChangeText={changeTxt}
         value={value}
+        secureTextEntry={securetextentry}
       />
       <Text style={styleTxtBtn}> {BtnTxt} </Text>
     </View>

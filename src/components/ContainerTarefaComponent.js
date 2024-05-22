@@ -24,6 +24,12 @@ export default function ContainerTarefa({
         marginLeft: 10,
         marginTop: 20,
         flexDirection: "row",
+        shadowColor: "black",
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.7,
+        shadowRadius: 2,
+        elevation: 5,
+        marginBottom: 10,
       }}
     >
       <BotaoImagemComponent
@@ -35,7 +41,7 @@ export default function ContainerTarefa({
         size={33}
         onPress={onPressCompleto}
         styleBtn={styleContainer}
-        color="black"
+        color="#a2a0a02"
       />
       <View style={{ justifyContent: "center", alignItems: "center" }}>
         <TxtComponent texto={TituloTarefa} styleTxt={styleTexto} />
@@ -45,7 +51,7 @@ export default function ContainerTarefa({
           name={"trash-can-outline"}
           size={33}
           onPress={onPressExcluir}
-          color="black"
+          color="#a2a0a0"
           styleBtn={styleIcone}
         />
       </View>

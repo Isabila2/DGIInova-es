@@ -45,6 +45,7 @@ export default function Routes() {
             component={RoutesDrawer}
             options={{
               headerShown: false,
+              tabBarStyle: { display: "none" },
               tabBarIcon: ({ color, size }) => {
                 return <AntDesign name="home" size={24} color="#c0c0c0" />;
               },
@@ -52,10 +53,11 @@ export default function Routes() {
           />
 
           <Tab.Screen
-            name="Tarefas"
+            name="Minhas Tarefas"
             component={TarefasPrivadas}
             options={{
               headerShown: false,
+              tabBarStyle: { display: "none" },
               tabBarIcon: ({ color, size }) => {
                 return (
                   <MaterialIcons
@@ -72,6 +74,7 @@ export default function Routes() {
             component={TarefasSala}
             options={{
               headerShown: false,
+              tabBarStyle: { display: "none" },
               tabBarIcon: ({ color, size }) => {
                 return (
                   <MaterialIcons
@@ -88,6 +91,7 @@ export default function Routes() {
             component={TarefasSalaAdministrador}
             options={{
               headerShown: false,
+              tabBarStyle: { display: "none" },
               tabBarIcon: ({ color, size }) => {
                 return (
                   <MaterialIcons
@@ -105,6 +109,7 @@ export default function Routes() {
             component={EntrarSala}
             options={{
               headerShown: false,
+              tabBarStyle: { display: "none" },
               tabBarIcon: ({ color, size }) => {
                 return <Feather name="user" size={24} color="#c0c0c0" />;
               },
@@ -115,6 +120,7 @@ export default function Routes() {
             component={MinhaConta}
             options={{
               headerShown: false,
+              tabBarStyle: { display: "none" },
               tabBarIcon: ({ color, size }) => {
                 return <Feather name="user" size={24} color="#c0c0c0" />;
               },

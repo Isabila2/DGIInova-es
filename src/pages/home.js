@@ -7,13 +7,15 @@ import {
   Modal,
 } from "react-native";
 import ImagemComponent from "../components/ImagemComponent";
-import { stylesHome } from "../styles/styleHome";
+import { stylesHome, VIDEO_HEIGHT } from "../styles/styleHome";
 import { ScrollView } from "react-native";
 import BotaoComponent from "../components/BotaoComponent";
 import { useNavigation } from "@react-navigation/native";
 import TxtComponent from "../components/TxtComponent";
 import React, { useState } from "react";
 import FlatComponent from "../components/FlatListComponent";
+import YoutubeIframe from "react-native-youtube-iframe";
+import { ActivityIndicator } from "react-native";
 
 export default function HomePrincipal() {
   // Const para a navegação
@@ -25,6 +27,9 @@ export default function HomePrincipal() {
   // Abrir modal
   const [visible, setVisible] = useState(false);
   const [select, setSelect] = useState(null);
+
+  //Rodar vídeo
+  const [videoReady, setVideoReady] = useState(false);
 
   visModal = (vis) => {
     !visible ? setVisible(vis) : setVisible(vis);
@@ -91,6 +96,13 @@ export default function HomePrincipal() {
               style={stylesHome.frase2}
             />
           </View>
+
+          <YoutubeIframe
+            videoId="A6PWu3EH7Xw"
+            height={VIDEO_HEIGHT}
+            onReady={() => setVideoReady(true)}
+          />
+          {!videoReady && <ActivityIndicator color="red" />}
         </View>
       </ScrollView>
 

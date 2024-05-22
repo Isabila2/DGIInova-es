@@ -77,7 +77,7 @@ const MinhasSalas = ({ navigation }) => {
           }}
         >
           <ImagemComponent
-            RotaImagem={require("../assets/images/logosalas.png")}
+            RotaImagem={require("../assets/images/minhassalaas.png")}
             style={styles.imglogo}
           />
         </View>
@@ -88,8 +88,8 @@ const MinhasSalas = ({ navigation }) => {
             backgroundColor: "white",
           }}
         >
-          <TouchableOpacity onPress={loadRooms} style={styles.butao}>
-            <Text style={styles.txtbutao}>ATUALIZAR SALAS </Text>
+          <TouchableOpacity onPress={loadRooms} style={styles.btn}>
+            <Text style={styles.btntext}>ATUALIZAR SALAS </Text>
           </TouchableOpacity>
           {/* Botão de atualização */}
           <View
@@ -116,8 +116,8 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
   },
   imglogo: {
-    width: 390,
-    height: 220,
+    width: 380,
+    height: 330,
     marginTop: 0,
     marginBottom: 30,
   },
@@ -153,23 +153,19 @@ const styles = StyleSheet.create({
     textAlign: "center",
     marginLeft: 270,
   },
-  butao: {
-    width: 250,
+
+  btn: {
+    backgroundColor: "#d46dd4",
+
     height: 50,
-    borderRadius: 10,
-    borderWidth: 1,
-    borderColor: "#DBA3DB",
-    backgroundColor: "#D87AD8",
-    alignItems: "center",
+    width: 230,
     justifyContent: "center",
-    marginTop: 20,
-    marginBottom: 30,
+    alignItems: "center",
+    borderRadius: 20,
   },
-  txtbutao: {
-    color: "white",
-    fontSize: 15,
+  btntext: {
     textAlign: "center",
-    fontWeight: "300",
+    color: "white",
   },
   roomName: {
     fontSize: 25,

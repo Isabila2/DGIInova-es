@@ -87,11 +87,24 @@ export default function HomeUsuario() {
           <View
             style={{ backgroundColor: "white", width: "100%", height: "1" }}
           >
-            <TxtComponent
-              texto={`Seja Bem-Vindo(a), ${userData ? userData.usuario : ""}!`}
-              styleTxt={styleUserHome.txtboasv}
-              style={styleUserHome.bemvind}
-            />
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <TxtComponent
+                texto={`Seja Bem-Vindo(a),`}
+                styleTxt={styleUserHome.txtboasv}
+                style={styleUserHome.bemvind}
+              />
+              <TxtComponent
+                texto={` ${userData ? userData.usuario : ""}!`}
+                styleTxt={styleUserHome.txtboasvinda}
+                style={styleUserHome.bemvind}
+              />
+            </View>
             <ImagemComponent
               RotaImagem={require("../assets/images/txtRec.png")}
               style={styleUserHome.imgRec}
@@ -99,12 +112,12 @@ export default function HomeUsuario() {
           </View>
           <View style={{ flexDirection: "row" }}>
             <TouchableOpacity
-              onPress={() => navigation.navigate("Tarefas")}
+              onPress={() => navigation.navigate("Minhas Tarefas")}
               style={styleUserHome.btn}
             >
-              <MaterialIcons name="folder-shared" size={140} color="#D87AD8" />
+              <MaterialIcons name="folder-shared" size={110} color="#D87AD8" />
               <TxtComponent
-                texto="Minhas Tarefas"
+                texto="   Minhas Tarefas   "
                 styleTxt={styleUserHome.txtbtn2}
               />
             </TouchableOpacity>
@@ -115,7 +128,7 @@ export default function HomeUsuario() {
             >
               <MaterialCommunityIcons
                 name="folder-search"
-                size={140}
+                size={110}
                 color="#D87AD8"
               />
               <TxtComponent
@@ -128,11 +141,11 @@ export default function HomeUsuario() {
             <TouchableOpacity onPress={AbrirModal} style={styleUserHome.btn}>
               <MaterialIcons
                 name="create-new-folder"
-                size={140}
+                size={110}
                 color="#D87AD8"
               />
               <TxtComponent
-                texto="  Criar uma Sala  "
+                texto="   Criar uma Sala   "
                 styleTxt={styleUserHome.txtbtn}
               />
             </TouchableOpacity>
@@ -141,9 +154,9 @@ export default function HomeUsuario() {
               onPress={() => navigation.navigate("Minhas Salas")}
               style={styleUserHome.btn}
             >
-              <MaterialIcons name="folder-copy" size={140} color="#D87AD8" />
+              <MaterialIcons name="folder-copy" size={110} color="#D87AD8" />
               <TxtComponent
-                texto="   Minhas Salas   "
+                texto="     Minhas Salas     "
                 styleTxt={styleUserHome.txtbtn}
               />
             </TouchableOpacity>
@@ -160,7 +173,7 @@ export default function HomeUsuario() {
           style={styleUserHome.imgAnun}
         />
 
-        <View style={{ marginTop: 100 }}>
+        <View style={{ marginTop: 20, marginBottom: 40 }}>
           <View
             style={{ backgroundColor: "white", width: "100%", height: "1" }}
           />
@@ -170,6 +183,13 @@ export default function HomeUsuario() {
             onReady={() => setVideoReady(true)}
           />
           {!videoReady && <ActivityIndicator color="red" />}
+        </View>
+
+        <View style={styleUserHome.footer}>
+          <ImagemComponent
+            RotaImagem={require("../assets/images/LogoPrincipal.png")}
+            style={styleUserHome.footerlogo}
+          />
         </View>
       </ScrollView>
     </View>

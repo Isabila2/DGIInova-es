@@ -125,6 +125,7 @@ export default function TarefasSalaAdministrador() {
           />
           <TxtComponent texto={codigoSalaAtual} />
         </View>
+
         <AdicionarTarefa
           tarefa={novaTarefa}
           onChangeText={setNovaTarefa}

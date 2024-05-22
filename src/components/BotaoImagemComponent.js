@@ -10,9 +10,10 @@ export default function BotaoImagemComponent({
   styleBtn,
   texto,
   styletexto,
+  fundo,
 }) {
   return (
-    <TouchableOpacity>
+    <TouchableOpacity style={fundo}>
       <MaterialCommunityIcons
         name={name}
         size={size}

@@ -2,7 +2,8 @@
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import {
-  getAuth,
+  initializeAuth,
+  getReactNativePersistence,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
 } from "firebase/auth";
@@ -15,11 +16,9 @@ import {
   collection,
   getDocs,
 } from "firebase/firestore";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 // Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
   apiKey: "AIzaSyDf_s64bD0cFyD_a-jio7KlmghNSKdWtGA",
   authDomain: "dgi-taskstodo.firebaseapp.com",
@@ -33,9 +32,13 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
-export const auth = getAuth();
-export const db = getFirestore();
-export { collection, getDocs };
+const auth = initializeAuth(app, {
+  persistence: getReactNativePersistence(AsyncStorage),
+});
+const db = getFirestore(app);
+
+export { auth, db, collection, getDocs };
+
 export async function cadastrar(email, senha, usuario) {
   try {
     const userCredential = await createUserWithEmailAndPassword(
@@ -58,6 +61,7 @@ export async function cadastrar(email, senha, usuario) {
     throw error;
   }
 }
+
 export async function updateUserData(userId, updatedData) {
   try {
     const userDocRef = doc(db, "users", userId);
@@ -69,12 +73,10 @@ export async function updateUserData(userId, updatedData) {
   }
 }
 
-// Função de Login
 export async function login(email, senha) {
   try {
     const userCredential = await signInWithEmailAndPassword(auth, email, senha);
     const user = userCredential.user;
-    console.log(auth);
     console.log("Usuário logado com sucesso:", user);
     return user;
   } catch (error) {

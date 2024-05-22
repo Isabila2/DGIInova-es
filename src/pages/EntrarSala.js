@@ -55,8 +55,6 @@ export default function EntrarSala({ navigation }) {
         {/* Header Adicionar nova sala */}
         <View
           style={{
-            borderBottomColor: "black",
-            borderBottomWidth: 0.2,
             backgroundColor: "white",
           }}
         >
@@ -106,6 +104,12 @@ export default function EntrarSala({ navigation }) {
           />
         </View>
       </View>
+      <View style={styles.footer}>
+        <ImagemComponent
+          RotaImagem={require("../assets/images/LogoPrincipal.png")}
+          style={styles.footerlogo}
+        />
+      </View>
     </ScrollView>
   );
 }
@@ -124,7 +128,7 @@ const styles = StyleSheet.create({
   },
   input: {
     height: 60,
-    width: 260,
+    width: 300,
     textAlign: "center",
     borderBottomColor: "#d46dd4",
     borderBottomWidth: 1,
@@ -140,6 +144,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 20,
+    marginTop: 20,
   },
   btntext: {
     textAlign: "center",
@@ -179,5 +184,16 @@ const styles = StyleSheet.create({
     alignItems: "center",
     textAlign: "center",
     marginLeft: 270,
+  },
+  footerlogo: {
+    width: 120,
+    height: 50,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  footer: {
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "white",
   },
 });
