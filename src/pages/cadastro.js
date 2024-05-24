@@ -1,4 +1,11 @@
-import { View, TouchableOpacity, Text, Alert } from "react-native";
+import React, { useState } from "react";
+import {
+  View,
+  TouchableOpacity,
+  Text,
+  Alert,
+  ActivityIndicator,
+} from "react-native";
 import InputComponent from "../components/InputComponent";
 import ImagemComponent from "../components/ImagemComponent";
 import { useNavigation } from "@react-navigation/native";
@@ -37,9 +44,11 @@ export default function Cadastro() {
     resolver: yupResolver(schema),
   });
   const navigation = useNavigation();
+  const [loading, setLoading] = useState(false); // Estado para controle do indicador de carregamento
 
   const handleCadastro = async (data) => {
     try {
+      setLoading(true); // Ativando o indicador de carregamento
       const userCredential = await createUserWithEmailAndPassword(
         auth,
         data.email,
@@ -66,13 +75,13 @@ export default function Cadastro() {
       if (error.code === "auth/invalid-email") {
         Alert.alert("Email inválido");
       }
+    } finally {
+      setLoading(false); // Desativando o indicador de carregamento, independentemente do resultado do cadastro
     }
   };
 
   return (
-    // View principal
     <View style={stylesLoginCadastro.tela}>
-      {/* Imagem da logo */}
       <ImagemComponent
         RotaImagem={require("../assets/images/LogoHome.png")}
         style={stylesLoginCadastro.imgcadastro}
@@ -94,7 +103,6 @@ export default function Cadastro() {
             styleTxt={stylesLoginCadastro.erro}
           />
         )}
-
         <Controller
           control={control}
           name="usuario"
@@ -113,7 +121,6 @@ export default function Cadastro() {
             styleTxt={stylesLoginCadastro.erro}
           />
         )}
-
         <Controller
           control={control}
           name="email"
@@ -132,7 +139,6 @@ export default function Cadastro() {
             styleTxt={stylesLoginCadastro.erro}
           />
         )}
-
         <Controller
           control={control}
           name="senha"
@@ -152,7 +158,6 @@ export default function Cadastro() {
             styleTxt={stylesLoginCadastro.erro}
           />
         )}
-
         <Controller
           control={control}
           name="ConfirmSenha"
@@ -166,17 +171,20 @@ export default function Cadastro() {
             />
           )}
         />
-
-        {/* Botão de Cadastrar */}
         <TouchableOpacity
           onPress={handleSubmit(handleCadastro)}
           style={stylesLoginCadastro.botao}
+          disabled={loading} // Desativar o botão enquanto estiver carregando
         >
+          {/* Texto do botão de cadastro */}
           <TxtComponent
             texto="Cadastrar"
             styleTxt={stylesLoginCadastro.BotaoTxt}
           />
         </TouchableOpacity>
+        {loading && (
+          <ActivityIndicator style={{ marginTop: 10 }} color="#000" />
+        )}
       </View>
     </View>
   );

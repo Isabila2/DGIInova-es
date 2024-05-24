@@ -8,7 +8,7 @@ import InputComponent from "./InputComponent";
 import TxtComponent from "./TxtComponent";
 import BotaoComponent from "./BotaoComponent";
 import { auth, getUserData, updateUserData } from "../services/firebaseConfig";
-
+import ImagemComponent from "./ImagemComponent";
 const schema = yup.object({
   senha: yup.string().required("Informe sua senha"),
   usuario: yup.string().required("Informe seu nome de usuário"),
@@ -102,43 +102,147 @@ export default function ModalEditarPerfil({ visible, FecharModal }) {
 
   return (
     <Modal visible={visible}>
-      <View style={{ padding: 20 }}>
-        <View style={{ marginBottom: 20 }}>
-          <TxtComponent texto={"ome de usuário"} />
-          <Controller
-            control={control}
-            name="usuario"
-            render={({ field: { onChange, value } }) => (
-              <InputComponent value={value} onChangeText={onChange} />
-            )}
+      <View
+        style={{
+          backgroundColor: "white",
+
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <ImagemComponent
+          RotaImagem={require("../assets/images/LogoPrincipal.png")}
+          style={{ height: 80, width: 200, marginTop: 100 }}
+        />
+        <View
+          style={{
+            height: 410,
+            width: 350,
+            backgroundColor: "white",
+            justifyContent: "center",
+            alignItems: "center",
+            marginTop: 40,
+            borderRadius: 30,
+            shadowColor: "black",
+            shadowOffset: { width: 0, height: 2 },
+            shadowOpacity: 0.7,
+            shadowRadius: 2,
+            elevation: 5,
+          }}
+        >
+          <TxtComponent
+            texto="EDITAR INFORMAÇÕES"
+            styleTxt={{
+              fontSize: 20,
+              fontWeight: "300",
+              marginBottom: 20,
+            }}
           />
+          <View
+            style={{
+              flexDirection: "row",
+              height: 30,
+              width: "90%",
+              marginLeft: 5,
+              borderBottomColor: "#a2a0a0",
+              borderBottomWidth: 1,
+              marginTop: 30,
+            }}
+          >
+            <TxtComponent
+              texto={"Nome de usuário:  "}
+              styleTxt={{ fontWeight: "300" }}
+            />
+            <Controller
+              control={control}
+              name="usuario"
+              render={({ field: { onChange, value } }) => (
+                <InputComponent
+                  value={value}
+                  onChangeText={onChange}
+                  style={{
+                    width: 190,
+                    height: 40,
+                    marginTop: -8,
+                  }}
+                  styleTxtBtn={{ color: "red" }}
+                />
+              )}
+            />
+          </View>
           {errors.usuario && (
-            <Text style={{ color: "red" }}>{errors.usuario.message}</Text>
+            <TxtComponent
+              styleTxt={{ color: "red" }}
+              texto={errors.usuario.message}
+            />
           )}
-        </View>
-        <View style={{ marginBottom: 20 }}>
-          <TxtComponent texto={"Digite sua senha"} />
-          <Controller
-            control={control}
-            name="senha"
-            render={({ field: { onChange, value } }) => (
-              <InputComponent
-                secureTextEntry
-                value={value}
-                onChangeText={onChange}
-              />
-            )}
-          />
+
+          <View
+            style={{
+              flexDirection: "row",
+              height: 30,
+              width: "90%",
+              marginLeft: 5,
+              borderBottomColor: "#a2a0a0",
+              borderBottomWidth: 1,
+              marginTop: 30,
+            }}
+          >
+            <TxtComponent
+              texto={"Digite sua senha:  "}
+              styleTxt={{ fontWeight: "300" }}
+            />
+            <Controller
+              control={control}
+              name="senha"
+              render={({ field: { onChange, value } }) => (
+                <InputComponent
+                  secureTextEntry
+                  value={value}
+                  onChangeText={onChange}
+                  style={{
+                    width: 190,
+                    height: 40,
+                    marginTop: -8,
+                  }}
+                />
+              )}
+            />
+          </View>
           {errors.senha && (
             <Text style={{ color: "red" }}>{errors.senha.message}</Text>
           )}
+
+          <BotaoComponent
+            BtnTxt={"Salvar"}
+            OnPress={handleSubmit(handleUpdateProfile)}
+            style={{
+              marginTop: 40,
+              width: 230,
+              height: 50,
+              borderRadius: 10,
+              borderWidth: 1,
+              borderColor: "#DBA3DB",
+              backgroundColor: "#DBA3DB",
+              alignItems: "center",
+              justifyContent: "center",
+              marginBottom: 20,
+            }}
+            styleTxtBtn={{
+              color: "white",
+              fontSize: 20,
+              textAlign: "center",
+              fontWeight: "300",
+            }}
+          />
+          <BotaoComponent
+            BtnTxt={"Cancelar"}
+            OnPress={FecharModal}
+            style={{ marginTop: 10 }}
+            styleTxtBtn={{ color: "#d3d3d3" }}
+          />
+          {loading && <ActivityIndicator style={{ marginTop: 20 }} />}
         </View>
-        <BotaoComponent
-          BtnTxt={"Salvar"}
-          OnPress={handleSubmit(handleUpdateProfile)}
-        />
-        <BotaoComponent BtnTxt={"Cancelar"} OnPress={FecharModal} />
-        {loading && <ActivityIndicator style={{ marginTop: 20 }} />}
       </View>
     </Modal>
   );

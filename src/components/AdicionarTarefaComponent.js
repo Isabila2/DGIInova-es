@@ -27,15 +27,16 @@ export default function AdicionarTarefa({
         onChangeText={onChangeText}
         style={styleAdd}
       />
+
       <TouchableOpacity
         style={{
-          backgroundColor: "#d46dd4",
+          backgroundColor: "white",
           height: 50,
-          width: 370,
+          width: 45,
           justifyContent: "center",
           alignItems: "center",
-          borderRadius: 20,
-          marginLeft: 5,
+          borderRadius: 60,
+          marginLeft: 160,
           marginTop: -10,
           shadowColor: "black",
           shadowOffset: { width: 0, height: 2 },
@@ -49,9 +50,10 @@ export default function AdicionarTarefa({
           size={40}
           onPress={onPress}
           styleBtn={styleImg}
-          color="white"
+          color="#DBA3DB"
         />
       </TouchableOpacity>
+
       <View style={{ justifyContent: "center", alignItems: "center" }}>
         <TxtComponent
           texto={

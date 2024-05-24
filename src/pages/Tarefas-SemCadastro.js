@@ -81,10 +81,13 @@ export default function TarefasSemLogin() {
             keyExtractor={(tarefa) => tarefa.id}
             renderItem={({ item }) => (
               <ContainerTarefa
+                styleContainer={styleTarefa.iconeprimeiro}
+                styleTexto={styleTarefa.textarefa}
+                styleContai={styleTarefa.iconesegundo}
                 TituloTarefa={item.titulo}
+                styleIcone={styleTarefa.iconetrash}
                 completo={item.completo}
                 onPressCompleto={() => definirCompleto(item.id)}
-                styleIcone={styleTarefa.iconetrash}
                 onPressExcluir={() => ExcluirTarefa(item.id)}
               />
             )}

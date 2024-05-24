@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 
-export const VIDEO_HEIGHT = 180;
+export const VIDEO_HEIGHT = 230;
 
 export const styleUserHome = StyleSheet.create({
   txtboasv: {
@@ -88,8 +88,8 @@ export const styleUserHome = StyleSheet.create({
     height: 50,
     borderRadius: 100,
     borderWidth: 1,
-    borderColor: "#EFC8EF",
-    backgroundColor: "#EFC8EF",
+    borderColor: "white",
+    backgroundColor: "white",
     alignItems: "center",
     justifyContent: "center",
     marginTop: 72,
@@ -110,8 +110,8 @@ export const styleUserHome = StyleSheet.create({
     width: 250,
     height: 50,
     borderWidth: 1,
-    borderColor: "white",
-    backgroundColor: "#FFFFFF",
+    borderColor: "#EFC8EF",
+    backgroundColor: "#EFC8EF",
     alignItems: "center",
     justifyContent: "center",
     marginTop: -5,
@@ -128,6 +128,7 @@ export const styleUserHome = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     marginTop: 25,
+    marginBottom: 30,
   },
   btnTextCan: {
     color: "#d3d3d3",

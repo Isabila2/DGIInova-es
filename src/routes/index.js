@@ -12,6 +12,7 @@ import "react-native-get-random-values";
 import RoutesDrawer from "./routsDrawer";
 import HomePrincipal from "../pages/home";
 import EntrarSala from "../pages/EntrarSala";
+import RedefinirSenha from "../pages/RedefinirSenha";
 
 import { AntDesign } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
@@ -165,6 +166,7 @@ export default function Routes() {
               },
             }}
           />
+
           <Tab.Screen
             name="Cadastro"
             component={Cadastro}

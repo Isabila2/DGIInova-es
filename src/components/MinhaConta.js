@@ -322,7 +322,10 @@ export default function MinhaConta() {
       >
         <View style={styles.modalContainer}>
           <View style={styles.modalContent}>
-            <TxtComponent texto="Digite sua senha para confirmar" />
+            <TxtComponent
+              texto="Digite sua senha para confirmar"
+              styleTxt={{ fontSize: 15 }}
+            />
             <TextInput
               secureTextEntry
               placeholder="Senha"
@@ -330,10 +333,25 @@ export default function MinhaConta() {
               onChangeText={setPassword}
               style={styles.input}
             />
-            <BotaoComponent BtnTxt="Confirmar" OnPress={confirmDeleteAccount} />
+            <BotaoComponent
+              BtnTxt="Confirmar"
+              OnPress={confirmDeleteAccount}
+              style={{
+                backgroundColor: "#DBA3DB",
+                height: 40,
+                width: 250,
+                borderRadius: 10,
+                marginTop: -10,
+                textAlign: "center",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+              styleTxtBtn={{ color: "white", fontSize: 15, fontWeight: "300" }}
+            />
             <BotaoComponent
               BtnTxt="Cancelar"
               OnPress={() => setAuthVisible(false)}
+              styleTxtBtn={{ color: "grey", marginTop: 10 }}
             />
           </View>
         </View>

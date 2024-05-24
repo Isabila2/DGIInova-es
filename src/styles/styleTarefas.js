@@ -48,7 +48,6 @@ export const styleTarefa = StyleSheet.create({
     shadowOpacity: 0.7,
     shadowRadius: 2,
     elevation: 5,
-    marginRight: 5,
   },
   textoo: {
     fontSize: 18,
@@ -78,5 +77,8 @@ export const styleTarefa = StyleSheet.create({
     fontWeight: "300",
     textAlign: "center",
     marginLeft: 10,
+  },
+  ver: {
+    marginLeft: 5,
   },
 });

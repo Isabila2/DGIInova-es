@@ -1,19 +1,27 @@
-import { View, Text, Alert, Modal, TextInput, StyleSheet } from "react-native";
 import React, { useState } from "react";
+import {
+  View,
+  Text,
+  Alert,
+  TextInput,
+  StyleSheet,
+  Modal,
+  TouchableOpacity,
+} from "react-native";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import {
+  sendPasswordResetEmail,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
+import { auth } from "../services/firebaseConfig";
 import { useNavigation } from "@react-navigation/native";
 import ImagemComponent from "../components/ImagemComponent";
 import BotaoComponent from "../components/BotaoComponent";
 import InputSenhaComponent from "../components/InputSenhaComponent";
 import InputComponent from "../components/InputComponent";
 import { stylesLoginCadastro } from "../styles/styleLogin-Cadastro";
-import {
-  signInWithEmailAndPassword,
-  sendPasswordResetEmail,
-} from "firebase/auth";
-import { auth } from "../services/firebaseConfig";
 
 const schema = yup.object({
   email: yup.string().required("Informe seu Email").email("Email inválido"),
@@ -69,17 +77,12 @@ export default function Login() {
       await sendPasswordResetEmail(auth, resetEmail);
       Alert.alert("Sucesso", "Email para redefinição de senha enviado.");
       setModalVisible(false);
+      setResetEmail(""); // Limpar o campo de e-mail após o envio
     } catch (error) {
       if (error.code === "auth/user-not-found") {
         Alert.alert("Erro", "Email não cadastrado.");
-      }
-      if (error.code === "auth/invalid-email") {
-        Alert.alert("Erro", "Por favor insira um Email válido");
       } else {
-        Alert.alert(
-          "Erro",
-          "Não foi possível enviar o email para redefinição de senha. Por favor, tente novamente mais tarde."
-        );
+        Alert.alert("Erro", "Digite um Email válido.");
       }
       console.error("Erro ao enviar email de redefinição de senha:", error);
     }
@@ -147,34 +150,38 @@ export default function Login() {
         styleTxtBtn={stylesLoginCadastro.textcadastrar}
       />
 
-      <BotaoComponent
-        OnPress={() => setModalVisible(true)}
-        BtnTxt={"Esqueceu a senha?"}
-        styleTxtBtn={stylesLoginCadastro.textEsqueceuSenha}
-      />
+      <TouchableOpacity onPress={() => setModalVisible(true)}>
+        <Text style={stylesLoginCadastro.textEsqueceuSenha}>
+          Esqueceu a senha?
+        </Text>
+      </TouchableOpacity>
 
       <Modal
-        visible={modalVisible}
-        transparent={true}
         animationType="slide"
+        transparent={true}
+        visible={modalVisible}
         onRequestClose={() => setModalVisible(false)}
       >
         <View style={styles.modalContainer}>
           <View style={styles.modalContent}>
-            <Text style={styles.modalTitle}>Recuperar Senha</Text>
+            <Text style={styles.title}>Redefinir Senha</Text>
             <TextInput
               placeholder="Digite seu Email"
+              style={styles.input}
               value={resetEmail}
               onChangeText={setResetEmail}
-              style={styles.input}
             />
             <BotaoComponent
               BtnTxt="Enviar Email"
               OnPress={handlePasswordReset}
+              style={styles.button}
+              styleTxtBtn={styles.buttontxt}
             />
             <BotaoComponent
               BtnTxt="Cancelar"
               OnPress={() => setModalVisible(false)}
+              style={styles.cancelButton}
+              styleTxtBtn={styles.cancelButtonText}
             />
           </View>
         </View>
@@ -197,23 +204,40 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     alignItems: "center",
   },
-  modalTitle: {
-    fontSize: 18,
+  title: {
+    fontSize: 24,
     fontWeight: "bold",
     marginBottom: 20,
+    textAlign: "center",
   },
   input: {
-    width: "100%",
     height: 40,
     borderColor: "#ccc",
     borderWidth: 1,
     borderRadius: 5,
     paddingHorizontal: 10,
     marginBottom: 20,
+    width: "100%",
   },
-  textEsqueceuSenha: {
-    textAlign: "center",
-    marginTop: 10,
-    color: "#0000EE",
+  button: {
+    backgroundColor: "#EFC8EF",
+    paddingVertical: 10,
+    borderRadius: 10,
+    alignItems: "center",
+    width: "100%",
+    marginBottom: 10,
+  },
+  buttontxt: {
+    color: "white",
+    fontWeight: "300",
+  },
+  cancelButton: {
+    paddingVertical: 10,
+    borderRadius: 5,
+    alignItems: "center",
+    width: "100%",
+  },
+  cancelButtonText: {
+    color: "grey",
   },
 });

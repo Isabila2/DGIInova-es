@@ -30,6 +30,7 @@ export default function HomeUsuario() {
   const [userData, setUserData] = useState(null);
   const [visible, setVisible] = useState(false);
   const [rooms, setRooms] = useState([]);
+  const [loadingVideo, setLoadingVideo] = useState(true); // Estado para controle do indicador de carregamento do vídeo
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -178,11 +179,15 @@ export default function HomeUsuario() {
             style={{ backgroundColor: "white", width: "100%", height: "1" }}
           />
           <YoutubeIframe
-            videoId="A6PWu3EH7Xw"
+            videoId="3XzQ7jErQnc"
             height={VIDEO_HEIGHT}
-            onReady={() => setVideoReady(true)}
+            onReady={() => {
+              setVideoReady(true);
+              setLoadingVideo(false); // Quando o vídeo estiver pronto, desativa o indicador de carregamento
+            }}
           />
-          {!videoReady && <ActivityIndicator color="red" />}
+          {loadingVideo && <ActivityIndicator color="red" />}
+          {/* Mostra o indicador de carregamento enquanto o vídeo está sendo carregado */}
         </View>
 
         <View style={styleUserHome.footer}>

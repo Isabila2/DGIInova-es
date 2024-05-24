@@ -5,11 +5,12 @@ import {
   TouchableOpacity,
   Text,
   StyleSheet,
+  ActivityIndicator,
 } from "react-native";
 import InputComponent from "../components/InputComponent";
 import BotaoComponent from "../components/BotaoComponent";
-import { collection, query, where, getDocs } from "firebase/firestore";
-import { db } from "../services/firebaseConfig";
+import { collection, query, where, getDocs, addDoc } from "firebase/firestore";
+import { db, auth } from "../services/firebaseConfig"; // Certifique-se de importar auth se precisar do nome do usuário
 import ImagemComponent from "../components/ImagemComponent";
 import TxtComponent from "../components/TxtComponent";
 import { ScrollView } from "react-native";
@@ -17,61 +18,57 @@ import { ScrollView } from "react-native";
 export default function EntrarSala({ navigation }) {
   const [codigo, setCodigo] = useState("");
   const [salasEncontradas, setSalasEncontradas] = useState([]);
+  const [loading, setLoading] = useState(false); // Estado para controle do indicador de carregamento
 
   const buscarSala = async () => {
     try {
-      console.log(codigo);
+      setLoading(true); // Ativando o indicador de carregamento
       const q = query(collection(db, "Salas"), where("codigo", "==", codigo));
       const querySnapshot = await getDocs(q);
       const foundSalas = [];
-      console.log("Total de documentos encontrados:", querySnapshot.size);
       querySnapshot.forEach((doc) => {
-        // Adiciona as informações da sala encontrada ao array
-        console.log("Dados da sala encontrada:", doc.data());
         foundSalas.push({ id: doc.id, ...doc.data() });
       });
-      console.log("Salas encontradas:", foundSalas);
       setSalasEncontradas(foundSalas);
     } catch (error) {
       console.error("Erro ao buscar a sala:", error);
+    } finally {
+      setLoading(false); // Desativando o indicador de carregamento
     }
   };
 
-  const navigateToTarefasSala = (salaId) => {
+  const registrarEntradaUsuario = async (salaId, nomeUsuario) => {
+    try {
+      await addDoc(collection(db, "userEntries"), {
+        salaId,
+        nomeUsuario,
+        timestamp: new Date(),
+      });
+    } catch (error) {
+      console.error("Erro ao registrar entrada do usuário:", error);
+    }
+  };
+
+  const navigateToTarefasSala = async (salaId) => {
+    const user = auth.currentUser;
+    if (user) {
+      const nomeUsuario = user.displayName || user.email; // Ajuste conforme necessário
+      await registrarEntradaUsuario(salaId, nomeUsuario);
+    }
     navigation.navigate("TarefasSala", { salaId });
   };
 
   return (
     <ScrollView>
-      <View
-        style={{
-          flex: 1,
-          justifyContent: "center",
-          alignItems: "center",
-          marginTop: 100,
-          backgroundColor: "white",
-        }}
-      >
-        {/* Header Adicionar nova sala */}
-        <View
-          style={{
-            backgroundColor: "white",
-          }}
-        >
+      <View style={styles.container}>
+        <View>
           <ImagemComponent
             RotaImagem={require("../assets/images/entrarsala.png")}
             style={styles.img}
           />
         </View>
 
-        {/* Lista de Salas encontradas */}
-        <View
-          style={{
-            backgroundColor: "white",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
+        <View style={styles.content}>
           <InputComponent
             placeholder={"Digite o Código da Sala"}
             onChangeText={setCodigo}
@@ -86,22 +83,26 @@ export default function EntrarSala({ navigation }) {
           />
           <TxtComponent styleTxt={styles.txt} texto="Salas Encontradas" />
 
-          <FlatList
-            data={salasEncontradas}
-            renderItem={({ item }) => (
-              <TouchableOpacity
-                onPress={() => navigateToTarefasSala(item.id)}
-                style={styles.sala}
-              >
-                <ImagemComponent
-                  RotaImagem={require("../assets/images/encontrarsala.png")}
-                  style={styles.imgsala}
-                />
-                <TxtComponent texto={item.nome} styleTxt={styles.salatxt} />
-              </TouchableOpacity>
-            )}
-            keyExtractor={(item) => item.id}
-          />
+          {loading ? ( // Verificando se está carregando
+            <ActivityIndicator style={{ marginTop: 10 }} color="#000" /> // Mostrar o indicador de carregamento
+          ) : (
+            <FlatList
+              data={salasEncontradas}
+              renderItem={({ item }) => (
+                <TouchableOpacity
+                  onPress={() => navigateToTarefasSala(item.id)}
+                  style={styles.sala}
+                >
+                  <ImagemComponent
+                    RotaImagem={require("../assets/images/salasimgg.png")}
+                    style={styles.imgsala}
+                  />
+                  <TxtComponent texto={item.nome} styleTxt={styles.salatxt} />
+                </TouchableOpacity>
+              )}
+              keyExtractor={(item) => item.id}
+            />
+          )}
         </View>
       </View>
       <View style={styles.footer}>
@@ -120,11 +121,15 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "white",
+    marginTop: 150,
   },
   img: {
     height: 310,
     width: 399,
-    marginTop: 103,
+  },
+  content: {
+    justifyContent: "center",
+    alignItems: "center",
   },
   input: {
     height: 60,
@@ -138,7 +143,6 @@ const styles = StyleSheet.create({
   },
   btn: {
     backgroundColor: "#d46dd4",
-
     height: 50,
     width: 230,
     justifyContent: "center",
@@ -158,7 +162,7 @@ const styles = StyleSheet.create({
   sala: {
     backgroundColor: "#d46dd4",
     padding: 10,
-    marginLeft: 8,
+    marginLeft: 0,
     borderRadius: 10,
     height: 110,
     width: 370,
@@ -168,6 +172,11 @@ const styles = StyleSheet.create({
     marginTop: 10,
     textAlign: "left",
     justifyContent: "center",
+    shadowColor: "black",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.7,
+    shadowRadius: 2,
+    elevation: 5,
   },
   salatxt: {
     fontWeight: "400",
@@ -178,12 +187,12 @@ const styles = StyleSheet.create({
   imgsala: {
     height: 100,
     width: 70,
-    marginLeft: 220,
+    marginLeft: 270,
     justifyContent: "center",
-    marginTop: -40,
+    marginTop: -38,
     alignItems: "center",
     textAlign: "center",
-    marginLeft: 270,
+    opacity: 0.9,
   },
   footerlogo: {
     width: 120,

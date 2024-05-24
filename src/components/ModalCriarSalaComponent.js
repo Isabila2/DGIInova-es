@@ -80,6 +80,7 @@ export default function ModalCriarSalaComponent({
             OnPress={CriarSala}
             BtnTxt={"Criar Sala"}
             style={styleUserHome.btn1}
+            styleTxtBtn={{ color: "white", fontWeight: "400", fontSize: 15 }}
           />
           <BotaoComponent
             OnPress={Close}

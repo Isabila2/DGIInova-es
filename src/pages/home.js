@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from "react";
 import {
   View,
   Animated,
@@ -5,6 +6,7 @@ import {
   Text,
   TouchableOpacity,
   Modal,
+  ActivityIndicator,
 } from "react-native";
 import ImagemComponent from "../components/ImagemComponent";
 import { stylesHome, VIDEO_HEIGHT } from "../styles/styleHome";
@@ -12,27 +14,27 @@ import { ScrollView } from "react-native";
 import BotaoComponent from "../components/BotaoComponent";
 import { useNavigation } from "@react-navigation/native";
 import TxtComponent from "../components/TxtComponent";
-import React, { useState } from "react";
 import FlatComponent from "../components/FlatListComponent";
 import YoutubeIframe from "react-native-youtube-iframe";
-import { ActivityIndicator } from "react-native";
 
 export default function HomePrincipal() {
-  // Const para a navegação
   const navigation = useNavigation();
-
-  // Consts para a Animação
   const [largura, setLargura] = useState(new Animated.Value(0));
   const [altura, setAltura] = useState(new Animated.Value(30));
-  // Abrir modal
   const [visible, setVisible] = useState(false);
   const [select, setSelect] = useState(null);
-
-  //Rodar vídeo
   const [videoReady, setVideoReady] = useState(false);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    // Simulação de carregamento
+    setTimeout(() => {
+      setLoading(false);
+    }, 3000);
+  }, []);
 
   visModal = (vis) => {
-    !visible ? setVisible(vis) : setVisible(vis);
+    setVisible(vis);
   };
 
   Animated.sequence([
@@ -47,7 +49,6 @@ export default function HomePrincipal() {
   ]).start();
 
   return (
-    // View Principal
     <View
       style={{
         flex: 1,
@@ -56,9 +57,7 @@ export default function HomePrincipal() {
         justifyContent: "center",
       }}
     >
-      {/* Parte do Scrool View */}
       <ScrollView>
-        {/* Parte do Boas-Vindas com animação */}
         <Animated.View
           style={{
             flex: 1,
@@ -68,16 +67,13 @@ export default function HomePrincipal() {
             justifyContent: "center",
           }}
         >
-          {/* Imagem da logo e botão para começar */}
           <ImagemComponent
             RotaImagem={require("../assets/images/LogoHome.png")}
             style={stylesHome.img}
           />
         </Animated.View>
 
-        {/* Código do meio */}
         <View style={stylesHome.meio}>
-          {/* Parte das imagens com texto motivacional */}
           <View style={stylesHome.box}>
             <ImagemComponent
               RotaImagem={require("../assets/Gifs/Task.gif")}
@@ -102,11 +98,15 @@ export default function HomePrincipal() {
             height={VIDEO_HEIGHT}
             onReady={() => setVideoReady(true)}
           />
-          {!videoReady && <ActivityIndicator color="red" />}
+          {loading && <ActivityIndicator color="red" />}
+          {!loading && !videoReady && (
+            <Text style={{ color: "red", marginTop: 10 }}>
+              Failed to load video.
+            </Text>
+          )}
         </View>
       </ScrollView>
 
-      {/* Parte do footer com a imagem da logo */}
       <View style={stylesHome.footer}>
         <ImagemComponent
           RotaImagem={require("../assets/images/LogoPrincipal.png")}

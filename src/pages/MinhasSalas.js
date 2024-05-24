@@ -126,7 +126,7 @@ const styles = StyleSheet.create({
   },
   roomItem: {
     padding: 10,
-    marginLeft: 8,
+    marginLeft: 5,
     borderRadius: 10,
     height: 110,
     width: 370,
