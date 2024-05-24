@@ -23,7 +23,6 @@ export default function AdicionarTarefa({
     >
       <InputComponent
         placeholder={"Adicione uma nova Tarefa"}
-        style={{ color: "black" }}
         value={tarefa}
         onChangeText={onChangeText}
         style={styleAdd}
