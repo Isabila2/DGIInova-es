@@ -1,3 +1,4 @@
+// Importação de pacotes, componentes, styleTarefa, etc
 import { Alert, FlatList, View } from "react-native";
 import AdicionarTarefa from "../components/AdicionarTarefaComponent";
 import ContainerTarefa from "../components/ContainerTarefaComponent";
@@ -61,7 +62,9 @@ export default function TarefasSemLogin() {
   ).length;
 
   return (
+    // View de início
     <View style={styleTarefa.inicio}>
+      {/* ScrollView começa aqui */}
       <ScrollView>
         <ImagemComponent
           RotaImagem={require("../assets/images/semlogintarefas.png")}
@@ -69,7 +72,7 @@ export default function TarefasSemLogin() {
         />
         {/* View onde tem o input e o botão para adicionar tarefa */}
         <View style={{ justifyContent: "center", alignItems: "center" }}>
-          {/* component com Input, Botão de adicionar e Contadores de Tarefas */}
+          {/* Component com Input, Botão de adicionar e Contadores de Tarefas, com o Component AdcionarTarefa */}
           <AdicionarTarefa
             tarefa={novaTarefa}
             onChangeText={setNovaTarefa}
@@ -84,7 +87,7 @@ export default function TarefasSemLogin() {
         </View>
         {/* View onde aparece as tarefas */}
         <View>
-          {/* Essa é a lista de Tarefas */}
+          {/* Essa é a lista de Tarefas com o Component ContainerTarefa*/}
           <FlatList
             data={tarefas}
             keyExtractor={(tarefa) => tarefa.id}

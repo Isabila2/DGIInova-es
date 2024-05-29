@@ -22,6 +22,7 @@ import ImagemComponent from "../components/ImagemComponent";
 import BotaoComponent from "../components/BotaoComponent";
 import InputSenhaComponent from "../components/InputSenhaComponent";
 import InputComponent from "../components/InputComponent";
+import TxtComponent from "../components/TxtComponent";
 import { stylesLoginCadastro } from "../styles/styleLogin-Cadastro";
 
 // Usando o Yup para otimizar e "automatizar" meu formulário
@@ -101,7 +102,10 @@ export default function Login() {
         style={stylesLoginCadastro.img}
       />
       {errors.usuario && (
-        <Text style={stylesLoginCadastro.erro}>{errors.usuario.message}</Text>
+        <TxtComponent
+          texto={errors.usuario.message}
+          styleTxt={stylesLoginCadastro.erro}
+        />
       )}
 
       {/* View com os Inputs para colocar informação e os TxtComponents com os textos  */}
@@ -125,7 +129,10 @@ export default function Login() {
       </View>
 
       {errors.senha && (
-        <Text style={stylesLoginCadastro.erro}>{errors.senha.message}</Text>
+        <TxtComponent
+          texto={errors.senha.message}
+          styleTxt={stylesLoginCadastro.erro}
+        />
       )}
       <View style={stylesLoginCadastro.view_Inputs}>
         <ImagemComponent
@@ -177,7 +184,11 @@ export default function Login() {
       >
         <View style={stylesLoginCadastro.modalContainer}>
           <View style={stylesLoginCadastro.modalContent}>
-            <Text style={stylesLoginCadastro.title}>Redefinir Senha</Text>
+            <TxtComponent
+              texto="Redefinir Senha"
+              styleTxt={stylesLoginCadastro.title}
+            />
+
             <TextInput
               placeholder="Digite seu Email"
               style={stylesLoginCadastro.input}

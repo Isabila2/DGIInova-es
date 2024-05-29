@@ -81,4 +81,34 @@ export const styleTarefa = StyleSheet.create({
   ver: {
     marginLeft: 5,
   },
+  centeredView: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 22,
+  },
+  modalView: {
+    margin: 20,
+    backgroundColor: "white",
+    borderRadius: 20,
+    padding: 35,
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+    width: 340,
+    height: 650,
+  },
+  modalText: {
+    marginBottom: 15,
+    textAlign: "center",
+    fontWeight: "300",
+    fontSize: 18,
+  },
+  modalUsers: {
+    marginBottom: 15,
+    textAlign: "center",
+    fontWeight: "300",
+  },
 });

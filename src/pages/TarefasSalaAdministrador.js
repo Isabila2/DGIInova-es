@@ -1,4 +1,5 @@
 // Importações necessárias do React Native e do Firebase Firestore
+// Importação de pacotes, componentes, styleTarefa, etc
 import React, { useEffect, useState } from "react";
 import {
   View,
@@ -221,12 +222,16 @@ export default function TarefasSalaAdministrador() {
   ).length;
 
   return (
+    // View principal com a imagem principal
     <View style={styleTarefa.inicio}>
+      {/* ScrollView começa aqui */}
       <ScrollView>
         <ImagemComponent
           RotaImagem={require("../assets/images/tarefassala.png")}
           style={styleTarefa.img}
         />
+
+        {/* View com o TxtComponent com o código da sala e os usuário */}
         <View style={{ flexDirection: "row", marginBottom: 10 }}>
           <TxtComponent
             texto={"Código da Sala: "}
@@ -239,21 +244,26 @@ export default function TarefasSalaAdministrador() {
           OnPress={() => setModalVisible(true)}
           styleTxtBtn={styleTarefa.ver}
         />
+
+        {/* Código modal dos usuários */}
         <Modal
           animationType="slide"
           transparent={true}
           visible={modalVisible}
           onRequestClose={() => setModalVisible(false)}
         >
-          <View style={styles.centeredView}>
-            <View style={styles.modalView}>
-              <Text style={styles.modalText}>Usuários na Sala:</Text>
+          <View style={styleTarefa.centeredView}>
+            <View style={styleTarefa.modalView}>
+              <Text style={styleTarefa.modalText}>Usuários na Sala:</Text>
+              {/* ScrollView do modal */}
               <ScrollView>
                 <FlatList
                   data={usuarios}
                   keyExtractor={(usuario) => usuario.id}
                   renderItem={({ item }) => (
-                    <Text style={styles.modalUsers}>{item.nomeUsuario}</Text>
+                    <Text style={styleTarefa.modalUsers}>
+                      {item.nomeUsuario}
+                    </Text>
                   )}
                 />
               </ScrollView>
@@ -265,6 +275,8 @@ export default function TarefasSalaAdministrador() {
             </View>
           </View>
         </Modal>
+
+        {/* View de adicionar tarefas */}
         <View style={{ marginLeft: 2 }}>
           <AdicionarTarefa
             tarefa={novaTarefa}
@@ -278,6 +290,8 @@ export default function TarefasSalaAdministrador() {
             styleTxtt={styleTarefa.textoo}
           />
         </View>
+
+        {/* View da Flatlist das tarefas, com o Component ContainerTarefa */}
         <View>
           <FlatList
             data={tarefas}
@@ -304,36 +318,3 @@ export default function TarefasSalaAdministrador() {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  centeredView: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    marginTop: 22,
-  },
-  modalView: {
-    margin: 20,
-    backgroundColor: "white",
-    borderRadius: 20,
-    padding: 35,
-    alignItems: "center",
-    shadowColor: "#000",
-    shadowOpacity: 0.25,
-    shadowRadius: 4,
-    elevation: 5,
-    width: 340,
-    height: 650,
-  },
-  modalText: {
-    marginBottom: 15,
-    textAlign: "center",
-    fontWeight: "300",
-    fontSize: 18,
-  },
-  modalUsers: {
-    marginBottom: 15,
-    textAlign: "center",
-    fontWeight: "300",
-  },
-});

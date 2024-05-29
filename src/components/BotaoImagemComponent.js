@@ -3,6 +3,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import TxtComponent from "./TxtComponent";
 
 export default function BotaoImagemComponent({
+  // Props
   name,
   size,
   color,
@@ -13,6 +14,7 @@ export default function BotaoImagemComponent({
   fundo,
 }) {
   return (
+    // Props Touchable com o MaterialCOmmunityIcons
     <TouchableOpacity style={fundo}>
       <MaterialCommunityIcons
         name={name}

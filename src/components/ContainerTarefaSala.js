@@ -4,6 +4,7 @@ import TxtComponent from "./TxtComponent";
 import { styleTarefa } from "../styles/styleTarefas";
 
 export default function ContainerTarefaSala({
+  // Props
   TituloTarefa,
   completo,
   onPressCompleto,

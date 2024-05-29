@@ -3,6 +3,7 @@ import BotaoImagemComponent from "./BotaoImagemComponent";
 import TxtComponent from "./TxtComponent";
 
 export default function ContainerTarefa({
+  // Props
   TituloTarefa,
   completo,
   onPressCompleto,
@@ -13,6 +14,7 @@ export default function ContainerTarefa({
   styleIcone,
 }) {
   return (
+    // View do props do container tarefas - a tarefa em si
     <View
       style={{
         backgroundColor: "white",
@@ -32,6 +34,7 @@ export default function ContainerTarefa({
         marginBottom: 10,
       }}
     >
+      {/* Botão de confirmar as tarefas */}
       <BotaoImagemComponent
         // criando um if ternario para alternar o icone caso seja concluido a tarefa
         name={
@@ -44,9 +47,13 @@ export default function ContainerTarefa({
         styleBtn={styleContainer}
         color="#a2a0a02"
       />
+
+      {/* O texto da tarefa */}
       <View style={{ justifyContent: "center", alignItems: "center" }}>
         <TxtComponent texto={TituloTarefa} styleTxt={styleTexto} />
       </View>
+
+      {/* Botão de excluir tarefa */}
       <View style={styleContai}>
         <BotaoImagemComponent
           name={"trash-can-outline"}

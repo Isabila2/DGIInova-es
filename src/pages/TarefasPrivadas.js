@@ -1,3 +1,4 @@
+// Importação de pacotes, componentes, styleTarefa, etc
 import { Alert, FlatList, View } from "react-native";
 import AdicionarTarefa from "../components/AdicionarTarefaComponent";
 import ContainerTarefa from "../components/ContainerTarefaComponent";
@@ -102,7 +103,9 @@ export default function TarefasPrivadas() {
   ).length;
 
   return (
+    // Essa é a View principal
     <View style={styleTarefa.inicio}>
+      {/* ScrollView começa aqui */}
       <ScrollView>
         {/* Somente a Imagem */}
         <ImagemComponent
@@ -116,7 +119,7 @@ export default function TarefasPrivadas() {
             alignItems: "center",
           }}
         >
-          {/* component com Input, Botão de adicionar e Contadores de Tarefas */}
+          {/* component com Input, Botão de adicionar e Contadores de Tarefas, com o Component AdicionarTarefa */}
           <AdicionarTarefa
             tarefa={novaTarefa}
             onChangeText={setNovaTarefa}
@@ -131,7 +134,7 @@ export default function TarefasPrivadas() {
         </View>
         {/* View onde aparece as tarefas */}
         <View>
-          {/* Essa é a lista de Tarefas */}
+          {/* Essa é a lista de Tarefas, com o Component C ontinerTarefaa*/}
           <FlatList
             data={tarefas}
             keyExtractor={(tarefa) => tarefa.id}

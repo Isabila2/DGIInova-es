@@ -1,9 +1,11 @@
+// Import de pacotes, componentes, etc
 import { View } from "react-native";
 import InputComponent from "./InputComponent";
 import TxtComponent from "./TxtComponent";
 import BotaoImagemComponent from "./BotaoImagemComponent";
 import { TouchableOpacity } from "react-native";
 
+// Props
 export default function AdicionarTarefa({
   onChangeText,
   tarefa,
@@ -15,11 +17,13 @@ export default function AdicionarTarefa({
   styleTxtt,
 }) {
   return (
+    // View principal
     <View
       style={{
         backgroundColor: "white",
       }}
     >
+      {/* Input e Touchable para adicionar tarefas */}
       <InputComponent
         placeholder={"Adicione uma nova Tarefa"}
         value={tarefa}
@@ -53,6 +57,7 @@ export default function AdicionarTarefa({
         />
       </TouchableOpacity>
 
+      {/* View do textos com as quantidades */}
       <View style={{ justifyContent: "center", alignItems: "center" }}>
         <TxtComponent
           texto={

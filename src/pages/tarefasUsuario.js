@@ -1,3 +1,4 @@
+// Importação de pacotes, componentes, styleTarefa, etc
 import { Alert, FlatList, View } from "react-native";
 import ContainerTarefa from "../components/ContainerTarefaComponent";
 import SemTarefa from "../components/SemTarefaComponent";
@@ -67,12 +68,16 @@ export default function TarefasSala() {
   ).length;
 
   return (
+    // View principal com a imagem principal
     <View style={styleTarefa.inicio}>
+      {/* Inicio do Scroll View */}
       <ScrollView>
         <ImagemComponent
           RotaImagem={require("../assets/images/salacompartilhada.png")}
           style={styleTarefa.img}
         />
+
+        {/* View do Flatlist das tarefas, com component ContainerTarefas */}
         <View>
           <FlatList
             data={tarefas}
