@@ -9,6 +9,8 @@ import TxtComponent from "./TxtComponent";
 import BotaoComponent from "./BotaoComponent";
 import { auth, getUserData, updateUserData } from "../services/firebaseConfig";
 import ImagemComponent from "./ImagemComponent";
+
+// aqui usando o Yup para configurar melhor meus Formularios, facilitando e otimizando o formulário
 const schema = yup.object({
   senha: yup.string().required("Informe sua senha"),
   usuario: yup.string().required("Informe seu nome de usuário"),
@@ -33,6 +35,7 @@ export default function ModalEditarPerfil({ visible, FecharModal }) {
         if (currentUser) {
           const data = await getUserData(currentUser.uid);
           setUserData(data);
+          // setando o valor usuario com o nome do usuario cadastrado no Banco de Dados usando o id dele
           setValue("usuario", data.usuario);
         }
       } catch (error) {
@@ -43,8 +46,9 @@ export default function ModalEditarPerfil({ visible, FecharModal }) {
     fetchUserData();
   }, []);
 
-  const handleUpdateProfile = async (data) => {
+  const AtualizarPerfil = async (data) => {
     try {
+      // Setando o Loading como true para ele aparecer
       setLoading(true);
       const currentUser = auth.currentUser;
       if (currentUser) {
@@ -52,6 +56,7 @@ export default function ModalEditarPerfil({ visible, FecharModal }) {
           currentUser.email,
           data.senha
         );
+        // Usando a função do Auth para verificar se a senha está correta
         await reauthenticateWithCredential(currentUser, credential);
 
         // Confirmar alteração de usuário
@@ -68,6 +73,7 @@ export default function ModalEditarPerfil({ visible, FecharModal }) {
               text: "Confirmar",
               onPress: async () => {
                 try {
+                  // Rodando a função para atualizar o nome do Usuario, foi feita no firebaseConfig.js
                   await updateUserData(currentUser.uid, {
                     usuario: data.usuario,
                   });
@@ -83,6 +89,7 @@ export default function ModalEditarPerfil({ visible, FecharModal }) {
                     "Não foi possível atualizar o nome de usuário. Por favor, tente novamente mais tarde."
                   );
                 } finally {
+                  // Fazendo o loading desaparecer depois e concluido
                   setLoading(false);
                 }
               },
@@ -215,7 +222,7 @@ export default function ModalEditarPerfil({ visible, FecharModal }) {
 
           <BotaoComponent
             BtnTxt={"Salvar"}
-            OnPress={handleSubmit(handleUpdateProfile)}
+            OnPress={handleSubmit(AtualizarPerfil)}
             style={{
               marginTop: 40,
               width: 230,
@@ -241,6 +248,7 @@ export default function ModalEditarPerfil({ visible, FecharModal }) {
             style={{ marginTop: 10 }}
             styleTxtBtn={{ color: "#d3d3d3" }}
           />
+
           {loading && <ActivityIndicator style={{ marginTop: 20 }} />}
         </View>
       </View>

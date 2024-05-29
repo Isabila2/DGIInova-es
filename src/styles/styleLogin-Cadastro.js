@@ -95,4 +95,53 @@ export const stylesLoginCadastro = StyleSheet.create({
   textcadastrar: {
     fontWeight: "200",
   },
+  modalContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "rgba(0,0,0,0.5)",
+  },
+  modalContent: {
+    width: 300,
+    padding: 20,
+    backgroundColor: "white",
+    borderRadius: 10,
+    alignItems: "center",
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: "bold",
+    marginBottom: 20,
+    textAlign: "center",
+  },
+  input: {
+    height: 40,
+    borderColor: "#ccc",
+    borderWidth: 1,
+    borderRadius: 5,
+    paddingHorizontal: 10,
+    marginBottom: 20,
+    width: "100%",
+  },
+  button: {
+    backgroundColor: "#EFC8EF",
+    paddingVertical: 10,
+    borderRadius: 10,
+    alignItems: "center",
+    width: "100%",
+    marginBottom: 10,
+  },
+  buttontxt: {
+    color: "white",
+    fontWeight: "300",
+  },
+  cancelButton: {
+    paddingVertical: 10,
+    borderRadius: 5,
+    alignItems: "center",
+    width: "100%",
+  },
+  cancelButtonText: {
+    color: "grey",
+  },
 });

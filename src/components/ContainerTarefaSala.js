@@ -11,6 +11,7 @@ export default function ContainerTarefaSala({
   return (
     <View>
       <BotaoImagemComponent
+        // usando novamente o if ternario  para mudar o icone caso seja concluido a tarefa
         name={
           completo
             ? "checkbox-marked-circle-outline"

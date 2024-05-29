@@ -7,14 +7,11 @@ import { auth } from "../services/firebaseConfig";
 import { getUserData } from "../services/firebaseConfig";
 import { styleUserHome } from "../styles/stylesUserHome";
 
-import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { MaterialIcons } from "@expo/vector-icons";
-
 export default function LogOutDrawer() {
   const [userData, setUserData] = useState(null);
 
   useEffect(() => {
-    // Função para obter os dados do usuário após o login
+    // Função para tentar pegar os dados do usuário após o login
     const fetchUserData = async () => {
       try {
         const user = auth.currentUser;

@@ -12,7 +12,6 @@ import "react-native-get-random-values";
 import RoutesDrawer from "./routsDrawer";
 import HomePrincipal from "../pages/home";
 import EntrarSala from "../pages/EntrarSala";
-import RedefinirSenha from "../pages/RedefinirSenha";
 
 import { AntDesign } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
@@ -26,6 +25,7 @@ const Tab = createBottomTabNavigator();
 export default function Routes() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
+  // usando um sistema fornecido pelo Auth para verificar se o usuario está logado ou não
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       if (user) {
@@ -38,7 +38,12 @@ export default function Routes() {
     return unsubscribe;
   }, []);
   return (
-    <Tab.Navigator>
+    <Tab.Navigator
+      screenOptions={{
+        tabBarActiveTintColor: "#d46dd4",
+        tabBarInactiveTintColor: "#c0c0c0",
+      }}
+    >
       {isAuthenticated ? (
         <>
           <Tab.Screen

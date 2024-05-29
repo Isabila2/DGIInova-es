@@ -35,6 +35,7 @@ export default function InputSenhaComponent({ onChangeText, value }) {
       >
         <Image
           source={
+            // If Ternario para alterar a imagem do Olho de acordo com o estado do ShowPassword (secureTextEntry)
             showPassword
               ? require("../assets/images/OlhoAberto.png")
               : require("../assets/images/OlhoFechado.png")

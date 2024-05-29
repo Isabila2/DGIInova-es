@@ -1,42 +1,51 @@
-import React, { useState } from "react";
+// Importação de pacotes, componentes, etc
+import React, { useState, useEffect } from "react";
 import {
   View,
   FlatList,
   TouchableOpacity,
-  Text,
   StyleSheet,
   ActivityIndicator,
+  ScrollView,
+  Alert,
 } from "react-native";
 import InputComponent from "../components/InputComponent";
 import BotaoComponent from "../components/BotaoComponent";
 import { collection, query, where, getDocs, addDoc } from "firebase/firestore";
-import { db, auth } from "../services/firebaseConfig"; // Certifique-se de importar auth se precisar do nome do usuário
+import { db, auth } from "../services/firebaseConfig";
 import ImagemComponent from "../components/ImagemComponent";
 import TxtComponent from "../components/TxtComponent";
-import { ScrollView } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function EntrarSala({ navigation }) {
   const [codigo, setCodigo] = useState("");
   const [salasEncontradas, setSalasEncontradas] = useState([]);
-  const [loading, setLoading] = useState(false); // Estado para controle do indicador de carregamento
+  const [loading, setLoading] = useState(false);
 
   const buscarSala = async () => {
     try {
-      setLoading(true); // Ativando o indicador de carregamento
-      const q = query(collection(db, "Salas"), where("codigo", "==", codigo));
-      const querySnapshot = await getDocs(q);
+      setLoading(true); // Ativando o Loading
+      // fazendo uma busca usando o codigo fornecido no campo "codigo"
+      const Codigo = query(
+        collection(db, "Salas"),
+        where("codigo", "==", codigo)
+      );
+      // Executa a const Codigo e retorna os resultados da pesquisa
+      const querySnapshot = await getDocs(Codigo);
       const foundSalas = [];
       querySnapshot.forEach((doc) => {
         foundSalas.push({ id: doc.id, ...doc.data() });
       });
+      // seta essa busca como SalasEncontradas
       setSalasEncontradas(foundSalas);
     } catch (error) {
       console.error("Erro ao buscar a sala:", error);
     } finally {
-      setLoading(false); // Desativando o indicador de carregamento
+      setLoading(false); // Desativando o Loading
     }
   };
 
+  // adicionar o usuario ao banco de dados para rastreio de cada usuario que entra na Sala
   const registrarEntradaUsuario = async (salaId, nomeUsuario) => {
     try {
       await addDoc(collection(db, "userEntries"), {
@@ -49,18 +58,44 @@ export default function EntrarSala({ navigation }) {
     }
   };
 
-  const navigateToTarefasSala = async (salaId) => {
+  // Salvar salas acessadas no Async Storage
+  const salvarSalaAcessada = async (sala) => {
+    try {
+      const salasAcessadas = await AsyncStorage.getItem("salasAcessadas");
+      const salasAcessadasArray = salasAcessadas
+        ? JSON.parse(salasAcessadas)
+        : [];
+      const salaExistente = salasAcessadasArray.find((s) => s.id === sala.id);
+
+      if (!salaExistente) {
+        salasAcessadasArray.push(sala);
+        await AsyncStorage.setItem(
+          "salasAcessadas",
+          JSON.stringify(salasAcessadasArray)
+        );
+      }
+    } catch (error) {
+      console.error("Erro ao salvar a sala acessada:", error);
+    }
+  };
+
+  // pegando o email e e usuario do usuário para salvas seus dados antes de entrar na Sala
+  const NavegarParaTarefasSala = async (sala) => {
     const user = auth.currentUser;
     if (user) {
-      const nomeUsuario = user.displayName || user.email; // Ajuste conforme necessário
-      await registrarEntradaUsuario(salaId, nomeUsuario);
+      const nomeUsuario = user.displayName || user.email;
+      await registrarEntradaUsuario(sala.id, nomeUsuario);
+      await salvarSalaAcessada(sala);
     }
-    navigation.navigate("TarefasSala", { salaId });
+    navigation.navigate("TarefasSala", { salaId: sala.id });
   };
 
   return (
+    // ScrollView começa aqui
     <ScrollView>
+      {/* View Principal */}
       <View style={styles.container}>
+        {/* View com a imagem principal */}
         <View>
           <ImagemComponent
             RotaImagem={require("../assets/images/entrarsala.png")}
@@ -68,13 +103,17 @@ export default function EntrarSala({ navigation }) {
           />
         </View>
 
+        {/* View com o Input para pesquisar e o botão de pesquisa */}
         <View style={styles.content}>
+          {/* Input para digitar o código. O valor é "codigo" e ele tem o onChangeText para mudar seu "estado" */}
           <InputComponent
             placeholder={"Digite o Código da Sala"}
             onChangeText={setCodigo}
             value={codigo}
             style={styles.input}
           />
+
+          {/* Esse é o botão que realiza a função de buscar a sala com o código digitado */}
           <BotaoComponent
             BtnTxt={"Buscar Sala"}
             OnPress={buscarSala}
@@ -84,13 +123,13 @@ export default function EntrarSala({ navigation }) {
           <TxtComponent styleTxt={styles.txt} texto="Salas Encontradas" />
 
           {loading ? ( // Verificando se está carregando
-            <ActivityIndicator style={{ marginTop: 10 }} color="#000" /> // Mostrar o indicador de carregamento
+            <ActivityIndicator style={{ marginTop: 10 }} color="#000" /> // Mostrar o Loading
           ) : (
             <FlatList
               data={salasEncontradas}
               renderItem={({ item }) => (
                 <TouchableOpacity
-                  onPress={() => navigateToTarefasSala(item.id)}
+                  onPress={() => NavegarParaTarefasSala(item)}
                   style={styles.sala}
                 >
                   <ImagemComponent
@@ -105,6 +144,8 @@ export default function EntrarSala({ navigation }) {
           )}
         </View>
       </View>
+
+      {/* View do footer */}
       <View style={styles.footer}>
         <ImagemComponent
           RotaImagem={require("../assets/images/LogoPrincipal.png")}
@@ -115,6 +156,7 @@ export default function EntrarSala({ navigation }) {
   );
 }
 
+// CSS do código
 const styles = StyleSheet.create({
   container: {
     flex: 1,

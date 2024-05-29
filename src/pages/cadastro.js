@@ -1,11 +1,6 @@
+// Importação de pacotes, componentes, styleLogin-Cadastro, etc
 import React, { useState } from "react";
-import {
-  View,
-  TouchableOpacity,
-  Text,
-  Alert,
-  ActivityIndicator,
-} from "react-native";
+import { View, TouchableOpacity, Alert, ActivityIndicator } from "react-native";
 import InputComponent from "../components/InputComponent";
 import ImagemComponent from "../components/ImagemComponent";
 import { useNavigation } from "@react-navigation/native";
@@ -22,6 +17,7 @@ import { setDoc, doc } from "firebase/firestore";
 import { db } from "../services/firebaseConfig";
 import TxtComponent from "../components/TxtComponent";
 
+// Usando o Yup para otimizar e "automatizar" meu formulário
 const schema = yup.object({
   usuario: yup.string().required("Informe seu Usuário"),
   email: yup.string().email("Email Inválido").required("Informe seu Email"),
@@ -44,11 +40,13 @@ export default function Cadastro() {
     resolver: yupResolver(schema),
   });
   const navigation = useNavigation();
-  const [loading, setLoading] = useState(false); // Estado para controle do indicador de carregamento
+  const [loading, setLoading] = useState(false);
 
   const handleCadastro = async (data) => {
     try {
-      setLoading(true); // Ativando o indicador de carregamento
+      // Setando o Loading para aparecer
+      setLoading(true);
+      // Usando a função pronta do Auth para adicionar o usuário com o email e a senha
       const userCredential = await createUserWithEmailAndPassword(
         auth,
         data.email,
@@ -56,8 +54,10 @@ export default function Cadastro() {
       );
       const user = userCredential.user;
 
+      // quando criar a conta enviar um Email de verificação para o Email cadastrado
       await sendEmailVerification(auth.currentUser);
 
+      // adicionar o usuário no outro banco de dados com outras informações
       await setDoc(doc(db, "users", user.uid), {
         email: data.email,
         usuario: data.usuario,
@@ -76,20 +76,25 @@ export default function Cadastro() {
         Alert.alert("Email inválido");
       }
     } finally {
-      setLoading(false); // Desativando o indicador de carregamento, independentemente do resultado do cadastro
+      setLoading(false); // Desativando o Loading, independentemente do resultado do cadastro
     }
   };
 
   return (
+    // View principal com a imagem principal
     <View style={stylesLoginCadastro.tela}>
       <ImagemComponent
         RotaImagem={require("../assets/images/LogoHome.png")}
         style={stylesLoginCadastro.imgcadastro}
       />
+
+      {/* Texto de fazer Cadastro */}
       <TxtComponent
         texto=" Fazer Cadastro"
         styleTxt={stylesLoginCadastro.txttitulo}
       />
+
+      {/* View com os Inputs para colocar informação e os TxtComponents com os textos  */}
       <View
         style={{
           justifyContent: "center",

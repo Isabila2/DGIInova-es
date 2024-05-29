@@ -33,6 +33,7 @@ export default function ContainerTarefa({
       }}
     >
       <BotaoImagemComponent
+        // criando um if ternario para alternar o icone caso seja concluido a tarefa
         name={
           completo
             ? "checkbox-marked-circle-outline"

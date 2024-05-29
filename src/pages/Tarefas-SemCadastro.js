@@ -1,5 +1,4 @@
 import { Alert, FlatList, View } from "react-native";
-import HeaderTarefas from "../components/HeaderTarefasComponent";
 import AdicionarTarefa from "../components/AdicionarTarefaComponent";
 import ContainerTarefa from "../components/ContainerTarefaComponent";
 import SemTarefa from "../components/SemTarefaComponent";
@@ -12,9 +11,14 @@ import { ScrollView } from "react-native";
 export default function TarefasSemLogin() {
   const [tarefas, setTarefas] = useState([]);
   const [novaTarefa, setNovaTarefa] = useState("");
+
   const definirCompleto = (id) => {
+    // "(prevTarefas)" Recebe o estado anterior de Tarefas como argumento e retorna o novo estado.
     setTarefas((prevTarefas) =>
       prevTarefas.map((tarefa) =>
+        // Verifica se o Id da tarefa é igual ao Id passado para a função de DefinirCompleto
+        // se for ele cria um novo Objeto tarefa só alterando o valor de "Completo"
+        // Se não for igual ele não altera nada
         tarefa.id === id ? { ...tarefa, completo: !tarefa.completo } : tarefa
       )
     );
@@ -36,12 +40,17 @@ export default function TarefasSemLogin() {
     ]);
   }
   const addTarefa = () => {
+    if (novaTarefa.length <= 4) {
+      Alert.alert("Erro", "Digite no minimo 5 letras para adicionar");
+    }
     if (novaTarefa !== "" && novaTarefa.length >= 5) {
       const novaTarefaObj = {
+        // Usei o uuidv4 para criar o id de cada Tarefa
         id: uuidv4(),
         completo: false,
         titulo: novaTarefa,
       };
+      // Adiciona a nova tarefa, preservando as outras já adicionadas
       setTarefas((prevTarefas) => [...prevTarefas, novaTarefaObj]);
       setNovaTarefa("");
     }
@@ -91,6 +100,7 @@ export default function TarefasSemLogin() {
                 onPressExcluir={() => ExcluirTarefa(item.id)}
               />
             )}
+            // caso não houver nenhum item na lista, renderiza o component "SemTarefa"
             ListEmptyComponent={<SemTarefa />}
           />
         </View>

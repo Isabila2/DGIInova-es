@@ -2,7 +2,6 @@ import { View } from "react-native";
 import InputComponent from "./InputComponent";
 import TxtComponent from "./TxtComponent";
 import BotaoImagemComponent from "./BotaoImagemComponent";
-import styleTarefa from "../styles/styleTarefas";
 import { TouchableOpacity } from "react-native";
 
 export default function AdicionarTarefa({
@@ -58,9 +57,11 @@ export default function AdicionarTarefa({
         <TxtComponent
           texto={
             "Criados: " +
+            // variavel contantando as tarefas criadas na pagina
             QuantidadeTarefasCriadas +
             "                     " +
             "Concluídos: " +
+            // variavel contandando as tarefas concluidas na pagina
             QuantidadeTarefasConcluidas
           }
           styleTxt={styleTxtt}

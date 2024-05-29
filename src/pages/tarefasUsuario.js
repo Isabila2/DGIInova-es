@@ -91,6 +91,7 @@ export default function TarefasSala() {
                 onPressExcluir={TentarApagarTask}
               />
             )}
+            // caso não houver nenhum item na lista, renderiza o component "SemTarefa"
             ListEmptyComponent={<SemTarefa />}
           />
         </View>

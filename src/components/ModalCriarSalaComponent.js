@@ -1,14 +1,13 @@
 import React, { useState } from "react";
 import { View, Modal, Alert, ScrollView } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { addDoc, doc, setDoc, serverTimestamp } from "firebase/firestore";
-import { db, collection } from "../services/firebaseConfig"; // Importe a referência ao banco de dados Firebase
+import { addDoc, doc, setDoc } from "firebase/firestore";
+import { db, collection } from "../services/firebaseConfig";
 import { styleUserHome } from "../styles/stylesUserHome";
 import { v4 as uuidv4 } from "uuid";
 
 import InputComponent from "./InputComponent";
 import BotaoComponent from "./BotaoComponent";
-import TxtComponent from "./TxtComponent";
 import ImagemComponent from "./ImagemComponent";
 import { auth } from "../services/firebaseConfig";
 
@@ -19,6 +18,7 @@ export default function ModalCriarSalaComponent({
 }) {
   const [value, setValue] = useState("");
   const navigation = useNavigation();
+  // pegando o Id do usuario usando o Auth
   const userId = auth.currentUser.uid;
 
   async function CriarSala() {
@@ -26,26 +26,30 @@ export default function ModalCriarSalaComponent({
       Alert.alert("Digite um nome para sua Sala");
     } else {
       try {
+        // usando o uuidv4 para criar um Id unico para cada Sala e colocando ele com limite de caracteres
         const codigoSala = uuidv4().split("-")[0].substring(0, 10);
+        // adicionando a nova sala no Banco de Dados
         const novaSalaRef = await addDoc(collection(db, "Salas"), {
           nome: value,
           userId: userId,
-          codigo: codigoSala, // Adiciona o código da sala ao documento
+          codigo: codigoSala,
         });
         const novaSalaId = novaSalaRef.id;
 
-        // Atualize o documento da sala com o código
         await setDoc(
           doc(db, "Salas", novaSalaId),
           {
             codigo: codigoSala,
           },
+          // Merge é um parametro especifico do FireBase que com Merge True ele apenas atualiza os dados necessarios e não exclui o que não foi alterado
           { merge: true }
         );
 
-        Close(); // Fecha o modal
-        updateRooms(); // Atualiza a lista de salas
-        // Navegue para a tela da sala recém-criada, passando o ID da sala como parâmetro de rota
+        Close(); // Fechar o modal
+
+        updateRooms(); // Atualiza a lista de salas usando a função passada como parametro
+
+        // Naveguando para a tela da salas, passando o ID da sala como parâmetro de rota
         navigation.navigate("Minhas Salas", { salaId: novaSalaId });
         setValue("");
       } catch (error) {

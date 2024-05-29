@@ -20,7 +20,7 @@ import {
   deleteUser,
   reauthenticateWithCredential,
   EmailAuthProvider,
-  sendPasswordResetEmail, // Importação da função para enviar email de redefinição de senha
+  sendPasswordResetEmail,
 } from "firebase/auth";
 import BotaoComponent from "./BotaoComponent";
 import TxtComponent from "./TxtComponent";
@@ -34,7 +34,7 @@ export default function MinhaConta() {
   const [password, setPassword] = useState("");
 
   useEffect(() => {
-    // Função para obter os dados do usuário após o login
+    // Função para tentar pegar os dados do usuário após o login
     const fetchUserData = async () => {
       try {
         const user = auth.currentUser;
@@ -50,11 +50,13 @@ export default function MinhaConta() {
     fetchUserData();
   }, []);
 
-  const handleDeleteAccount = () => {
+  // abrir Modal para colocar informações da Conta
+  const DeletarConta = () => {
     setAuthVisible(true);
   };
 
-  const confirmDeleteAccount = async () => {
+  // conferir se a Senha está correta de acordo com o usuário e caso sim aparecer o alert para confirmar a exclusão
+  const ConfirmarDeletarConta = async () => {
     try {
       const user = auth.currentUser;
       if (user && password) {
@@ -79,16 +81,19 @@ export default function MinhaConta() {
       console.error("Erro ao excluir conta:", error);
       Alert.alert(
         "Erro",
-        "Não foi possível excluir a conta. Por favor, tente novamente mais tarde."
+        "Não foi possível excluir a conta. Verifique sua senha e Tente novamente"
       );
       setAuthVisible(false);
     }
   };
 
-  const handlePasswordReset = async () => {
+  // Usando o Auth ele irá mandar um email para o Email do usuario logado para ele poder redefinir sua senha
+  const ResetarSenha = async () => {
     try {
+      // Aqui ele está pegando as informações do usuario logado
       const user = auth.currentUser;
       if (user) {
+        // mandando o email usando o Auth
         await sendPasswordResetEmail(auth, user.email);
         Alert.alert(
           "Sucesso",
@@ -259,7 +264,7 @@ export default function MinhaConta() {
           />
           <BotaoComponent
             BtnTxt={"Alterar Senha"}
-            OnPress={handlePasswordReset} // Adiciona a função para enviar email de redefinição de senha
+            OnPress={ResetarSenha} // Adicionando a função para enviar email de redefinição de senha
             styleTxtBtn={{
               marginLeft: 20,
               backgroundColor: "white",
@@ -296,7 +301,7 @@ export default function MinhaConta() {
           />
           <BotaoComponent
             BtnTxt={"Excluir minha conta"}
-            OnPress={handleDeleteAccount} // Adicionado o OnPress para deletar a conta
+            OnPress={DeletarConta} // Adicionando o OnPress para deletar a conta
             styleTxtBtn={{
               marginLeft: 20,
               backgroundColor: "white",
@@ -313,7 +318,7 @@ export default function MinhaConta() {
         </View>
       </ScrollView>
 
-      {/* Modal de reautenticação */}
+      {/* Modal de reautenticação para confirmar deletar a conta */}
       <Modal
         visible={authVisible}
         transparent={true}
@@ -335,7 +340,7 @@ export default function MinhaConta() {
             />
             <BotaoComponent
               BtnTxt="Confirmar"
-              OnPress={confirmDeleteAccount}
+              OnPress={ConfirmarDeletarConta}
               style={{
                 backgroundColor: "#DBA3DB",
                 height: 40,

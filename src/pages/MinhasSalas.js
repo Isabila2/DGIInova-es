@@ -1,3 +1,4 @@
+// Importação de pacotes, componentes, style, etc
 import React, { useEffect, useState } from "react";
 import {
   View,
@@ -9,37 +10,33 @@ import {
 import { collection, getDocs } from "firebase/firestore"; // Importe a função getDocs
 import { db } from "../services/firebaseConfig"; // Importe a referência ao banco de dados Firebase
 import ImagemComponent from "../components/ImagemComponent";
-import TxtComponent from "../components/TxtComponent";
 import { auth } from "../services/firebaseConfig";
 import { ScrollView } from "react-native-gesture-handler";
 
-const MinhasSalas = ({ navigation }) => {
+export default function MinhasSalas({ navigation }) {
   const [rooms, setRooms] = useState([]);
   const user = auth.currentUser;
   const userId = user ? user.uid : null;
 
   useEffect(() => {
-    loadRooms(); // Carregue as salas quando o componente for montado
+    loadRooms(); // Carrega as salas quando o componente for preenchido
   }, []);
 
   const loadRooms = async () => {
     try {
-      const querySnapshot = await getDocs(collection(db, "Salas")); // Obtenha todas as salas do banco de dados
+      const querySnapshot = await getDocs(collection(db, "Salas")); // Obtém todas as salas do banco de dados
       const loadedRooms = []; // Array para armazenar as salas carregadas
 
-      // Itere sobre os documentos da coleção de salas
       querySnapshot.forEach((doc) => {
-        // Extraia os dados de cada sala
         const roomData = doc.data();
         const roomId = doc.id;
 
-        // Verifique se o ID do usuário associado à sala corresponde ao ID do usuário atualmente autenticado
+        // Verifica se o Id do usuario é igual ao Id do Dono da Sala
         if (userId === roomData.userId) {
           // Adicione a sala ao array de salas carregadas apenas se ela pertencer ao usuário atual
           loadedRooms.push({
             id: roomId,
             name: roomData.nome,
-            // Outros campos da sala, se houver
           });
         }
       });
@@ -106,7 +103,7 @@ const MinhasSalas = ({ navigation }) => {
       </ScrollView>
     </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -176,5 +173,3 @@ const styles = StyleSheet.create({
     marginTop: -50,
   },
 });
-
-export default MinhasSalas;

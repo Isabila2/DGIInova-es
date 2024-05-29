@@ -7,8 +7,6 @@ import { auth } from "../services/firebaseConfig";
 import { getUserData } from "../services/firebaseConfig";
 import { styleUserHome } from "../styles/stylesUserHome";
 
-import { MaterialCommunityIcons } from "@expo/vector-icons";
-import BotaoComponent from "./BotaoComponent";
 import { Feather } from "@expo/vector-icons";
 
 export default function LogInDrawer() {
@@ -16,7 +14,7 @@ export default function LogInDrawer() {
   const navigation = useNavigation();
 
   useEffect(() => {
-    // Função para obter os dados do usuário após o login
+    // Função para tentar pegar os dados do usuário após o login
     const fetchUserData = async () => {
       try {
         const user = auth.currentUser;
@@ -52,6 +50,7 @@ export default function LogInDrawer() {
       >
         <Feather name="user" size={24} color="white" />
         <TxtComponent
+          // Para aparecer o nome do usuario, caso não consiga aparecer ""
           texto={`Olá, ${userData ? userData.usuario : ""}!`}
           styleTxt={{ marginLeft: 5, color: "#00000080" }}
         />

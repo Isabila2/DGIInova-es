@@ -1,31 +1,24 @@
+// Importação de pacotes, componentes, stylesHome, etc
 import React, { useState, useEffect } from "react";
-import {
-  View,
-  Animated,
-  FlatList,
-  Text,
-  TouchableOpacity,
-  Modal,
-  ActivityIndicator,
-} from "react-native";
+import { View, Animated, Text, ActivityIndicator } from "react-native";
 import ImagemComponent from "../components/ImagemComponent";
 import { stylesHome, VIDEO_HEIGHT } from "../styles/styleHome";
 import { ScrollView } from "react-native";
-import BotaoComponent from "../components/BotaoComponent";
 import { useNavigation } from "@react-navigation/native";
-import TxtComponent from "../components/TxtComponent";
-import FlatComponent from "../components/FlatListComponent";
 import YoutubeIframe from "react-native-youtube-iframe";
 
 export default function HomePrincipal() {
+  // Variáveis para a animação: definindo a altura e a largura para 0, e fazendo o valor mudar quando a animação acontecer
   const navigation = useNavigation();
   const [largura, setLargura] = useState(new Animated.Value(0));
   const [altura, setAltura] = useState(new Animated.Value(30));
-  const [visible, setVisible] = useState(false);
+
+  // Variáveis para o vídeo
   const [select, setSelect] = useState(null);
   const [videoReady, setVideoReady] = useState(false);
   const [loading, setLoading] = useState(true);
 
+  // UseEffect do vídeo
   useEffect(() => {
     // Simulação de carregamento
     setTimeout(() => {
@@ -33,10 +26,7 @@ export default function HomePrincipal() {
     }, 3000);
   }, []);
 
-  visModal = (vis) => {
-    setVisible(vis);
-  };
-
+  // Código da animação: Os valores da largura e da altura se alteram durante o intervalo de tempo determinado
   Animated.sequence([
     Animated.timing(largura, {
       toValue: 400,
@@ -49,6 +39,7 @@ export default function HomePrincipal() {
   ]).start();
 
   return (
+    // View Principal com alinhamento central e fundo branco com flex 1
     <View
       style={{
         flex: 1,
@@ -57,6 +48,7 @@ export default function HomePrincipal() {
         justifyContent: "center",
       }}
     >
+      {/* ScrollView e View animada. Apenas o que está dentro desta View irá receber a animação. O width e o height estão conectados ao código de animação acima e as variáveis */}
       <ScrollView>
         <Animated.View
           style={{
@@ -67,13 +59,16 @@ export default function HomePrincipal() {
             justifyContent: "center",
           }}
         >
+          {/* Component de Imagem com a imagem de LogoHome. */}
           <ImagemComponent
             RotaImagem={require("../assets/images/LogoHome.png")}
             style={stylesHome.img}
           />
         </Animated.View>
 
+        {/* Essa é a View da parte do meio. Ela não recebe animação.  */}
         <View style={stylesHome.meio}>
+          {/* Essa View está dento da View meio e apenas contém os Gifs e as Imagens */}
           <View style={stylesHome.box}>
             <ImagemComponent
               RotaImagem={require("../assets/Gifs/Task.gif")}
@@ -93,6 +88,7 @@ export default function HomePrincipal() {
             />
           </View>
 
+          {/* Esse é o código do vídeo do Youtube. Ele está dentro da View meio ainda. Ele tem o ID do vídeo para carregar o vídeo específico, além de ter uma animação de carregamento do vídeo*/}
           <YoutubeIframe
             videoId="A6PWu3EH7Xw"
             height={VIDEO_HEIGHT}
@@ -104,9 +100,12 @@ export default function HomePrincipal() {
               Failed to load video.
             </Text>
           )}
+
+          {/* A View do meio e o ScrollView acabam aqui */}
         </View>
       </ScrollView>
 
+      {/* Essa é a View do rodapé. Está fora do ScrollView para não sair da tela e estar sempre frizada. Contém uma imagem */}
       <View style={stylesHome.footer}>
         <ImagemComponent
           RotaImagem={require("../assets/images/LogoPrincipal.png")}

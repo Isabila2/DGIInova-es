@@ -1,3 +1,4 @@
+// Importação de pacotes, componentes, stylesHome, etc
 import React, { useState } from "react";
 import {
   View,
@@ -23,6 +24,7 @@ import InputSenhaComponent from "../components/InputSenhaComponent";
 import InputComponent from "../components/InputComponent";
 import { stylesLoginCadastro } from "../styles/styleLogin-Cadastro";
 
+// Usando o Yup para otimizar e "automatizar" meu formulário
 const schema = yup.object({
   email: yup.string().required("Informe seu Email").email("Email inválido"),
   senha: yup.string().required("Informe sua senha"),
@@ -47,6 +49,7 @@ export default function Login() {
 
   const handleLogin = async (data) => {
     try {
+      // Usando função fornecida pelo Auth para fazer o login do Usuário
       const userCredential = await signInWithEmailAndPassword(
         auth,
         data.email,
@@ -67,13 +70,15 @@ export default function Login() {
     }
   };
 
-  const handlePasswordReset = async () => {
+  const ResetarSenha = async () => {
+    // Verifica se resetEmail vazio, caso sim exibe o erro
     if (!resetEmail) {
       Alert.alert("Erro", "Por favor, insira um email válido.");
       return;
     }
 
     try {
+      // Chama a função do Firebase Auth para enviar o e-mail de redefinição de senha para o e-mail fornecido.
       await sendPasswordResetEmail(auth, resetEmail);
       Alert.alert("Sucesso", "Email para redefinição de senha enviado.");
       setModalVisible(false);
@@ -89,6 +94,7 @@ export default function Login() {
   };
 
   return (
+    // View principal com imagem principal
     <View style={stylesLoginCadastro.tela}>
       <ImagemComponent
         RotaImagem={require("../assets/images/LogoHome.png")}
@@ -97,6 +103,8 @@ export default function Login() {
       {errors.usuario && (
         <Text style={stylesLoginCadastro.erro}>{errors.usuario.message}</Text>
       )}
+
+      {/* View com os Inputs para colocar informação e os TxtComponents com os textos  */}
       <View style={stylesLoginCadastro.view_Inputs}>
         <ImagemComponent
           RotaImagem={require("../assets/images/usuario.png")}
@@ -138,50 +146,55 @@ export default function Login() {
         />
       </View>
 
+      {/* Botão de fazer login */}
       <BotaoComponent
         BtnTxt={"Fazer Login"}
         OnPress={handleSubmit(onSubmit)}
         style={stylesLoginCadastro.botao}
         styleTxtBtn={stylesLoginCadastro.BotaoTxt}
       />
+
+      {/* Botão de ir para a página de cadastro */}
       <BotaoComponent
         OnPress={() => navigation.navigate("Cadastro")}
         BtnTxt={"Cadastrar-se"}
         styleTxtBtn={stylesLoginCadastro.textcadastrar}
       />
 
-      <TouchableOpacity onPress={() => setModalVisible(true)}>
-        <Text style={stylesLoginCadastro.textEsqueceuSenha}>
-          Esqueceu a senha?
-        </Text>
-      </TouchableOpacity>
+      {/* Botão para abrir o modal de esqueceu a senha */}
+      <BotaoComponent
+        OnPress={() => setModalVisible(true)}
+        BtnTxt={"Esqueceu a senha?"}
+        styleTxtBtn={stylesLoginCadastro.textEsqueceuSenha}
+      />
 
+      {/* Código do modal de redefinir senha */}
       <Modal
         animationType="slide"
         transparent={true}
         visible={modalVisible}
         onRequestClose={() => setModalVisible(false)}
       >
-        <View style={styles.modalContainer}>
-          <View style={styles.modalContent}>
-            <Text style={styles.title}>Redefinir Senha</Text>
+        <View style={stylesLoginCadastro.modalContainer}>
+          <View style={stylesLoginCadastro.modalContent}>
+            <Text style={stylesLoginCadastro.title}>Redefinir Senha</Text>
             <TextInput
               placeholder="Digite seu Email"
-              style={styles.input}
+              style={stylesLoginCadastro.input}
               value={resetEmail}
               onChangeText={setResetEmail}
             />
             <BotaoComponent
               BtnTxt="Enviar Email"
-              OnPress={handlePasswordReset}
-              style={styles.button}
-              styleTxtBtn={styles.buttontxt}
+              OnPress={ResetarSenha}
+              style={stylesLoginCadastro.button}
+              styleTxtBtn={stylesLoginCadastro.buttontxt}
             />
             <BotaoComponent
               BtnTxt="Cancelar"
               OnPress={() => setModalVisible(false)}
-              style={styles.cancelButton}
-              styleTxtBtn={styles.cancelButtonText}
+              style={stylesLoginCadastro.cancelButton}
+              styleTxtBtn={stylesLoginCadastro.cancelButtonText}
             />
           </View>
         </View>
@@ -189,55 +202,3 @@ export default function Login() {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  modalContainer: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "rgba(0,0,0,0.5)",
-  },
-  modalContent: {
-    width: 300,
-    padding: 20,
-    backgroundColor: "white",
-    borderRadius: 10,
-    alignItems: "center",
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: "bold",
-    marginBottom: 20,
-    textAlign: "center",
-  },
-  input: {
-    height: 40,
-    borderColor: "#ccc",
-    borderWidth: 1,
-    borderRadius: 5,
-    paddingHorizontal: 10,
-    marginBottom: 20,
-    width: "100%",
-  },
-  button: {
-    backgroundColor: "#EFC8EF",
-    paddingVertical: 10,
-    borderRadius: 10,
-    alignItems: "center",
-    width: "100%",
-    marginBottom: 10,
-  },
-  buttontxt: {
-    color: "white",
-    fontWeight: "300",
-  },
-  cancelButton: {
-    paddingVertical: 10,
-    borderRadius: 5,
-    alignItems: "center",
-    width: "100%",
-  },
-  cancelButtonText: {
-    color: "grey",
-  },
-});

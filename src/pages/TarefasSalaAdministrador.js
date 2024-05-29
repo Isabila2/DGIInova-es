@@ -1,3 +1,4 @@
+// Importações necessárias do React Native e do Firebase Firestore
 import React, { useEffect, useState } from "react";
 import {
   View,
@@ -18,27 +19,32 @@ import {
   deleteDoc,
   getDoc,
 } from "firebase/firestore";
+
+// Importações de componentes personalizados e configurações
 import { db, auth } from "../services/firebaseConfig";
 import AdicionarTarefa from "../components/AdicionarTarefaComponent";
 import ContainerTarefa from "../components/ContainerTarefaComponent";
 import SemTarefa from "../components/SemTarefaComponent";
 import ImagemComponent from "../components/ImagemComponent";
 import { styleTarefa } from "../styles/styleTarefas";
-import { useRoute } from "@react-navigation/native"; // Importe o hook useRoute
+import { useRoute } from "@react-navigation/native";
 import TxtComponent from "../components/TxtComponent";
 import BotaoComponent from "../components/BotaoComponent";
 
 export default function TarefasSalaAdministrador() {
+  // Estados para gerenciar as tarefas, nova tarefa, código da sala, etc.
   const [tarefas, setTarefas] = useState([]);
   const [novaTarefa, setNovaTarefa] = useState("");
   const [codigosala, setCodigosala] = useState("");
   const [codigoSalaAtual, setCodigoSalaAtual] = useState("");
   const [usuarios, setUsuarios] = useState([]);
   const [modalVisible, setModalVisible] = useState(false);
-  const [usuariosRegistrados, setUsuariosRegistrados] = useState([]);
+  const [emailsExibidos, setEmailsExibidos] = useState(new Set());
 
+  // Acesso aos parâmetros de rota
   const route = useRoute();
 
+  // useEffect para buscar tarefas, código da sala e usuários quando há uma mudança nos parâmetros da rota
   useEffect(() => {
     if (auth.currentUser && route.params && route.params.salaId) {
       setCodigosala(route.params.salaId);
@@ -49,6 +55,7 @@ export default function TarefasSalaAdministrador() {
     }
   }, [route.params]);
 
+  // Função para buscar o código da sala no banco de dados
   const fetchCodigoSala = async (salaId) => {
     try {
       const salaDoc = await getDoc(doc(db, "Salas", salaId));
@@ -59,6 +66,7 @@ export default function TarefasSalaAdministrador() {
     }
   };
 
+  // Função para buscar tarefas da sala no banco de dados
   const buscarTarefasDaSala = async (salaId) => {
     try {
       const q = query(
@@ -77,6 +85,7 @@ export default function TarefasSalaAdministrador() {
     }
   };
 
+  // Função para buscar usuários da sala no banco de dados
   const buscarUsuariosDaSala = async (salaId) => {
     try {
       const q = query(
@@ -92,6 +101,20 @@ export default function TarefasSalaAdministrador() {
       });
     } catch (error) {
       console.error("Erro ao buscar usuários da sala:", error);
+    }
+  };
+
+  // Função para verificar se o usuário é o dono da sala
+  const verificarDonoSala = async (salaId) => {
+    try {
+      const user = auth.currentUser;
+      if (!user) return false; // Retorna falso se não houver usuário logado
+      const salaDoc = await getDoc(doc(db, "Salas", salaId));
+      const DonoId = salaDoc.data().DonoId;
+      return user.uid === DonoId;
+    } catch (error) {
+      console.error("Erro ao verificar dono da sala:", error);
+      return false;
     }
   };
 
@@ -118,7 +141,43 @@ export default function TarefasSalaAdministrador() {
     }
   };
 
+  // Função para buscar e verificar usuário antes de registrá-lo
+  const buscarEVerificarUsuario = async () => {
+    try {
+      const Dono = await verificarDonoSala(codigosala);
+      if (!Dono) {
+        // Se o usuário não for o dono da sala, registra-lo
+        const user = auth.currentUser;
+        const userId = user ? user.uid : null;
+        const snapshot = await getDoc(doc(db, "userEntries", userId));
+        if (!snapshot.exists()) {
+          // Se o usuário ainda não foi registrado, registra-lo
+          await verificarUsuarioRegistrado();
+        } else {
+          // Se o usuário já foi registrado, adiciona o email ao conjunto de emails exibidos
+          const emailUsuario = user.displayName || user.email;
+          setEmailsExibidos(new Set(emailsExibidos).add(emailUsuario));
+        }
+      }
+    } catch (error) {
+      console.error("Erro ao buscar e verificar usuário:", error);
+    }
+  };
+
+  // Exibir apenas os emails únicos
+  const emailsUnicos = Array.from(emailsExibidos);
+
+  // Chama a função para buscar e verificar usuário na sala
+  useEffect(() => {
+    buscarEVerificarUsuario();
+  }, []);
+
+  // Função para adicionar uma nova tarefa
   const addTarefa = async () => {
+    if (novaTarefa.length <= 4) {
+      Alert.alert("Erro", "Digite no minimo 5 letras para adicionar");
+    }
+    // verifica se o campo de tarefa não está vazio, se a tarefa tem mais de 5 letras e se o codigo está sendo passado corretamente
     if (novaTarefa !== "" && novaTarefa.length >= 5 && codigosala !== "") {
       const novaTarefaObj = {
         completo: false,
@@ -127,6 +186,7 @@ export default function TarefasSalaAdministrador() {
         CodigoSala: codigoSalaAtual,
       };
       try {
+        // adiciona a tarefa no Banco de Dados AdminTasks, feita exclusivamente para tarefas dos Admins
         await addDoc(collection(db, "adminTasks"), novaTarefaObj);
         setNovaTarefa("");
       } catch (error) {
@@ -135,50 +195,12 @@ export default function TarefasSalaAdministrador() {
     }
   };
 
-  // Função para contar tarefas concluídas por usuário
-  const contarTarefasConcluidasPorUsuario = () => {
-    const tarefasConcluidasPorUsuario = {};
-
-    // Itere sobre as tarefas concluídas
-    tarefas.forEach((tarefa) => {
-      const userId = tarefa.userId;
-      if (userId) {
-        if (!tarefasConcluidasPorUsuario[userId]) {
-          // Se este é
-          tarefasConcluidasPorUsuario[userId] = 1;
-        } else {
-          tarefasConcluidasPorUsuario[userId]++;
-        }
-      }
-    });
-
-    return tarefasConcluidasPorUsuario;
-  };
-
-  // Função para verificar se todas as tarefas foram concluídas por todos os usuários
-  const todasTarefasConcluidas = () => {
-    const tarefasConcluidasPorUsuario = contarTarefasConcluidasPorUsuario();
-    const totalUsuarios = usuarios.length;
-
-    for (const userId in tarefasConcluidasPorUsuario) {
-      if (tarefasConcluidasPorUsuario[userId] !== totalUsuarios) {
-        return false;
-      }
-    }
-
-    return true;
-  };
-
   const marcarTarefaComoCompleta = async (id, completo) => {
     try {
+      // atualiza o estado de Completo para o oposto do estado atual
       await updateDoc(doc(db, "adminTasks", id), {
         completo: !completo,
       });
-
-      if (todasTarefasConcluidas()) {
-        // Aqui você pode adicionar o código para marcar a tarefa como concluída para o administrador
-        console.log("Todas as tarefas concluídas!");
-      }
     } catch (error) {
       console.error("Erro ao marcar tarefa como completa:", error);
     }
@@ -186,6 +208,7 @@ export default function TarefasSalaAdministrador() {
 
   const excluirTarefa = async (id) => {
     try {
+      // deleta a tarefa do Banco de Dados
       await deleteDoc(doc(db, "adminTasks", id));
     } catch (error) {
       console.error("Erro ao excluir tarefa:", error);
@@ -273,6 +296,7 @@ export default function TarefasSalaAdministrador() {
                 onPressExcluir={() => excluirTarefa(item.id)}
               />
             )}
+            // caso não houver nenhum item na lista, renderiza o component "SemTarefa"
             ListEmptyComponent={<SemTarefa />}
           />
         </View>

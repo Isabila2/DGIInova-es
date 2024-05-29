@@ -25,7 +25,9 @@ export default function TarefasPrivadas() {
 
   const marcarTarefaComoCompleta = async (id, completo) => {
     try {
+      // puxa a tarefa pelo Id
       const tarefaRef = doc(db, "tarefas", id);
+      // Atualiza o estado de de Completo para o oposto do estado atual
       await updateDoc(tarefaRef, {
         completo: !completo,
       });
@@ -42,10 +44,12 @@ export default function TarefasPrivadas() {
 
   const buscarTarefasDoUsuario = async () => {
     try {
+      // busca as tarefas de acordo com o Id do usuário logado, aparecendo apenas as tarefas daquele usuário
       const q = query(
         collection(db, "tarefas"),
         where("userId", "==", auth.currentUser.uid)
       );
+      // adiciona as tarefas encontradas dentro do array "tarefasUsuario"
       onSnapshot(q, (snapshot) => {
         const tarefasUsuario = [];
         snapshot.forEach((doc) => {
@@ -59,6 +63,9 @@ export default function TarefasPrivadas() {
   };
 
   const addTarefa = () => {
+    if (novaTarefa.length <= 4) {
+      Alert.alert("Erro", "Digite no minimo 5 letras para adicionar");
+    }
     if (novaTarefa !== "" && novaTarefa.length >= 5) {
       const novaTarefaObj = {
         userId: auth.currentUser.uid,
@@ -72,6 +79,7 @@ export default function TarefasPrivadas() {
 
   const adicionarTarefaNoFirebase = async (novaTarefaObj) => {
     try {
+      // Adiciona a tarefa no Banco de Dados
       await addDoc(collection(db, "tarefas"), novaTarefaObj);
     } catch (error) {
       console.error("Erro ao adicionar tarefa:", error);
@@ -80,6 +88,7 @@ export default function TarefasPrivadas() {
 
   const excluirTarefa = async (id) => {
     try {
+      // busca a tarefa pelo Id e exclui ela do Banco de Dados
       const tarefaRef = doc(db, "tarefas", id);
       await deleteDoc(tarefaRef);
     } catch (error) {
@@ -140,6 +149,7 @@ export default function TarefasPrivadas() {
                 onPressExcluir={() => excluirTarefa(item.id)}
               />
             )}
+            // caso não houver nenhum item na lista, renderiza o component "SemTarefa"
             ListEmptyComponent={<SemTarefa />}
           />
         </View>
