@@ -79,6 +79,7 @@ export default function MinhasSalas({ navigation }) {
             style={styles.imglogo}
           />
         </View>
+
         <View
           style={{
             justifyContent: "center",
@@ -87,17 +88,17 @@ export default function MinhasSalas({ navigation }) {
           }}
         >
           {/* Botão de atualização */}
-
           <BotaoComponent
             BtnTxt="ATUALIZAR SALAS"
             OnPress={loadRooms}
             style={styles.btn}
             styleTxtBtn={styles.btntext}
           />
-
+          {/* View que aparece as salas */}
           <View
             style={{ backgroundColor: "white", marginTop: 20, width: "100%" }}
           >
+            {/* Flatlist das salas */}
             <FlatList
               data={rooms}
               renderItem={renderRoomItem}
@@ -111,6 +112,7 @@ export default function MinhasSalas({ navigation }) {
   );
 }
 
+// CSS do código
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -156,10 +158,8 @@ const styles = StyleSheet.create({
     textAlign: "center",
     marginLeft: 270,
   },
-
   btn: {
     backgroundColor: "#d46dd4",
-
     height: 50,
     width: 230,
     justifyContent: "center",
