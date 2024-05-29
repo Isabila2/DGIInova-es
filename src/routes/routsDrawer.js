@@ -1,37 +1,26 @@
 import { DrawerContentScrollView } from "@react-navigation/drawer";
-import { DrawerItem, DrawerItemList } from "@react-navigation/drawer";
+import { DrawerItemList } from "@react-navigation/drawer";
 import { auth } from "../services/firebaseConfig";
-import BotaoImagemComponent from "../components/BotaoImagemComponent";
 import { View } from "react-native";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import LogOutDrawer from "../components/LogOutDrawer";
 import LogInDrawer from "../components/LogInDrawer";
 import EntrarSala from "../pages/EntrarSala";
 import MinhaConta from "../components/MinhaConta";
-import { styleUserHome } from "../styles/stylesUserHome";
 
 // Importando as páginas que aparecerão
 
-import Tarefas from "../pages/tarefasUsuario";
 import HomeUsuario from "../pages/homeuser";
 import TarefasPrivadas from "../pages/TarefasPrivadas";
-
 import "react-native-get-random-values";
 import MinhasSalas from "../pages/MinhasSalas";
 // Const para o uso do Stack (rotas)
 const Drawer = createDrawerNavigator();
 
 export default function RoutesDrawer({ navigation, ...rest }) {
-  const handleLogout = async () => {
-    try {
-      await auth.signOut();
-    } catch (error) {
-      console.error("Erro ao fazer logout:", error.message);
-    }
-  };
-
   return (
     <Drawer.Navigator
+      // estilizando e passando opções para o Drawer
       screenOptions={{
         drawerStyle: { backgroundColor: "white" },
         drawerActiveBackgroundColor: "#D87AD880",
@@ -47,9 +36,11 @@ export default function RoutesDrawer({ navigation, ...rest }) {
         shadowRadius: 2,
         elevation: 5,
       }}
+      // adicionando components dentro do Drawer
       drawerContent={(drawerProps) => (
         <View style={{ flex: 1 }}>
           <LogInDrawer />
+          {/* adicionando para renderizar as navegações */}
           <DrawerContentScrollView {...drawerProps}>
             <DrawerItemList {...drawerProps} />
           </DrawerContentScrollView>

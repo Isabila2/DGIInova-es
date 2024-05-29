@@ -12,6 +12,7 @@ import { db } from "../services/firebaseConfig"; // Importe a referência ao ban
 import ImagemComponent from "../components/ImagemComponent";
 import { auth } from "../services/firebaseConfig";
 import { ScrollView } from "react-native-gesture-handler";
+import BotaoComponent from "../components/BotaoComponent";
 
 export default function MinhasSalas({ navigation }) {
   const [rooms, setRooms] = useState([]);
@@ -85,10 +86,15 @@ export default function MinhasSalas({ navigation }) {
             backgroundColor: "white",
           }}
         >
-          <TouchableOpacity onPress={loadRooms} style={styles.btn}>
-            <Text style={styles.btntext}>ATUALIZAR SALAS </Text>
-          </TouchableOpacity>
           {/* Botão de atualização */}
+
+          <BotaoComponent
+            BtnTxt="ATUALIZAR SALAS"
+            OnPress={loadRooms}
+            style={styles.btn}
+            styleTxtBtn={styles.btntext}
+          />
+
           <View
             style={{ backgroundColor: "white", marginTop: 20, width: "100%" }}
           >

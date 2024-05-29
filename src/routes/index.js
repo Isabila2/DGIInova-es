@@ -23,6 +23,7 @@ import MinhaConta from "../components/MinhaConta";
 const Tab = createBottomTabNavigator();
 
 export default function Routes() {
+  // estado se está logado ou não
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   // usando um sistema fornecido pelo Auth para verificar se o usuario está logado ou não
@@ -44,10 +45,12 @@ export default function Routes() {
         tabBarInactiveTintColor: "#c0c0c0",
       }}
     >
+      {/* usando If Ternario para modificar as paginas que aparecerão dependendo do estado do IsAuthenticated(se está logado) */}
       {isAuthenticated ? (
         <>
           <Tab.Screen
             name="Usuário(Aluno)"
+            // exibindo o conteudo do RoutesDrawer no lugar da Home do Usuario
             component={RoutesDrawer}
             options={{
               headerShown: false,
