@@ -1,7 +1,7 @@
 # DGIInova-es
 
 # Para iniciar o projeto:
-Com o terminar aberto, digite:
+Com o terminal aberto, digite:
 
 - git clone https://github.com/Isabila2/DGIInova-es.git ---- Para clonar o repositório com o código e com os pacotes
 - cd DGIInova-es ---- Para entrar na pasta clonada
