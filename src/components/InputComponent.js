@@ -13,6 +13,7 @@ export default function InputComponent({
     onChangeText(textInput);
   };
   return (
+    // Props de um Input
     <View>
       <TextInput
         placeholder={placeholder}

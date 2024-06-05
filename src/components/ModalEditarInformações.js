@@ -117,6 +117,7 @@ export default function ModalEditarPerfil({ visible, FecharModal }) {
           alignItems: "center",
         }}
       >
+        {/* Imagem principal */}
         <ImagemComponent
           RotaImagem={require("../assets/images/LogoPrincipal.png")}
           style={{ height: 80, width: 200, marginTop: 100 }}
@@ -137,6 +138,7 @@ export default function ModalEditarPerfil({ visible, FecharModal }) {
             elevation: 5,
           }}
         >
+          {/* View de editar informações */}
           <TxtComponent
             texto="EDITAR INFORMAÇÕES"
             styleTxt={{

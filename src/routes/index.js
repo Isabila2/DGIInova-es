@@ -149,7 +149,7 @@ export default function Routes() {
             }}
           />
           <Tab.Screen
-            name="TarefaSemLogin"
+            name="Tarefas"
             component={TarefasSemLogin}
             options={{
               headerShown: false,

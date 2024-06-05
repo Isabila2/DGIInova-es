@@ -69,6 +69,7 @@ export default function ModalCriarSalaComponent({
             alignItems: "center",
           }}
         >
+          {/* Imagens e os inputs para criar salas */}
           <ImagemComponent
             RotaImagem={require("../assets/images/modalCriarnovo.png")}
             style={styleUserHome.imgModal}

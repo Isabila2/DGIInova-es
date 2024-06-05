@@ -36,6 +36,7 @@ export default function LogInDrawer() {
         marginTop: 50,
       }}
     >
+      {/* A Imagem que fica no menu */}
       <ImagemComponent
         RotaImagem={require("../assets/images/DrawerFnd.png")}
         style={styleUserHome.img}
@@ -48,6 +49,7 @@ export default function LogInDrawer() {
           marginBottom: 20,
         }}
       >
+        {/* Icone de usuário (transparente) e texto de Boas-Vindas*/}
         <Feather name="user" size={24} color="white" />
         <TxtComponent
           // Para aparecer o nome do usuario, caso não consiga aparecer ""

@@ -2,29 +2,15 @@
 import React, { useState, useEffect } from "react";
 import { View, Animated, Text, ActivityIndicator } from "react-native";
 import ImagemComponent from "../components/ImagemComponent";
-import { stylesHome, VIDEO_HEIGHT } from "../styles/styleHome";
+import { stylesHome } from "../styles/styleHome";
 import { ScrollView } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import YoutubeIframe from "react-native-youtube-iframe";
 
 export default function HomePrincipal() {
   // Variáveis para a animação: definindo a altura e a largura para 0, e fazendo o valor mudar quando a animação acontecer
   const navigation = useNavigation();
   const [largura, setLargura] = useState(new Animated.Value(0));
   const [altura, setAltura] = useState(new Animated.Value(30));
-
-  // Variáveis para o vídeo
-  const [select, setSelect] = useState(null);
-  const [videoReady, setVideoReady] = useState(false);
-  const [loading, setLoading] = useState(true);
-
-  // UseEffect do vídeo
-  useEffect(() => {
-    // Simulação de carregamento
-    setTimeout(() => {
-      setLoading(false);
-    }, 3000);
-  }, []);
 
   // Código da animação: Os valores da largura e da altura se alteram durante o intervalo de tempo determinado
   Animated.sequence([
@@ -87,19 +73,6 @@ export default function HomePrincipal() {
               style={stylesHome.frase2}
             />
           </View>
-
-          {/* Esse é o código do vídeo do Youtube. Ele está dentro da View meio ainda. Ele tem o ID do vídeo para carregar o vídeo específico, além de ter uma animação de carregamento do vídeo*/}
-          <YoutubeIframe
-            videoId="A6PWu3EH7Xw"
-            height={VIDEO_HEIGHT}
-            onReady={() => setVideoReady(true)}
-          />
-          {loading && <ActivityIndicator color="red" />}
-          {!loading && !videoReady && (
-            <Text style={{ color: "red", marginTop: 10 }}>
-              Failed to load video.
-            </Text>
-          )}
 
           {/* A View do meio e o ScrollView acabam aqui */}
         </View>

@@ -9,6 +9,7 @@ export default function InputSenhaComponent({ onChangeText, value }) {
   };
 
   return (
+    // Text Input da senha
     <View
       style={{
         flexDirection: "row",
