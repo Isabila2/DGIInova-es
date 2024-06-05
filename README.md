@@ -7,6 +7,8 @@ Com o terminar aberto, digite:
 - cd DGIInova-es ---- Para entrar na pasta clonada
 - npm install ---- Por causa do git ignore, para instalar os pacotes
 - code . ---- Para entrar no projeto pelo Visual Studio Code
+  
+_____________________________________________________________________________________
 
 Dentro do Visual Code:
 - npx expo start --tunnel
