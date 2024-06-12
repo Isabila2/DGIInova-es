@@ -1,14 +1,6 @@
 // Importação de pacotes, componentes, stylesHome, etc
 import React, { useState } from "react";
-import {
-  View,
-  Text,
-  Alert,
-  TextInput,
-  StyleSheet,
-  Modal,
-  TouchableOpacity,
-} from "react-native";
+import { View, Alert, TextInput, Modal } from "react-native";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";

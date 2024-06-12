@@ -7,8 +7,8 @@ import {
   TouchableOpacity,
   StyleSheet,
 } from "react-native";
-import { collection, getDocs } from "firebase/firestore"; // Importe a função getDocs
-import { db } from "../services/firebaseConfig"; // Importe a referência ao banco de dados Firebase
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "../services/firebaseConfig";
 import ImagemComponent from "../components/ImagemComponent";
 import { auth } from "../services/firebaseConfig";
 import { ScrollView } from "react-native-gesture-handler";

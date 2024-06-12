@@ -18,7 +18,7 @@ import {
 } from "firebase/firestore";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-// Your web app's Firebase configuration
+// Configuração do Firebase fornecida pelo próprio no site do FireBase
 const firebaseConfig = {
   apiKey: "AIzaSyDf_s64bD0cFyD_a-jio7KlmghNSKdWtGA",
   authDomain: "dgi-taskstodo.firebaseapp.com",
@@ -37,10 +37,13 @@ const auth = initializeAuth(app, {
 });
 const db = getFirestore(app);
 
+// Exportando os serviços de autenticação e banco de dados
 export { auth, db, collection, getDocs };
 
+// Função para cadastrar um novo usuário
 export async function cadastrar(email, senha, usuario) {
   try {
+    // const para criar um novo usuário com email e senha
     const userCredential = await createUserWithEmailAndPassword(
       auth,
       email,
@@ -48,12 +51,13 @@ export async function cadastrar(email, senha, usuario) {
     );
     const user = userCredential.user;
 
+    // Armazenar os dados do usuário no Firestore
     await setDoc(doc(db, "users", user.uid), {
       usuario: usuario,
       email: email,
       senha: senha,
     });
-
+    // Mensagem no console caso cadastro efetuado
     console.log("Usuário cadastrado com sucesso:", user);
     return user;
   } catch (error) {
@@ -62,9 +66,12 @@ export async function cadastrar(email, senha, usuario) {
   }
 }
 
+// Função para atualizar os dados do usuário
 export async function updateUserData(userId, updatedData) {
   try {
+    // Referência ao documento do usuário no Firestore
     const userDocRef = doc(db, "users", userId);
+    // Atualizar o documento do usuário com os novos dados
     await updateDoc(userDocRef, updatedData);
     console.log("Dados do usuário atualizados com sucesso");
   } catch (error) {
@@ -73,8 +80,10 @@ export async function updateUserData(userId, updatedData) {
   }
 }
 
+// Função para login do usuário
 export async function login(email, senha) {
   try {
+    // Fazer login do usuário com email e senha
     const userCredential = await signInWithEmailAndPassword(auth, email, senha);
     const user = userCredential.user;
     console.log("Usuário logado com sucesso:", user);
@@ -85,10 +94,13 @@ export async function login(email, senha) {
   }
 }
 
+// Função para obter dados do usuário no Firestore
 export async function getUserData(userId) {
   try {
+    // Obter o documento do usuário do Firestore
     const userDoc = await getDoc(doc(db, "users", userId));
     if (userDoc.exists()) {
+      // Retornar dados do usuário se o documento existir
       return userDoc.data();
     } else {
       console.error("Documento de usuário não encontrado");
